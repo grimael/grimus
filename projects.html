@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Projets</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Icônes Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html" class="active">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projets" class="projects-section">
+      <div class="projects-header">
+        <h1>Mes Projets</h1>
+        <div id="category-filter">
+          <button class="category-btn active" data-category="all">Tous</button>
+          <button class="category-btn" data-category="statistique">Statistique</button>
+          <button class="category-btn" data-category="graphisme">Graphisme & Visualisation</button>
+          <button class="category-btn" data-category="autres">Autres</button>
+        </div>
+      </div>
+
+      <div id="project-list" class="projects-grid">
+
+        <!-- PROJET 1 -->
+        <div class="project-card" data-category="statistique">
+          <img src="assets/Images/climatique.jpg" alt="Analyse climatique" />
+          <h3>Analyse des tendances climatiques</h3>
+          <p>Analyse statistique des données climatiques sur 50 ans à l’aide de R.</p>
+          <a href="#" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 2 -->
+        <div class="project-card" data-category="graphisme">
+          <img src="assets/Images/shiny.png" alt="Dashboard Rshiny" />
+          <h3>Dashboard avec RShiny</h3>
+          <p>Application web interactive pour explorer des données.</p>
+          <a href="https://maphixz.shinyapps.io/project/" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 3 -->
+        <div class="project-card" data-category="graphisme">
+          <img src="assets/Images/power.png" alt="Power BI" />
+          <h3>Power BI</h3>
+          <p>Dashboard de visualisation des performances de la coupe du monde 2018</p>
+          <a href="https://app.powerbi.com/groups/me/reports/138e8739-ab87-4ccc-87a1-6ef83aed68ef/81cbe8fe1dedb44b8db8?experience=power-bi" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 4 -->
+        <div class="project-card" data-category="graphisme">
+          <img src="assets/Images/affiche1.png" alt="Affiche activités CEMAC" />
+          <h3>Affiche 1 - Vaccination</h3>
+          <p>Infographie réalisée pour une campagne de sensibilisation.</p>
+          <a href="assets/Images/affiche1.png" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 5 -->
+        <div class="project-card" data-category="autres">
+          <img src="assets/Images/econometrie.jpg" alt="Économétrie" />
+          <h3>Étude de cas en économétrie</h3>
+          <p>Analyse des facteurs influençant le PIB.</p>
+          <a href="#" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 6 -->
+        <div class="project-card" data-category="statistique">
+          <img src="assets/Images/marketing.png" alt="Marketing" />
+          <h3>Projet Marketing Étudiants</h3>
+          <p>Étude de marché autour de l’ENSEA.</p>
+          <a href="https://docs.google.com/presentation/d/1aWxuUbisc8ePkQNlmtg2tqZgS21tqKBI/edit?usp=sharing&ouid=107155812438891407989&rtpof=true&sd=true" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 7 -->
+        <div class="project-card" data-category="autres">
+          <img src="assets/Images/academique.png" alt="Crise Ukraine" />
+          <h3>Rapport de Stage - Ukraine</h3>
+          <p>Analyse des effets de la crise en Ukraine sur le commerce.</p>
+          <a href="https://drive.google.com/file/d/1UQadUGKtUvkHn2LbB771EJ8Nocfhlvpl/view?usp=sharing" target="_blank" class="btn-view">Voir</a>
+        </div>
+
+        <!-- PROJET 8 -->
+        <div class="project-card" data-category="autres">
+          <img src="assets/Images/qgis.png" alt="QGIS Abidjan" />
+          <h3>Projet QGIS - RGPH 2021</h3>
+          <p>Analyse démographique des communes d’Abidjan post-RGPH.</p>
+          <a href="https://drive.google.com/file/d/1NqlOS3TgirnoT7CBnfWz5LzdzXq0naGt/view?usp=sharing" target="_blank" class="btn-view">Voir</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Grima Michael</h3>
+        <p>Data Analyst • Statisticien • Visual Storyteller</p>
+      </div>
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="projects.html">Projets</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Me contacter</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Abidjan, Côte d’Ivoire</p>
+        <p><i class="fas fa-envelope"></i> grimamichael79@gmail.com.com</p>
+        <p><i class="fas fa-phone"></i>+2250718283603</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Suivez-moi</h4>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/michael-grima-95b78b262"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/grimael"><i class="fab fa-github"></i></a>
+         
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Grima Michael. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!--  Script correctement ajouté -->
+  <script src="script.js"></script>
+</body>
+</html>

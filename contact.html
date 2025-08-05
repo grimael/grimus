@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!--  Le header et footer sont déjà inclus dans base.html -->
+  <main>
+    <section id="contact">
+      <h2>Contactez-moi</h2>
+      <form id="contact-form" action="https://formspree.io/f/xeogorrd" method="post" novalidate>
+        <fieldset>
+          <legend>Informations personnelles</legend>
+          <div class="form-group">
+            <label for="nom">Nom complet* :</label>
+            <input type="text" id="nom" name="nom" required />
+            <span class="error-message" id="nom-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email* :</label>
+            <input type="email" id="email" name="email" required />
+            <span class="error-message" id="email-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">Message* :</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <span class="error-message" id="message-error"></span>
+          </div>
+          <input type="hidden" name="_next" value="/contact.html" />
+        </fieldset>
+        <button type="submit">Envoyer</button>
+      </form>
+      <div id="form-message" class="form-message"></div>
+
+      <div class="social-media">
+        <h3>Connectez-vous avec moi</h3>
+        <div class="social-icons">
+          <a href="https://web.facebook.com/michaelsiptgrima" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/in/michael-grima-95b78b262" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/2250718283603" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:maphix78@gmail.com"><i class="fas fa-envelope"></i></a>
+          <a href="https://github.com/grimael" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+    <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Grima Michael</h3>
+        <p>Data Analyst • Statisticien • Visual Storyteller</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="projects.html">Projets</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Me contacter</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Abidjan, Côte d’Ivoire</p>
+        <p><i class="fas fa-envelope"></i> grimamichael79@gmail.com.com</p>
+        <p><i class="fas fa-phone"></i>+2250718283603</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Suivez-moi</h4>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/michael-grima-95b78b262"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/grimael"><i class="fab fa-github"></i></a>
+         
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Grima Michael. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- ======= SCRIPTS ======= -->
+  <script src="script.js"></script>
+
+  
+</body>
+</html>

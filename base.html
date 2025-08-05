@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{% block title %}Grima Michael | Portfolio{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- ======= HEADER ======= -->
+    <header>
+    <nav>
+        <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="projects.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    </header>
+
+
+  <!-- ======= CONTENU PRINCIPAL ======= -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Grima Michael</h3>
+        <p>Data Analyst • Statisticien • Visual Storyteller</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="{{ url_for('home') }}">Accueil</a></li>
+          <li><a href="{{ url_for('about') }}">À propos</a></li>
+          <li><a href="{{ url_for('projects') }}">Projets</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Me contacter</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Abidjan, Côte d’Ivoire</p>
+        <p><i class="fas fa-envelope"></i> grimamichael79@gmail.com.com</p>
+        <p><i class="fas fa-phone"></i>+2250718283603</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Suivez-moi</h4>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/michael-grima-95b78b262"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/grimael"><i class="fab fa-github"></i></a>
+         
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Grima Michael. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- ======= SCRIPTS ======= -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
