@@ -3,11 +3,8 @@ export const profile = {
   role: 'Data scientist et ingénieur data - BI - ETL - Web',
   location: "Abidjan, Côte d'Ivoire",
   email: 'grimamichael79@gmail.com',
-  phone: '+225 07 18 28 36 03',
-  phoneLink: '+2250718283603',
   github: 'https://github.com/grimael',
-  linkedin: 'https://www.linkedin.com/in/michael-grima-95b78b262',
-  whatsapp: 'https://wa.me/2250718283603',
+  linkedin: 'https://www.linkedin.com/in/michaelgrima-dataanalyst-content-creator/',
   cv: 'https://drive.google.com/file/d/1YfLQ_Y0YVnX5t8xkXktFeSuC0qP9Oyx3/view?usp=sharing',
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
   bio:
