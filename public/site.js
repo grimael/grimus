@@ -1,18 +1,3 @@
-/* Word-reveal animation for hero h1 */
-const heroH1 = document.querySelector('.hero h1');
-if (heroH1) {
-  const words = heroH1.textContent.trim().split(/\s+/);
-  heroH1.innerHTML = '';
-  words.forEach((word, i) => {
-    const span = document.createElement('span');
-    span.className = 'hero-word';
-    span.textContent = word;
-    span.style.setProperty('--wi', i);
-    heroH1.appendChild(span);
-    if (i < words.length - 1) heroH1.appendChild(document.createTextNode(' '));
-  });
-}
-
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('[data-nav]');
 
@@ -23,24 +8,63 @@ toggle?.addEventListener('click', () => {
 });
 
 const revealItems = document.querySelectorAll('[data-reveal], .project-card');
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.14 }
-);
 
-revealItems.forEach((item) => observer.observe(item));
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.14 }
+  );
+
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add('is-visible'));
+}
 
 const light = document.querySelector('.cursor-light');
 window.addEventListener('pointermove', (event) => {
   light?.style.setProperty('--x', `${event.clientX}px`);
   light?.style.setProperty('--y', `${event.clientY}px`);
+});
+
+document.querySelectorAll('.logo-strip span, .skill-logo-grid article, .social-card').forEach((container) => {
+  const image = container.querySelector('img');
+
+  if (!image) return;
+
+  const markMissing = () => {
+    container.classList.add('logo-missing');
+  };
+
+  image.addEventListener('error', markMissing, { once: true });
+
+  if (image.complete && image.naturalWidth === 0) {
+    markMissing();
+  }
+});
+
+document.querySelectorAll('img.image-rotator[data-images]').forEach((image) => {
+  const sources = image.dataset.images.split('|').filter(Boolean);
+
+  if (sources.length < 2) return;
+
+  let current = Math.max(0, sources.indexOf(image.getAttribute('src')));
+
+  window.setInterval(() => {
+    current = (current + 1) % sources.length;
+    image.classList.add('is-swapping');
+
+    window.setTimeout(() => {
+      image.src = sources[current];
+      image.classList.remove('is-swapping');
+    }, 450);
+  }, 4000);
 });
 
 const filterButtons = document.querySelectorAll('[data-filter]');

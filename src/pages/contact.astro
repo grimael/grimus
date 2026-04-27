@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../data/profile';
+import { withBase } from '../lib/paths';
 
 const subject = encodeURIComponent('Projet data depuis votre portfolio');
-const body = encodeURIComponent('Bonjour Michael,\n\nJe souhaite discuter avec vous d un projet data.\n\nContexte:\nObjectif:\nDelai:\n');
+const body = encodeURIComponent('Bonjour Michael,\n\nJe souhaite discuter avec vous d’un projet data.\n\nContexte :\nObjectif :\nDélai :\n');
 
 const contacts = [
   {
@@ -46,17 +47,28 @@ const contacts = [
 
 <BaseLayout
   title="Contact | GRIMA Michael"
-  description="Contacter GRIMA Michael pour un projet data, dashboard, visualisation, statistique ou analyse econometrique."
+  description="Contacter GRIMA Michael pour un projet data, dashboard, visualisation, statistique ou analyse économétrique."
 >
-  <section class="page-hero contact-hero">
-    <p class="eyebrow">Contact</p>
-    <h1>Parlons du probleme, du livrable et de l'effet que vous voulez produire.</h1>
-
+  <section class="page-hero page-hero-media contact-hero section-accent section-accent-coral">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h1>Parlons du problème, du livrable et de l'effet que vous voulez produire.</h1>
+    </div>
+    <figure class="section-visual">
+      <img
+        class="image-rotator"
+        src={withBase('/assets/Images/grimus2.png')}
+        alt="Visuel de la page contact"
+        loading="lazy"
+        data-images={`${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+      />
+      <figcaption>Discussion projet</figcaption>
+    </figure>
   </section>
 
-  <section data-reveal>
+  <section class="section-accent section-accent-green" data-reveal>
     <p class="eyebrow">Canaux disponibles</p>
-    <h2>Choisissez votre moyen de contact prefere.</h2>
+    <h2>Choisissez votre moyen de contact préféré.</h2>
     <div class="social-grid">
       {contacts.map((c) => (
         <a
@@ -65,9 +77,10 @@ const contacts = [
           target={c.external ? '_blank' : undefined}
           rel={c.external ? 'noreferrer' : undefined}
           aria-label={c.label}
+          data-logo={c.label.slice(0, 2).toUpperCase()}
         >
           {c.icon ? (
-            <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" />
+            <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
           ) : (
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="var(--blue)" aria-hidden="true">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -80,18 +93,18 @@ const contacts = [
     </div>
   </section>
 
-  <section class="faq-grid" data-reveal>
+  <section class="faq-grid section-accent section-accent-gold" data-reveal>
     <article>
       <h3>Quels projets ?</h3>
-      <p>Analyse statistique, dashboards, cartographie, data storytelling, rapports et supports de presentation.</p>
+      <p>Analyse statistique, tableaux de bord, cartographie, data storytelling, rapports et supports de présentation.</p>
     </article>
     <article>
       <h3>Quels livrables ?</h3>
-      <p>Dashboard, rapport analytique, notebook, presentation, visualisation ou aide a la decision.</p>
+      <p>Tableau de bord, rapport analytique, notebook, présentation, visualisation ou aide à la décision.</p>
     </article>
     <article>
-      <h3>Quelle securite ?</h3>
-      <p>Pas de token GitHub cote client, pas de base de donnees exposee, pas de collecte invisible via formulaire.</p>
+      <h3>Quelle sécurité ?</h3>
+      <p>Pas de token GitHub côté client, pas de base de données exposée, pas de collecte invisible via formulaire.</p>
     </article>
   </section>
 </BaseLayout>

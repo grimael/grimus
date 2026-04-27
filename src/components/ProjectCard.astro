@@ -16,16 +16,16 @@ const targetUrl = project.private ? undefined : project.liveUrl ?? project.repoU
     href={targetUrl ?? undefined}
     target={targetUrl ? '_blank' : undefined}
     rel={targetUrl ? 'noreferrer' : undefined}
-    aria-label={project.private ? `${project.title} est un projet prive` : `Voir ${project.title}`}
+    aria-label={project.private ? `${project.title} est un projet privé` : `Voir ${project.title}`}
     aria-disabled={project.private ? 'true' : undefined}
   >
     <img src={project.image} alt="" loading="lazy" />
     <span class="media-tag">{project.category}</span>
-    {project.private && <span class="lock-badge" aria-label="Projet prive">Lock</span>}
+    {project.private && <span class="lock-badge" aria-label="Projet privé">Privé</span>}
   </a>
   <div class="project-body">
     <div class="project-meta">
-      <span class="status-dot">Case study</span>
+      <span class="status-dot">Étude de cas</span>
       <span>{project.stack[0]}</span>
     </div>
     <h3>{project.title}</h3>
@@ -36,11 +36,17 @@ const targetUrl = project.private ? undefined : project.liveUrl ?? project.repoU
     </div>
     <div class="project-actions">
       {project.private ? (
-        <span class="btn btn-disabled">Projet prive</span>
+        <span class="btn btn-disabled">Privé</span>
       ) : (
         <>
-          {project.liveUrl && <a class="btn btn-primary" href={project.liveUrl} target="_blank" rel="noreferrer">Voir le livrable <span>-></span></a>}
-          {project.repoUrl && <a class="btn btn-ghost" href={project.repoUrl} target="_blank" rel="noreferrer">Repo GitHub <span>-></span></a>}
+          {project.liveUrl && <a class="btn btn-primary btn-compact" href={project.liveUrl} target="_blank" rel="noreferrer">Voir</a>}
+          {project.repoUrl && (
+            <a class="btn btn-ghost btn-icon" href={project.repoUrl} target="_blank" rel="noreferrer" aria-label={`Dépôt GitHub : ${project.title}`} title="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92v2.84c0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+              </svg>
+            </a>
+          )}
         </>
       )}
     </div>

@@ -3,20 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { projects } from '../data/projects';
+import { withBase } from '../lib/paths';
 
 const categories = ['Tous', ...Array.from(new Set(projects.map((project) => project.category)))];
 ---
 
 <BaseLayout
   title="Projets Data | GRIMA Michael"
-  description="Projets data, dashboards, econometrie, cartographie et visualisation de GRIMA Michael avec liens vers livrables et repos GitHub."
+  description="Projets data, tableaux de bord, économétrie, cartographie et visualisation de GRIMA Michael avec liens vers livrables et dépôts GitHub."
 >
-  <section class="page-hero">
-    <p class="eyebrow">Portfolio de projets</p>
-    <h1>Des projets data presentes comme des produits finis.</h1>
-    <p>
-      Chaque carte met en avant le contexte, le livrable, l'impact mesurable et un acces direct au resultat.
-    </p>
+  <section class="page-hero page-hero-media section-accent section-accent-violet">
+    <div>
+      <p class="eyebrow">Portfolio de projets</p>
+      <h1>Des projets data présentés comme des produits finis.</h1>
+      <p>
+        Chaque carte met en avant le contexte, le livrable, l'impact mesurable et un accès direct au résultat.
+      </p>
+    </div>
+    <figure class="section-visual">
+      <img
+        class="image-rotator"
+        src={withBase('/assets/Images/Grimus.png')}
+        alt="Visuel de la page projets"
+        loading="lazy"
+        data-images={`${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+      />
+      <figcaption>Livrables data</figcaption>
+    </figure>
   </section>
 
   <section class="filter-shell" aria-label="Categories de projets">
@@ -27,15 +40,15 @@ const categories = ['Tous', ...Array.from(new Set(projects.map((project) => proj
     ))}
   </section>
 
-  <section id="all">
+  <section id="all" class="section-accent section-accent-blue">
     <SectionHeading
       eyebrow="Tous les projets"
-      title={`${projects.length} livrables selectionnes`}
-      text="Le design privilegie la lecture rapide: image, contexte, impact, stack, livrable et repo."
+      title={`${projects.length} livrables sélectionnés`}
+      text="Le design privilégie la lecture rapide : image, contexte, impact, technologies, livrable et dépôt."
     />
     <div class="projects-list">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
-    <p class="empty-state" data-empty-state>Aucun projet dans cette categorie pour le moment.</p>
+    <p class="empty-state" data-empty-state>Aucun projet dans cette catégorie pour le moment.</p>
   </section>
 </BaseLayout>

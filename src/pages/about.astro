@@ -2,53 +2,64 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { profile, skillLogos } from '../data/profile';
+import { withBase } from '../lib/paths';
 
 const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 ---
 
 <BaseLayout
   title="Profil | GRIMA Michael"
-  description="Profil de GRIMA Michael, statisticien et data analyst: competences, approche, outils et philosophie de travail."
+  description="Profil de GRIMA Michael, statisticien et data analyst : compétences, approche, outils et philosophie de travail."
 >
-  <section class="page-hero about-hero">
-    <p class="eyebrow">Profil</p>
-    <h1>Un profil data qui relie science statistique, analyse metier et developpement web.</h1>
-    <p>{profile.headline}</p>
+  <section class="page-hero page-hero-media about-hero section-accent section-accent-blue">
+    <div>
+      <p class="eyebrow">Profil</p>
+      <h1>Un profil data qui relie science statistique, analyse métier et développement web.</h1>
+      <p>{profile.headline}</p>
+    </div>
+    <figure class="section-visual">
+      <img
+        class="image-rotator"
+        src={withBase('/assets/Images/Grimus.png')}
+        alt="Visuel de la page profil"
+        loading="lazy"
+        data-images={`${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+      />
+      <figcaption>Profil data</figcaption>
+    </figure>
   </section>
 
-  <section class="about-grid">
-    <div class="portrait-card">
-      <img src="/assets/Images/profil.jpg" alt="Portrait de GRIMA Michael" />
-      <div>
-        <strong>{profile.name}</strong>
-        <span>{profile.role}</span>
-      </div>
-    </div>
+  <section class="about-grid section-accent section-accent-green">
     <div class="about-copy">
       <SectionHeading
         eyebrow="Approche"
         title="Comprendre avant de visualiser. Prouver avant de convaincre."
       />
       <p>
-        Diplome de l'ENSEA d'Abidjan, je combine les methodes quantitatives, l'econometrie, la BI et le data engineering
-        pour concevoir des solutions data completes: collecte, pipelines ETL, data warehouse, dashboards et analyses.
+        Diplômé de l'ENSEA d'Abidjan, je combine les méthodes quantitatives, l'économétrie, la BI et l'ingénierie des données
+        pour concevoir des solutions data complètes : collecte, pipelines ETL, entrepôt de données, tableaux de bord et analyses.
       </p>
       <p>
-        Mes experiences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquee,
-        avec un fil conducteur: rendre la donnee fiable, lisible et utile a la decision.
+        Mes expériences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquée,
+        avec un fil conducteur : rendre la donnée fiable, lisible et utile à la décision.
       </p>
-      <dl class="info-list">
-        <div><dt>Base</dt><dd>{profile.location}</dd></div>
-        <div><dt>Focus</dt><dd>Data science, BI, ETL, statistique et developpement web</dd></div>
-        <div><dt>Disponibilite</dt><dd>{profile.availability}</dd></div>
-      </dl>
     </div>
+    <figure class="section-visual">
+      <img
+        class="image-rotator"
+        src={withBase('/assets/Images/grimus2.png')}
+        alt="Visuel de la section approche"
+        loading="lazy"
+        data-images={`${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+      />
+      <figcaption>Approche analytique</figcaption>
+    </figure>
   </section>
 
-  <section>
+  <section class="section-accent section-accent-gold">
     <SectionHeading
-      eyebrow="Competences"
-      title="Une boite a outils complete pour passer du dataset au livrable."
+      eyebrow="Compétences"
+      title="Une boîte à outils complète pour passer du dataset au livrable."
     />
     <div class="skill-categories">
       {skillGroups.map((group) => (
@@ -56,8 +67,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
           <h3>{group}</h3>
           <div class="skills-matrix skill-logo-grid">
             {skillLogos.filter((skill) => skill.group === group).map((skill) => (
-              <article>
-                {skill.icon ? <img src={skill.icon} alt="" loading="lazy" /> : <span class="skill-initials">{skill.initials}</span>}
+              <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
+                {skill.icon ? (
+                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                ) : (
+                  <span class="skill-initials">{skill.initials}</span>
+                )}
                 <strong>{skill.name}</strong>
               </article>
             ))}
@@ -67,10 +82,10 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
   </section>
 
-  <section data-reveal>
+  <section class="section-accent section-accent-violet" data-reveal>
     <SectionHeading
       eyebrow="Experience"
-      title="Des missions data concretes, connectees aux enjeux metiers."
+      title="Des missions data concrètes, connectées aux enjeux métiers."
     />
     <div class="timeline">
 
@@ -81,13 +96,13 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date">Janv. 2026 — Present</span>
+            <span class="timeline-date">Janv. 2026 — Présent</span>
             <span class="timeline-badge current">En poste</span>
           </div>
           <h3 class="timeline-role">Support Data & Business Intelligence</h3>
           <p class="timeline-org">SanlamAllianz Participations</p>
           <p class="timeline-desc">
-            Analyse de donnees financieres clients, conception de tableaux de bord Power BI
+            Analyse de données financières clients, conception de tableaux de bord Power BI
             et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel.
           </p>
           <div class="timeline-stack">
@@ -113,7 +128,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
           <p class="timeline-org">Observatoire du Service Public</p>
           <p class="timeline-desc">
             Analyse multi-sources et production de rapports analytiques avec recommandations
-            strategiques. Suivi et modelisation d'indicateurs de performance du service public.
+            stratégiques. Suivi et modélisation d'indicateurs de performance du service public.
           </p>
           <div class="timeline-stack">
             <span>Python</span>
@@ -136,8 +151,8 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
           <h3 class="timeline-role">Statisticien — Data Analyst</h3>
           <p class="timeline-org">Ministere de l'Enseignement Technique</p>
           <p class="timeline-desc">
-            Architecture ETL et data warehouse national, modelisation de KPIs nationaux
-            et mise en place d'un reporting automatise sous Apache Superset.
+            Architecture ETL et entrepôt de données national, modélisation de KPIs nationaux
+            et mise en place d'un reporting automatisé sous Apache Superset.
           </p>
           <div class="timeline-stack">
             <span>Apache Superset</span>
@@ -152,23 +167,23 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
   </section>
 
-  <section class="visuals-strip" data-reveal>
-    <p class="eyebrow">Realisations</p>
+  <section class="visuals-strip section-accent section-accent-coral" data-reveal>
+    <p class="eyebrow">Réalisations</p>
     <div class="visuals-grid">
       <figure class="visual-item">
-        <img src="/assets/Images/power.png" alt="Dashboard Power BI" loading="lazy" />
+        <img src={withBase('/assets/Images/power.png')} alt="Tableau de bord Power BI" loading="lazy" />
         <figcaption>Power BI</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src="/assets/Images/shiny.png" alt="App R Shiny" loading="lazy" />
+        <img src={withBase('/assets/Images/shiny.png')} alt="App R Shiny" loading="lazy" />
         <figcaption>R Shiny</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src="/assets/Images/qgis.png" alt="Cartographie QGIS" loading="lazy" />
+        <img src={withBase('/assets/Images/qgis.png')} alt="Cartographie QGIS" loading="lazy" />
         <figcaption>QGIS</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src="/assets/Images/marketing.png" alt="Analyse marketing" loading="lazy" />
+        <img src={withBase('/assets/Images/marketing.png')} alt="Analyse marketing" loading="lazy" />
         <figcaption>Analyse</figcaption>
       </figure>
     </div>
@@ -185,7 +200,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </article>
     <article>
       <span>Raconter</span>
-      <p>Transformer les resultats en supports clairs pour des publics techniques et non techniques.</p>
+      <p>Transformer les résultats en supports clairs pour des publics techniques et non techniques.</p>
     </article>
   </section>
 </BaseLayout>
