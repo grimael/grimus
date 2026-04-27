@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { projects } from '../data/projects';
+
+const categories = ['Tous', ...Array.from(new Set(projects.map((project) => project.category)))];
+---
+
+<BaseLayout
+  title="Projets Data | GRIMA Michael"
+  description="Projets data, dashboards, econometrie, cartographie et visualisation de GRIMA Michael avec liens vers livrables et repos GitHub."
+>
+  <section class="page-hero">
+    <p class="eyebrow">Portfolio de projets</p>
+    <h1>Des projets data presentes comme des produits finis.</h1>
+    <p>
+      Chaque carte met en avant le contexte, le livrable, l'impact mesurable et un acces direct au resultat.
+    </p>
+  </section>
+
+  <section class="filter-shell" aria-label="Categories de projets">
+    {categories.map((category) => (
+      <button class={category === 'Tous' ? 'is-active' : ''} type="button" data-filter={category}>
+        {category}
+      </button>
+    ))}
+  </section>
+
+  <section id="all">
+    <SectionHeading
+      eyebrow="Tous les projets"
+      title={`${projects.length} livrables selectionnes`}
+      text="Le design privilegie la lecture rapide: image, contexte, impact, stack, livrable et repo."
+    />
+    <div class="projects-list">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <p class="empty-state" data-empty-state>Aucun projet dans cette categorie pour le moment.</p>
+  </section>
+</BaseLayout>

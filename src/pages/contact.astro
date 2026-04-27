@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+
+const subject = encodeURIComponent('Projet data depuis votre portfolio');
+const body = encodeURIComponent('Bonjour Michael,\n\nJe souhaite discuter avec vous d un projet data.\n\nContexte:\nObjectif:\nDelai:\n');
+
+const contacts = [
+  {
+    label: 'Email',
+    sublabel: profile.email,
+    href: `mailto:${profile.email}?subject=${subject}&body=${body}`,
+    icon: 'https://cdn.simpleicons.org/gmail/EA4335',
+    external: false,
+  },
+  {
+    label: 'WhatsApp',
+    sublabel: profile.phone,
+    href: profile.whatsapp,
+    icon: 'https://cdn.simpleicons.org/whatsapp/25D366',
+    external: true,
+  },
+  {
+    label: 'LinkedIn',
+    sublabel: 'Voir mon profil',
+    href: profile.linkedin,
+    icon: 'https://cdn.simpleicons.org/linkedin/0A66C2',
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    sublabel: 'grimael',
+    href: profile.github,
+    icon: 'https://cdn.simpleicons.org/github/181717',
+    external: true,
+  },
+  {
+    label: 'Telephone',
+    sublabel: profile.phone,
+    href: `tel:${profile.phoneLink}`,
+    icon: null,
+    external: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Contact | GRIMA Michael"
+  description="Contacter GRIMA Michael pour un projet data, dashboard, visualisation, statistique ou analyse econometrique."
+>
+  <section class="page-hero contact-hero">
+    <p class="eyebrow">Contact</p>
+    <h1>Parlons du probleme, du livrable et de l'effet que vous voulez produire.</h1>
+
+  </section>
+
+  <section data-reveal>
+    <p class="eyebrow">Canaux disponibles</p>
+    <h2>Choisissez votre moyen de contact prefere.</h2>
+    <div class="social-grid">
+      {contacts.map((c) => (
+        <a
+          class="social-card"
+          href={c.href}
+          target={c.external ? '_blank' : undefined}
+          rel={c.external ? 'noreferrer' : undefined}
+          aria-label={c.label}
+        >
+          {c.icon ? (
+            <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" />
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="var(--blue)" aria-hidden="true">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+          )}
+          <strong>{c.label}</strong>
+          <small>{c.sublabel}</small>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="faq-grid" data-reveal>
+    <article>
+      <h3>Quels projets ?</h3>
+      <p>Analyse statistique, dashboards, cartographie, data storytelling, rapports et supports de presentation.</p>
+    </article>
+    <article>
+      <h3>Quels livrables ?</h3>
+      <p>Dashboard, rapport analytique, notebook, presentation, visualisation ou aide a la decision.</p>
+    </article>
+    <article>
+      <h3>Quelle securite ?</h3>
+      <p>Pas de token GitHub cote client, pas de base de donnees exposee, pas de collecte invisible via formulaire.</p>
+    </article>
+  </section>
+</BaseLayout>

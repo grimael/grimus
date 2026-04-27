@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { profile, skillLogos } from '../data/profile';
+
+const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
+---
+
+<BaseLayout
+  title="Profil | GRIMA Michael"
+  description="Profil de GRIMA Michael, statisticien et data analyst: competences, approche, outils et philosophie de travail."
+>
+  <section class="page-hero about-hero">
+    <p class="eyebrow">Profil</p>
+    <h1>Un profil data qui relie science statistique, analyse metier et developpement web.</h1>
+    <p>{profile.headline}</p>
+  </section>
+
+  <section class="about-grid">
+    <div class="portrait-card">
+      <img src="/assets/Images/profil.jpg" alt="Portrait de GRIMA Michael" />
+      <div>
+        <strong>{profile.name}</strong>
+        <span>{profile.role}</span>
+      </div>
+    </div>
+    <div class="about-copy">
+      <SectionHeading
+        eyebrow="Approche"
+        title="Comprendre avant de visualiser. Prouver avant de convaincre."
+      />
+      <p>
+        Diplome de l'ENSEA d'Abidjan, je combine les methodes quantitatives, l'econometrie, la BI et le data engineering
+        pour concevoir des solutions data completes: collecte, pipelines ETL, data warehouse, dashboards et analyses.
+      </p>
+      <p>
+        Mes experiences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquee,
+        avec un fil conducteur: rendre la donnee fiable, lisible et utile a la decision.
+      </p>
+      <dl class="info-list">
+        <div><dt>Base</dt><dd>{profile.location}</dd></div>
+        <div><dt>Focus</dt><dd>Data science, BI, ETL, statistique et developpement web</dd></div>
+        <div><dt>Disponibilite</dt><dd>{profile.availability}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <SectionHeading
+      eyebrow="Competences"
+      title="Une boite a outils complete pour passer du dataset au livrable."
+    />
+    <div class="skill-categories">
+      {skillGroups.map((group) => (
+        <section class="skill-category">
+          <h3>{group}</h3>
+          <div class="skills-matrix skill-logo-grid">
+            {skillLogos.filter((skill) => skill.group === group).map((skill) => (
+              <article>
+                {skill.icon ? <img src={skill.icon} alt="" loading="lazy" /> : <span class="skill-initials">{skill.initials}</span>}
+                <strong>{skill.name}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section data-reveal>
+    <SectionHeading
+      eyebrow="Experience"
+      title="Des missions data concretes, connectees aux enjeux metiers."
+    />
+    <div class="timeline">
+
+      <div class="timeline-item is-current">
+        <div class="timeline-marker">
+          <span class="timeline-dot"></span>
+          <span class="timeline-line"></span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <span class="timeline-date">Janv. 2026 — Present</span>
+            <span class="timeline-badge current">En poste</span>
+          </div>
+          <h3 class="timeline-role">Support Data & Business Intelligence</h3>
+          <p class="timeline-org">SanlamAllianz Participations</p>
+          <p class="timeline-desc">
+            Analyse de donnees financieres clients, conception de tableaux de bord Power BI
+            et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel.
+          </p>
+          <div class="timeline-stack">
+            <span>Power BI</span>
+            <span>Apache Hop</span>
+            <span>ETL</span>
+            <span>SQL</span>
+            <span>Finance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"></span>
+          <span class="timeline-line"></span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <span class="timeline-date">Oct. 2025 — Janv. 2026</span>
+          </div>
+          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
+          <p class="timeline-org">Observatoire du Service Public</p>
+          <p class="timeline-desc">
+            Analyse multi-sources et production de rapports analytiques avec recommandations
+            strategiques. Suivi et modelisation d'indicateurs de performance du service public.
+          </p>
+          <div class="timeline-stack">
+            <span>Python</span>
+            <span>R</span>
+            <span>KPI</span>
+            <span>Reporting</span>
+            <span>Service public</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-marker">
+          <span class="timeline-dot"></span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <span class="timeline-date">Mai 2025 — Sept. 2025</span>
+          </div>
+          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
+          <p class="timeline-org">Ministere de l'Enseignement Technique</p>
+          <p class="timeline-desc">
+            Architecture ETL et data warehouse national, modelisation de KPIs nationaux
+            et mise en place d'un reporting automatise sous Apache Superset.
+          </p>
+          <div class="timeline-stack">
+            <span>Apache Superset</span>
+            <span>Data Warehouse</span>
+            <span>ETL</span>
+            <span>SQL</span>
+            <span>Education</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="visuals-strip" data-reveal>
+    <p class="eyebrow">Realisations</p>
+    <div class="visuals-grid">
+      <figure class="visual-item">
+        <img src="/assets/Images/power.png" alt="Dashboard Power BI" loading="lazy" />
+        <figcaption>Power BI</figcaption>
+      </figure>
+      <figure class="visual-item">
+        <img src="/assets/Images/shiny.png" alt="App R Shiny" loading="lazy" />
+        <figcaption>R Shiny</figcaption>
+      </figure>
+      <figure class="visual-item">
+        <img src="/assets/Images/qgis.png" alt="Cartographie QGIS" loading="lazy" />
+        <figcaption>QGIS</figcaption>
+      </figure>
+      <figure class="visual-item">
+        <img src="/assets/Images/marketing.png" alt="Analyse marketing" loading="lazy" />
+        <figcaption>Analyse</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="principles-grid">
+    <article>
+      <span>Explorer</span>
+      <p>Identifier les tendances, anomalies et questions importantes avant de construire le livrable.</p>
+    </article>
+    <article>
+      <span>Modeliser</span>
+      <p>Choisir des methodes statistiques adaptees, lisibles et defendables.</p>
+    </article>
+    <article>
+      <span>Raconter</span>
+      <p>Transformer les resultats en supports clairs pour des publics techniques et non techniques.</p>
+    </article>
+  </section>
+</BaseLayout>

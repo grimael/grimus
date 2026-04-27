@@ -1,0 +1,48 @@
+---
+import type { Project } from '../data/projects';
+
+type Props = {
+  project: Project;
+  compact?: boolean;
+};
+
+const { project, compact = false } = Astro.props;
+const targetUrl = project.private ? undefined : project.liveUrl ?? project.repoUrl;
+---
+
+<article class:list={['project-card', { compact, private: project.private }]} data-category={project.category}>
+  <a
+    class="project-media"
+    href={targetUrl ?? undefined}
+    target={targetUrl ? '_blank' : undefined}
+    rel={targetUrl ? 'noreferrer' : undefined}
+    aria-label={project.private ? `${project.title} est un projet prive` : `Voir ${project.title}`}
+    aria-disabled={project.private ? 'true' : undefined}
+  >
+    <img src={project.image} alt="" loading="lazy" />
+    <span class="media-tag">{project.category}</span>
+    {project.private && <span class="lock-badge" aria-label="Projet prive">Lock</span>}
+  </a>
+  <div class="project-body">
+    <div class="project-meta">
+      <span class="status-dot">Case study</span>
+      <span>{project.stack[0]}</span>
+    </div>
+    <h3>{project.title}</h3>
+    <p>{project.summary}</p>
+    {!compact && <p class="impact">{project.impact}</p>}
+    <div class="stack-list" aria-label="Technologies">
+      {project.stack.map((tech) => <span>{tech}</span>)}
+    </div>
+    <div class="project-actions">
+      {project.private ? (
+        <span class="btn btn-disabled">Projet prive</span>
+      ) : (
+        <>
+          {project.liveUrl && <a class="btn btn-primary" href={project.liveUrl} target="_blank" rel="noreferrer">Voir le livrable <span>-></span></a>}
+          {project.repoUrl && <a class="btn btn-ghost" href={project.repoUrl} target="_blank" rel="noreferrer">Repo GitHub <span>-></span></a>}
+        </>
+      )}
+    </div>
+  </div>
+</article>

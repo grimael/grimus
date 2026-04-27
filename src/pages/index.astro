@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { featuredProjects, projects } from '../data/projects';
+import { profile, skillLogos } from '../data/profile';
+
+const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
+---
+
+<BaseLayout
+  title="GRIMA Michael | Data Analyst & Statisticien"
+  description="Portfolio premium de GRIMA Michael: data analyst, statisticien, developpeur web et visual storyteller base a Abidjan."
+>
+  <section class="hero" data-reveal>
+    <div class="hero-content">
+      <h1>Data Scientist & Engineer pour transformer la donnee en impact mesurable.</h1>
+      <p class="hero-lead">{profile.bio}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/projects/">Voir mon travail <span>-></span></a>
+        <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noreferrer">CV & profil <span>download</span></a>
+      </div>
+      <div class="logo-strip" aria-label="Competences principales">
+        {skillLogos.filter(s => s.icon).slice(0, 8).map((skill) => (
+          <span title={skill.name}><img src={skill.icon} alt={skill.name} loading="lazy" /></span>
+        ))}
+      </div>
+    </div>
+    <aside class="hero-showcase" aria-label="Apercu visuel du portfolio">
+      <div class="showcase-main">
+        <img src="/assets/Images/profil2.jpg" alt="Portrait de GRIMA Michael" />
+        <div class="showcase-caption">
+          <span>Disponible</span>
+          <strong>{profile.availability}</strong>
+        </div>
+      </div>
+      <div class="floating-card card-a">
+        <span>Dashboard</span>
+        <strong>Power BI / Shiny</strong>
+      </div>
+      <div class="floating-card card-b">
+        <span>Code</span>
+        <strong>Web + Data apps</strong>
+      </div>
+    </aside>
+  </section>
+
+  <section class="split-section" data-reveal>
+    <div>
+      <SectionHeading
+        eyebrow="Signature"
+        title="Un profil hybride: statistique, data produit et web."
+        text="Je ne veux pas seulement produire des graphiques. Je veux construire des supports qui se comprennent vite, qui donnent confiance et qui peuvent vivre dans un vrai environnement digital."
+      />
+    </div>
+    <div class="capability-grid">
+      <article>
+        <span>01</span>
+        <h3>Statistique appliquee</h3>
+        <p>Modeles, tests, econometrie et interpretation rigoureuse pour passer du signal brut a la decision.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Dashboards premium</h3>
+        <p>Power BI, R Shiny et interfaces analytiques pour rendre les indicateurs lisibles et actionnables.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Web & storytelling</h3>
+        <p>Pages, supports et experiences web qui donnent une vraie presence aux resultats.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="work-preview" data-reveal>
+    <SectionHeading
+      eyebrow="Apercu"
+      title="Des livrables concrets, visuels et presentables."
+      text="Dashboards interactifs, cartographie, applications statistiques — des resultats qui parlent d'eux-memes."
+    />
+    <div class="preview-grid">
+      <figure class="preview-card preview-main">
+        <img src="/assets/Images/power.png" alt="Dashboard Power BI" loading="lazy" />
+        <figcaption>
+          <strong>Dashboard Power BI</strong>
+          <span>Reporting financier & KPIs</span>
+        </figcaption>
+      </figure>
+      <figure class="preview-card">
+        <img src="/assets/Images/shiny.png" alt="Application R Shiny" loading="lazy" />
+        <figcaption>
+          <strong>Application R Shiny</strong>
+          <span>Analyse statistique interactive</span>
+        </figcaption>
+      </figure>
+      <figure class="preview-card">
+        <img src="/assets/Images/qgis.png" alt="Cartographie QGIS" loading="lazy" />
+        <figcaption>
+          <strong>Cartographie QGIS</strong>
+          <span>Visualisation spatiale</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <SectionHeading
+      eyebrow="Selection"
+      title="Des projets presentes avec image, impact et acces direct."
+      text="Chaque carte presente le contexte, l'impact, la stack technique et un acces direct au livrable."
+    />
+    <div class="featured-grid">
+      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <div class="center-action">
+      <a class="btn btn-ghost" href="/projects/">Voir les {projects.length} projets</a>
+    </div>
+  </section>
+
+  <section class="skills-band" data-reveal>
+    <p class="eyebrow">Outils, langages & technologies</p>
+    <div class="skill-categories">
+      {skillGroups.map((group) => (
+        <section class="skill-category">
+          <h3>{group}</h3>
+          <div class="skill-logo-grid">
+            {skillLogos.filter((skill) => skill.group === group).map((skill) => (
+              <article>
+                {skill.icon ? <img src={skill.icon} alt="" loading="lazy" /> : <span class="skill-initials">{skill.initials}</span>}
+                <strong>{skill.name}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta-section" data-reveal>
+    <div>
+      <p class="eyebrow">Collaboration</p>
+      <h2>Vous avez un projet data ? Transformons-le en livrable concret.</h2>
+      <p>Analyse, dashboard, rapport ou application web — je prends en charge le projet de bout en bout, de la donnee au resultat.</p>
+    </div>
+    <a class="btn btn-primary" href="/contact/">Me contacter <span>-></span></a>
+  </section>
+</BaseLayout>

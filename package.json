@@ -1,0 +1,19 @@
+{
+  "name": "grima-michael-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.1.9",
+    "typescript": "^5.7.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
