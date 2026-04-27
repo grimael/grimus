@@ -71,7 +71,6 @@ body::before {
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.26;
-  animation: drift 14s ease-in-out infinite alternate;
 }
 
 .ambient-one {
@@ -84,7 +83,6 @@ body::before {
   right: -10rem;
   top: 25rem;
   background: var(--coral);
-  animation-delay: -5s;
 }
 
 .cursor-light {
@@ -243,6 +241,8 @@ main > section {
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
   padding: 6.5rem 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
 }
 
 .section-accent {
@@ -574,7 +574,7 @@ p {
 
 .hero-showcase {
   position: relative;
-  min-height: 620px;
+  min-height: 400px;
 }
 
 .showcase-main {
@@ -598,12 +598,20 @@ p {
   pointer-events: none;
   background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.56), transparent 42%);
   transform: translateX(-120%);
-  animation: shine 5.5s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.65s ease;
+}
+
+.showcase-main:hover::after,
+.project-card:hover .project-media::after {
+  opacity: 1;
+  transform: translateX(120%);
 }
 
 .showcase-main > img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
+  max-height: 380px;
   border-radius: 22px;
   object-fit: cover;
   filter: saturate(1.06) contrast(1.02);
@@ -1188,7 +1196,7 @@ p {
 
 .page-hero-media {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.45fr);
   align-items: center;
   gap: clamp(2rem, 5vw, 4rem);
 }
@@ -1215,19 +1223,10 @@ p {
 
 .section-visual > img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
+  max-height: 280px;
   border-radius: 22px;
   object-fit: cover;
-}
-
-.image-rotator {
-  opacity: 1;
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-
-.image-rotator.is-swapping {
-  opacity: 0.08;
-  transform: scale(1.01);
 }
 
 .section-visual figcaption {
@@ -1769,6 +1768,17 @@ p {
   .logo-strip img {
     width: 24px;
     height: 24px;
+  }
+
+  .site-header,
+  .showcase-caption,
+  .floating-card,
+  .timeline-content,
+  .social-card,
+  .project-card,
+  .section-accent,
+  .section-visual {
+    backdrop-filter: none;
   }
 }
 

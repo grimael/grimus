@@ -10,21 +10,21 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 ---
 
 <BaseLayout
-  title="GRIMA Michael | Analyste data & Statisticien"
-  description="Portfolio de GRIMA Michael : analyste data, statisticien, développeur web et concepteur de récits visuels basé à Abidjan."
+  title="Accueil"
+  description="Portfolio data : analyste data, statisticien, développeur web et concepteur de récits visuels basé à Abidjan."
 >
   <section class="hero section-accent section-accent-blue" data-reveal>
     <div class="hero-content">
-      <h1>Data scientist et ingénieur data pour transformer la donnée en impact mesurable.</h1>
+      <h1>Statisticien | Data Scientist & Data Analyst</h1>
       <p class="hero-lead">{profile.bio}</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href={withBase('/projects/')}>Mes projets</a>
-        <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noreferrer">CV</a>
+        <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noopener noreferrer">CV</a>
       </div>
       <div class="logo-strip" aria-label="Competences principales">
         {skillLogos.filter(s => s.icon).slice(0, 8).map((skill) => (
           <span title={skill.name} data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
-            <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+            <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="28" height="28" fetchpriority="low" />
           </span>
         ))}
       </div>
@@ -32,10 +32,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     <aside class="hero-showcase" aria-label="Aperçu visuel du portfolio">
       <div class="showcase-main">
         <img
-          class="image-rotator"
-          src={withBase('/assets/Images/Grimus.png')}
+          src={withBase('/assets/Images/optimized/Grimus.webp')}
           alt="Visuel de présentation"
-          data-images={`${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+          width="900"
+          height="1125"
+          decoding="async"
+          fetchpriority="high"
         />
       </div>
     </aside>
@@ -46,7 +48,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
       <SectionHeading
         eyebrow="Signature"
         title="Un profil hybride : statistique, produit data et web."
-        text="Je ne veux pas seulement produire des graphiques. Je veux construire des supports qui se comprennent vite, qui inspirent confiance et qui peuvent vivre dans un vrai environnement digital."
+        text="Je ne produis pas seulement des graphiques. Je construit  des supports qui inspirent confiance et qui peuvent vivre dans un vrai environnement digital."
       />
     </div>
     <div class="capability-grid">
@@ -76,21 +78,21 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     />
     <div class="preview-grid">
       <figure class="preview-card preview-main">
-        <img src={withBase('/assets/Images/power.png')} alt="Tableau de bord Power BI" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/power.webp')} alt="Tableau de bord Power BI" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
           <strong>Tableau de bord Power BI</strong>
           <span>Reporting financier & KPIs</span>
         </figcaption>
       </figure>
       <figure class="preview-card">
-        <img src={withBase('/assets/Images/shiny.png')} alt="Application R Shiny" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/shiny.webp')} alt="Application R Shiny" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
           <strong>Application R Shiny</strong>
           <span>Analyse statistique interactive</span>
         </figcaption>
       </figure>
       <figure class="preview-card">
-        <img src={withBase('/assets/Images/qgis.png')} alt="Cartographie QGIS" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/qgis.webp')} alt="Cartographie QGIS" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
           <strong>Cartographie QGIS</strong>
           <span>Visualisation spatiale</span>
@@ -123,7 +125,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             {skillLogos.filter((skill) => skill.group === group).map((skill) => (
               <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
                 {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="38" height="38" fetchpriority="low" />
                 ) : (
                   <span class="skill-initials">{skill.initials}</span>
                 )}

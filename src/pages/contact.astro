@@ -4,7 +4,7 @@ import { profile } from '../data/profile';
 import { withBase } from '../lib/paths';
 
 const subject = encodeURIComponent('Projet data depuis votre portfolio');
-const body = encodeURIComponent('Bonjour Michael,\n\nJe souhaite discuter avec vous d’un projet data.\n\nContexte :\nObjectif :\nDélai :\n');
+const body = encodeURIComponent('Bonjour,\n\nJe souhaite discuter avec vous d’un projet data.\n\nContexte :\nObjectif :\nDélai :\n');
 
 const contacts = [
   {
@@ -32,8 +32,8 @@ const contacts = [
 ---
 
 <BaseLayout
-  title="Contact | GRIMA Michael"
-  description="Contacter GRIMA Michael pour un projet data, tableau de bord, visualisation, statistique ou analyse économétrique."
+  title="Contact"
+  description="Contact pour un projet data, tableau de bord, visualisation, statistique ou analyse économétrique."
 >
   <section class="page-hero page-hero-media contact-hero section-accent section-accent-coral">
     <div>
@@ -42,35 +42,15 @@ const contacts = [
     </div>
     <figure class="section-visual">
       <img
-        class="image-rotator"
-        src={withBase('/assets/Images/grimus2.png')}
+        src={withBase('/assets/Images/optimized/grimus2.webp')}
         alt="Visuel de la page contact"
         loading="lazy"
-        data-images={`${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+        decoding="async"
+        width="900"
+        height="675"
       />
       <figcaption>Discussion projet</figcaption>
     </figure>
-  </section>
-
-  <section class="section-accent section-accent-green" data-reveal>
-    <p class="eyebrow">Canaux disponibles</p>
-    <h2>Choisissez votre moyen de contact préféré.</h2>
-    <div class="social-grid">
-      {contacts.map((c) => (
-        <a
-          class="social-card"
-          href={c.href}
-          target={c.external ? '_blank' : undefined}
-          rel={c.external ? 'noreferrer' : undefined}
-          aria-label={c.label}
-          data-logo={c.label.slice(0, 2).toUpperCase()}
-        >
-          <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
-          <strong>{c.label}</strong>
-          <small>{c.sublabel}</small>
-        </a>
-      ))}
-    </div>
   </section>
 
   <section class="faq-grid section-accent section-accent-gold" data-reveal>
@@ -86,5 +66,26 @@ const contacts = [
       <h3>Quelle sécurité ?</h3>
       <p>Pas de token GitHub côté client, pas de base de données exposée, pas de collecte invisible via formulaire.</p>
     </article>
+  </section>
+
+  <section class="section-accent section-accent-green" data-reveal>
+    <p class="eyebrow">Canaux disponibles</p>
+    <h2>Choisissez votre moyen de contact préféré.</h2>
+    <div class="social-grid">
+      {contacts.map((c) => (
+        <a
+          class="social-card"
+          href={c.href}
+          target={c.external ? '_blank' : undefined}
+          rel={c.external ? 'noopener noreferrer' : undefined}
+          aria-label={c.label}
+          data-logo={c.label.slice(0, 2).toUpperCase()}
+        >
+          <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" fetchpriority="low" />
+          <strong>{c.label}</strong>
+          <small>{c.sublabel}</small>
+        </a>
+      ))}
+    </div>
   </section>
 </BaseLayout>

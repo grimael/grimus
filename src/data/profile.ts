@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'Michael SIPTOUA GRIMA',
+  name: 'Analyste data',
   role: 'Data scientist et ingénieur data - BI - ETL - Web',
   location: "Abidjan, Côte d'Ivoire",
   email: 'grimamichael79@gmail.com',

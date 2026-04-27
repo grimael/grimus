@@ -8,8 +8,8 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 ---
 
 <BaseLayout
-  title="Profil | GRIMA Michael"
-  description="Profil de GRIMA Michael, statisticien et data analyst : compétences, approche, outils et philosophie de travail."
+  title="Profil"
+  description="Profil de statisticien et data analyst : compétences, approche, outils et philosophie de travail."
 >
   <section class="page-hero page-hero-media about-hero section-accent section-accent-blue">
     <div>
@@ -19,11 +19,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
     <figure class="section-visual">
       <img
-        class="image-rotator"
-        src={withBase('/assets/Images/Grimus.png')}
+        src={withBase('/assets/Images/optimized/Grimus.webp')}
         alt="Visuel de la page profil"
         loading="lazy"
-        data-images={`${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+        decoding="async"
+        width="900"
+        height="675"
       />
       <figcaption>Profil data</figcaption>
     </figure>
@@ -46,11 +47,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
     <figure class="section-visual">
       <img
-        class="image-rotator"
-        src={withBase('/assets/Images/grimus2.png')}
+        src={withBase('/assets/Images/optimized/grimus2.webp')}
         alt="Visuel de la section approche"
         loading="lazy"
-        data-images={`${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+        decoding="async"
+        width="900"
+        height="675"
       />
       <figcaption>Approche analytique</figcaption>
     </figure>
@@ -69,7 +71,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             {skillLogos.filter((skill) => skill.group === group).map((skill) => (
               <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
                 {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="38" height="38" fetchpriority="low" />
                 ) : (
                   <span class="skill-initials">{skill.initials}</span>
                 )}
@@ -171,19 +173,19 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     <p class="eyebrow">Réalisations</p>
     <div class="visuals-grid">
       <figure class="visual-item">
-        <img src={withBase('/assets/Images/power.png')} alt="Tableau de bord Power BI" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/power.webp')} alt="Tableau de bord Power BI" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>Power BI</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src={withBase('/assets/Images/shiny.png')} alt="App R Shiny" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/shiny.webp')} alt="App R Shiny" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>R Shiny</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src={withBase('/assets/Images/qgis.png')} alt="Cartographie QGIS" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/qgis.webp')} alt="Cartographie QGIS" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>QGIS</figcaption>
       </figure>
       <figure class="visual-item">
-        <img src={withBase('/assets/Images/marketing.png')} alt="Analyse marketing" loading="lazy" />
+        <img src={withBase('/assets/Images/optimized/marketing.webp')} alt="Analyse marketing" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>Analyse</figcaption>
       </figure>
     </div>

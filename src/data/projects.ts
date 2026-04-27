@@ -15,13 +15,14 @@ export type Project = {
 const github = 'https://github.com/grimael';
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 const projectImage = asset('/assets/Images/Project.svg');
+const image = (name: string) => asset(`/assets/Images/optimized/${name}.webp`);
 
 export const projects: Project[] = [
   {
     title: 'Portfolio GRIMUS',
     slug: 'portfolio-grimus',
     category: 'Web',
-    image: asset('/assets/Images/Grimus.png'),
+    image: image('Grimus'),
     summary: 'Portfolio personnel construit pour présenter un profil data, des projets, des livrables et des canaux de contact professionnels.',
     impact: 'Site statique optimisé pour GitHub Pages, navigation claire, identité visuelle personnalisée et structure maintenable.',
     stack: ['Astro', 'HTML', 'CSS', 'JavaScript'],
@@ -61,12 +62,12 @@ export const projects: Project[] = [
     private: true
   },
   {
-    title: 'Profil GitHub GRIMAEL',
+    title: 'Profil GitHub',
     slug: 'profil-github-grimael',
     category: 'Web',
-    image: asset('/assets/Images/grimus2.png'),
+    image: image('grimus2'),
     summary: 'Profil GitHub personnel conçu pour centraliser l’identité technique, les projets, les domaines de compétence et les liens utiles.',
-    impact: 'Point d’entrée clair vers les dépôts, les projets publics et la présence technique de GRIMA Michael.',
+    impact: 'Point d’entrée clair vers les dépôts, les projets publics et la présence technique.',
     stack: ['GitHub', 'Markdown', 'Portfolio', 'Documentation'],
     repoUrl: `${github}/grimael`
   },
@@ -84,7 +85,7 @@ export const projects: Project[] = [
     title: 'Étude économétrique : corruption et investissement public',
     slug: 'econometrie-corruption-investissement',
     category: 'Statistique',
-    image: asset('/assets/Images/logo_maphix.png'),
+    image: image('logo_maphix'),
     summary: "Analyse des effets de la corruption sur l'investissement public en Afrique subsaharienne avec une lecture économétrique orientée décision.",
     impact: 'Modèles de régression, interprétation causale prudente, recommandations de politique publique et restitution claire.',
     stack: ['Économétrie', 'Régression', 'R', 'Analyse publique'],
@@ -95,7 +96,7 @@ export const projects: Project[] = [
     title: 'Tableau de bord R Shiny',
     slug: 'dashboard-rshiny',
     category: 'Tableau de bord',
-    image: asset('/assets/Images/shiny.png'),
+    image: image('shiny'),
     summary: 'Application web interactive pour explorer des données complexes avec filtres dynamiques et visualisations exploitables.',
     impact: 'Expérience analytique fluide, lecture rapide des tendances et export des résultats pour les utilisateurs métiers.',
     stack: ['R', 'Shiny', 'Visualisation', 'Interface analytique'],
@@ -106,7 +107,7 @@ export const projects: Project[] = [
     title: 'Power BI - Coupe du Monde 2018',
     slug: 'powerbi-coupe-du-monde-2018',
     category: 'Tableau de bord',
-    image: asset('/assets/Images/power.png'),
+    image: image('power'),
     summary: 'Tableau de bord Power BI pour analyser les performances des équipes, les statistiques de match et les dynamiques du tournoi.',
     impact: 'Tableaux de bord clairs, comparaison des équipes, indicateurs de performance et visualisation géographique.',
     stack: ['Power BI', 'DAX', 'Modélisation', 'Analyse sportive'],
@@ -117,7 +118,7 @@ export const projects: Project[] = [
     title: 'Projet Data Viz - Transport au Togo',
     slug: 'transport-togo-dataviz',
     category: 'Tableau de bord',
-    image: asset('/assets/Images/image.png'),
+    image: image('image'),
     summary: 'Analyse des performances du secteur logistique et transport au Togo avec indicateurs, tendances et comparaisons régionales.',
     impact: "Tableau de bord décisionnel centré sur les KPI, la lecture temporelle et les zones d'amélioration opérationnelle.",
     stack: ['Power BI', 'KPI', 'Analyse transport', 'Visualisation'],
@@ -128,7 +129,7 @@ export const projects: Project[] = [
     title: 'Projet Marketing Étudiants',
     slug: 'marketing-etudiants-ensea',
     category: 'Statistique',
-    image: asset('/assets/Images/marketing.png'),
+    image: image('marketing'),
     summary: "Étude de marché autour de l'ENSEA pour comprendre comportements, besoins et préférences des étudiants.",
     impact: 'Enquêtes, analyses factorielles, tests statistiques et restitution orientée action.',
     stack: ['Enquête', 'Analyse factorielle', 'Tests statistiques', 'Présentation'],
@@ -139,7 +140,7 @@ export const projects: Project[] = [
     title: 'Projet QGIS - RGPH 2021',
     slug: 'qgis-rgph-2021-abidjan',
     category: 'Géospatial',
-    image: asset('/assets/Images/qgis.png'),
+    image: image('qgis'),
     summary: "Cartographie et analyse démographique des communes d'Abidjan à partir du RGPH 2021.",
     impact: 'Cartes thématiques, analyse spatiale et visualisation de la répartition de population.',
     stack: ['QGIS', 'Cartographie', 'Analyse spatiale', 'RGPH'],
@@ -150,7 +151,7 @@ export const projects: Project[] = [
     title: 'Rapport de stage - Crise en Ukraine',
     slug: 'rapport-ukraine-commerce',
     category: 'Recherche',
-    image: asset('/assets/Images/academique.png'),
+    image: image('academique'),
     summary: 'Analyse des effets de la crise en Ukraine sur les flux commerciaux internationaux et les équilibres macroéconomiques.',
     impact: 'Lecture sectorielle, synthèse économique et mise en évidence des impacts régionaux.',
     stack: ['Recherche', 'Macroéconomie', 'Commerce international', 'Rapport'],
@@ -161,7 +162,7 @@ export const projects: Project[] = [
     title: 'Affiche - Activités CEMAC',
     slug: 'affiche-cemac',
     category: 'Visualisation',
-    image: asset('/assets/Images/affiche1.png'),
+    image: image('affiche1'),
     summary: 'Infographie professionnelle pour une campagne de sensibilisation autour des activités CEMAC.',
     impact: "Communication visuelle claire, hiérarchie de l'information et design adapté à une diffusion institutionnelle.",
     stack: ['Design graphique', 'Infographie', 'Communication', 'Canva'],

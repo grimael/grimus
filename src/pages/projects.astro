@@ -9,24 +9,22 @@ const categories = ['Tous', ...Array.from(new Set(projects.map((project) => proj
 ---
 
 <BaseLayout
-  title="Projets Data | GRIMA Michael"
-  description="Projets data, tableaux de bord, économétrie, cartographie et visualisation de GRIMA Michael avec liens vers livrables et dépôts GitHub."
+  title="Projets"
+  description="Projets data, tableaux de bord, économétrie, cartographie et visualisation avec liens vers livrables et dépôts GitHub."
 >
   <section class="page-hero page-hero-media section-accent section-accent-violet">
     <div>
       <p class="eyebrow">Portfolio de projets</p>
       <h1>Des projets data présentés comme des produits finis.</h1>
-      <p>
-        Chaque carte met en avant le contexte, le livrable, l'impact mesurable et un accès direct au résultat.
-      </p>
     </div>
     <figure class="section-visual">
       <img
-        class="image-rotator"
-        src={withBase('/assets/Images/Grimus.png')}
+        src={withBase('/assets/Images/optimized/Grimus.webp')}
         alt="Visuel de la page projets"
         loading="lazy"
-        data-images={`${withBase('/assets/Images/Grimus.png')}|${withBase('/assets/Images/grimus2.png')}|${withBase('/assets/Images/profil2.jpg')}`}
+        decoding="async"
+        width="900"
+        height="675"
       />
       <figcaption>Livrables data</figcaption>
     </figure>
