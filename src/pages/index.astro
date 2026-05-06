@@ -7,6 +7,10 @@ import { profile, skillLogos } from '../data/profile';
 import { withBase } from '../lib/paths';
 
 const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
+const heroSkillNames = ['Python', 'R', 'Power BI', 'Tableau', 'SQL', 'PostgreSQL', 'GitHub', 'Astro'];
+const heroSkills = heroSkillNames
+  .map((name) => skillLogos.find((skill) => skill.name === name && skill.icon))
+  .filter(Boolean);
 ---
 
 <BaseLayout
@@ -22,7 +26,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noopener noreferrer">CV</a>
       </div>
       <div class="logo-strip" aria-label="Competences principales">
-        {skillLogos.filter(s => s.icon).slice(0, 8).map((skill) => (
+        {heroSkills.map((skill) => (
           <span title={skill.name} data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
             <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="28" height="28" fetchpriority="low" />
           </span>

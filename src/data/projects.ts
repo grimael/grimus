@@ -26,7 +26,7 @@ export const projects: Project[] = [
     summary: 'Portfolio personnel construit pour présenter un profil data, des projets, des livrables et des canaux de contact professionnels.',
     impact: 'Site statique optimisé pour GitHub Pages, navigation claire, identité visuelle personnalisée et structure maintenable.',
     stack: ['Astro', 'HTML', 'CSS', 'JavaScript'],
-    repoUrl: `${github}/grimus`,
+    private: true,
     featured: true
   },
   {
@@ -89,8 +89,7 @@ export const projects: Project[] = [
     summary: "Analyse des effets de la corruption sur l'investissement public en Afrique subsaharienne avec une lecture économétrique orientée décision.",
     impact: 'Modèles de régression, interprétation causale prudente, recommandations de politique publique et restitution claire.',
     stack: ['Économétrie', 'Régression', 'R', 'Analyse publique'],
-    liveUrl: 'https://drive.google.com/file/d/1FpKmP7QUJN9bS9Yb9jz2GkIkQPxc5Qbf/view?usp=sharing',
-    repoUrl: `${github}/econometrie-corruption-investissement`
+    liveUrl: 'https://drive.google.com/file/d/1FpKmP7QUJN9bS9Yb9jz2GkIkQPxc5Qbf/view?usp=sharing'
   },
   {
     title: 'Tableau de bord R Shiny',
@@ -101,7 +100,7 @@ export const projects: Project[] = [
     impact: 'Expérience analytique fluide, lecture rapide des tendances et export des résultats pour les utilisateurs métiers.',
     stack: ['R', 'Shiny', 'Visualisation', 'Interface analytique'],
     liveUrl: 'https://maphixz.shinyapps.io/project/',
-    repoUrl: `${github}/dashboard-rshiny`
+    repoUrl: `${github}/R_Shiny`
   },
   {
     title: 'Power BI - Coupe du Monde 2018',
@@ -111,8 +110,7 @@ export const projects: Project[] = [
     summary: 'Tableau de bord Power BI pour analyser les performances des équipes, les statistiques de match et les dynamiques du tournoi.',
     impact: 'Tableaux de bord clairs, comparaison des équipes, indicateurs de performance et visualisation géographique.',
     stack: ['Power BI', 'DAX', 'Modélisation', 'Analyse sportive'],
-    liveUrl: 'https://app.powerbi.com/groups/me/reports/138e8739-ab87-4ccc-87a1-6ef83aed68ef/81cbe8fe1dedb44b8db8?experience=power-bi',
-    repoUrl: `${github}/powerbi-world-cup-2018`
+    liveUrl: 'https://app.powerbi.com/groups/me/reports/138e8739-ab87-4ccc-87a1-6ef83aed68ef/81cbe8fe1dedb44b8db8?experience=power-bi'
   },
   {
     title: 'Projet Data Viz - Transport au Togo',
@@ -122,8 +120,7 @@ export const projects: Project[] = [
     summary: 'Analyse des performances du secteur logistique et transport au Togo avec indicateurs, tendances et comparaisons régionales.',
     impact: "Tableau de bord décisionnel centré sur les KPI, la lecture temporelle et les zones d'amélioration opérationnelle.",
     stack: ['Power BI', 'KPI', 'Analyse transport', 'Visualisation'],
-    liveUrl: 'https://app.powerbi.com/groups/me/reports/d83f5d40-fc18-473f-a659-8e7e28c03b2f/1f5a89a6e9eb01911d69?experience=power-bi',
-    repoUrl: `${github}/transport-togo-dataviz`
+    liveUrl: 'https://app.powerbi.com/groups/me/reports/d83f5d40-fc18-473f-a659-8e7e28c03b2f/1f5a89a6e9eb01911d69?experience=power-bi'
   },
   {
     title: 'Projet Marketing Étudiants',
@@ -133,8 +130,7 @@ export const projects: Project[] = [
     summary: "Étude de marché autour de l'ENSEA pour comprendre comportements, besoins et préférences des étudiants.",
     impact: 'Enquêtes, analyses factorielles, tests statistiques et restitution orientée action.',
     stack: ['Enquête', 'Analyse factorielle', 'Tests statistiques', 'Présentation'],
-    liveUrl: 'https://docs.google.com/presentation/d/1aWxuUbisc8ePkQNlmtg2tqZgS21tqKBI/edit?usp=sharing&ouid=107155812438891407989&rtpof=true&sd=true',
-    repoUrl: `${github}/marketing-etudiants-ensea`
+    liveUrl: 'https://docs.google.com/presentation/d/1aWxuUbisc8ePkQNlmtg2tqZgS21tqKBI/edit?usp=sharing&ouid=107155812438891407989&rtpof=true&sd=true'
   },
   {
     title: 'Projet QGIS - RGPH 2021',
@@ -145,7 +141,7 @@ export const projects: Project[] = [
     impact: 'Cartes thématiques, analyse spatiale et visualisation de la répartition de population.',
     stack: ['QGIS', 'Cartographie', 'Analyse spatiale', 'RGPH'],
     liveUrl: 'https://drive.google.com/file/d/1NqlOS3TgirnoT7CBnfWz5LzdzXq0naGt/view?usp=sharing',
-    repoUrl: `${github}/qgis-rgph-2021-abidjan`
+    repoUrl: `${github}/Projet_SIG`
   },
   {
     title: 'Rapport de stage - Crise en Ukraine',
@@ -155,8 +151,7 @@ export const projects: Project[] = [
     summary: 'Analyse des effets de la crise en Ukraine sur les flux commerciaux internationaux et les équilibres macroéconomiques.',
     impact: 'Lecture sectorielle, synthèse économique et mise en évidence des impacts régionaux.',
     stack: ['Recherche', 'Macroéconomie', 'Commerce international', 'Rapport'],
-    liveUrl: 'https://drive.google.com/file/d/1UQadUGKtUvkHn2LbB771EJ8Nocfhlvpl/view?usp=sharing',
-    repoUrl: `${github}/rapport-ukraine-commerce`
+    liveUrl: 'https://drive.google.com/file/d/1UQadUGKtUvkHn2LbB771EJ8Nocfhlvpl/view?usp=sharing'
   },
   {
     title: 'Affiche - Activités CEMAC',
@@ -165,8 +160,67 @@ export const projects: Project[] = [
     image: image('affiche1'),
     summary: 'Infographie professionnelle pour une campagne de sensibilisation autour des activités CEMAC.',
     impact: "Communication visuelle claire, hiérarchie de l'information et design adapté à une diffusion institutionnelle.",
-    stack: ['Design graphique', 'Infographie', 'Communication', 'Canva'],
-    repoUrl: `${github}/affiche-cemac`
+    stack: ['Design graphique', 'Infographie', 'Communication', 'Canva']
+  },
+  {
+    title: 'Déploiement Apache Superset',
+    slug: 'superset-deploy',
+    category: 'Tableau de bord',
+    image: projectImage,
+    summary: 'Configuration de déploiement pour Apache Superset afin de préparer un environnement BI exploitable.',
+    impact: 'Base technique pour publier, administrer et maintenir des tableaux de bord analytiques avec Superset.',
+    stack: ['Apache Superset', 'BI', 'Déploiement', 'Data visualisation'],
+    repoUrl: `${github}/superset-deploy`
+  },
+  {
+    title: 'Dashboard R Shiny',
+    slug: 'dashboard-rshiny-public',
+    category: 'Tableau de bord',
+    image: image('shiny'),
+    summary: 'Dépôt public consacré à un tableau de bord interactif développé avec R Shiny.',
+    impact: 'Mise en valeur de la construction d’interfaces analytiques dynamiques avec filtres, restitution visuelle et logique serveur R.',
+    stack: ['R', 'Shiny', 'Dashboard', 'Visualisation'],
+    repoUrl: `${github}/Dashboard-Rshiny`
+  },
+  {
+    title: 'Tableau Desktop',
+    slug: 'tableau-desktop',
+    category: 'Tableau de bord',
+    image: projectImage,
+    summary: 'Projet de visualisation construit autour de Tableau Desktop pour explorer et restituer des données métier.',
+    impact: 'Production de vues analytiques lisibles pour faciliter la comparaison, le suivi d’indicateurs et la prise de décision.',
+    stack: ['Tableau', 'Data visualisation', 'BI', 'Dashboard'],
+    repoUrl: `${github}/Tableau-Desktop`
+  },
+  {
+    title: 'Application VBA - Évaluation de salaire',
+    slug: 'projet-vba-evaluation-salaire',
+    category: 'Statistique',
+    image: projectImage,
+    summary: "Application d'évaluation de salaire développée avec VBA pour automatiser un calcul ou une analyse dans l'environnement Excel.",
+    impact: 'Automatisation de traitements répétitifs, structuration des règles de calcul et interface bureautique utilisable par des profils non techniques.',
+    stack: ['VBA', 'Excel', 'Automatisation', 'Analyse'],
+    repoUrl: `${github}/Projet_VBA`
+  },
+  {
+    title: 'Algorithmes génétiques',
+    slug: 'projet-algorithmes-genetiques',
+    category: 'IA',
+    image: projectImage,
+    summary: "Projet Python autour des algorithmes génétiques et de l'optimisation par recherche évolutive.",
+    impact: "Expérimentation de méthodes d'optimisation, représentation de solutions candidates et amélioration progressive par sélection.",
+    stack: ['Python', 'Algorithmes génétiques', 'Optimisation', 'IA'],
+    repoUrl: `${github}/Projet_Algorithmes_gen`
+  },
+  {
+    title: 'Projet Python Grimm',
+    slug: 'grimm-python',
+    category: 'IA',
+    image: projectImage,
+    summary: 'Dépôt Python public servant de base expérimentale pour des scripts ou prototypes data.',
+    impact: 'Support de prototypage pour tester rapidement des traitements, organiser du code Python et capitaliser les expérimentations.',
+    stack: ['Python', 'Prototype', 'Data science', 'Scripts'],
+    repoUrl: `${github}/grimm`
   },
   {
     title: 'Segmentation comportementale clients',

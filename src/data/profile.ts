@@ -2,9 +2,9 @@ export const profile = {
   name: 'Analyste data',
   role: 'Data scientist et ingénieur data - BI - ETL - Web',
   location: "Abidjan, Côte d'Ivoire",
-  email: 'grimamichael79@gmail.com',
+  email: 'grimael.s@outlook.com',
   github: 'https://github.com/grimael',
-  linkedin: 'https://www.linkedin.com/in/michaelgrima-dataanalyst-content-creator/',
+  linkedin: 'https://www.linkedin.com/in/grimael',
   cv: 'https://drive.google.com/file/d/1YfLQ_Y0YVnX5t8xkXktFeSuC0qP9Oyx3/view?usp=sharing',
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
   bio:
@@ -42,33 +42,33 @@ export const skillLogos = [
   { name: 'scikit-learn', icon: 'https://cdn.simpleicons.org/scikitlearn/F7931E', group: 'Science des données et ML' },
   { name: 'pandas', icon: 'https://cdn.simpleicons.org/pandas/150458', group: 'Science des données et ML' },
   { name: 'NumPy', icon: 'https://cdn.simpleicons.org/numpy/013243', group: 'Science des données et ML' },
-  { name: 'Matplotlib', initials: 'MPL', group: 'Science des données et ML' },
-  { name: 'STATA', initials: 'ST', group: 'Science des données et ML' },
-  { name: 'SPSS', initials: 'SPSS', group: 'Science des données et ML' },
+  { name: 'Matplotlib', icon: 'https://api.iconify.design/logos:matplotlib-icon.svg', group: 'Science des données et ML' },
+  { name: 'STATA', icon: 'https://api.iconify.design/devicon:stata-wordmark.svg', group: 'Science des données et ML' },
+  { name: 'SPSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spss/spss-original.svg', group: 'Science des données et ML' },
   {
     name: 'SQL',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg',
     group: 'Ingénierie des données'
   },
   { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', group: 'Ingénierie des données' },
-  { name: 'Apache Hop', initials: 'HOP', group: 'Ingénierie des données' },
-  { name: 'dbt', icon: 'https://cdn.simpleicons.org/dbt', group: 'Ingénierie des données' },
-  { name: 'Talend', initials: 'TD', group: 'Ingénierie des données' },
+  { name: 'Apache Hop', icon: 'https://api.iconify.design/logos:apache.svg', group: 'Ingénierie des données' },
+  { name: 'dbt', icon: 'https://api.iconify.design/logos:dbt-icon.svg', group: 'Ingénierie des données' },
+  { name: 'Talend', icon: 'https://cdn.simpleicons.org/talend/FF6D70', group: 'Ingénierie des données' },
   { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', group: 'Ingénierie des données' },
   { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717', group: 'Ingénierie des données' },
   {
     name: 'Power BI',
-    initials: 'PBI',
+    icon: 'https://api.iconify.design/logos:microsoft-power-bi.svg',
     group: 'BI et visualisation'
   },
   {
     name: 'Tableau',
-    initials: 'TB',
+    icon: 'https://api.iconify.design/logos:tableau-icon.svg',
     group: 'BI et visualisation'
   },
   { name: 'Apache Superset', icon: 'https://cdn.simpleicons.org/apachesuperset/20A6C9', group: 'BI et visualisation' },
   { name: 'R Shiny', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg', group: 'BI et visualisation' },
-  { name: 'Excel', initials: 'XL', group: 'BI et visualisation' },
+  { name: 'Excel', icon: 'https://api.iconify.design/vscode-icons:file-type-excel.svg', group: 'BI et visualisation' },
   {
     name: 'QGIS',
     icon: 'https://cdn.simpleicons.org/qgis/589632',
@@ -97,10 +97,10 @@ export const skillLogos = [
     group: 'Développement web'
   },
   { name: 'LaTeX', icon: 'https://cdn.simpleicons.org/latex/008080', group: 'Développement web' },
-  { name: 'KoboToolbox', initials: 'KOBO', group: 'Collecte de données' },
-  { name: 'ODK', initials: 'ODK', group: 'Collecte de données' },
-  { name: 'CSPro', initials: 'CSP', group: 'Collecte de données' },
-  { name: 'Survey Solutions', initials: 'SS', group: 'Collecte de données' },
+  { name: 'KoboToolbox', icon: 'https://avatars.githubusercontent.com/kobotoolbox?s=200', group: 'Collecte de données' },
+  { name: 'ODK', icon: 'https://avatars.githubusercontent.com/getodk?s=200', group: 'Collecte de données' },
+  { name: 'CSPro', icon: 'https://commons.wikimedia.org/wiki/Special:FilePath/CSPro_Logo.png', group: 'Collecte de données' },
+  { name: 'Survey Solutions', icon: 'https://avatars.githubusercontent.com/surveysolutions?s=200', group: 'Collecte de données' },
   {
     name: 'VS Code',
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
@@ -108,12 +108,12 @@ export const skillLogos = [
   },
   {
     name: 'PowerPoint',
-    initials: 'PPT',
+    icon: 'https://api.iconify.design/vscode-icons:file-type-powerpoint.svg',
     group: 'Flux de travail'
   },
   {
     name: 'Canva',
-    icon: 'https://cdn.simpleicons.org/canva',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg',
     group: 'Flux de travail'
   },
   {

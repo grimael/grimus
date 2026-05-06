@@ -11,14 +11,16 @@ const contacts = [
     label: 'Email',
     sublabel: profile.email,
     href: `mailto:${profile.email}?subject=${subject}&body=${body}`,
-    icon: 'https://cdn.simpleicons.org/gmail/EA4335',
+    icon: 'https://api.iconify.design/vscode-icons:file-type-outlook.svg',
+    brand: '#0078D4',
     external: false,
   },
   {
     label: 'LinkedIn',
     sublabel: 'Voir mon profil',
     href: profile.linkedin,
-    icon: 'https://cdn.simpleicons.org/linkedin/0A66C2',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+    brand: '#0A66C2',
     external: true,
   },
   {
@@ -26,6 +28,7 @@ const contacts = [
     sublabel: 'grimael',
     href: profile.github,
     icon: 'https://cdn.simpleicons.org/github/181717',
+    brand: '#181717',
     external: true,
   },
 ];
@@ -80,6 +83,7 @@ const contacts = [
           rel={c.external ? 'noopener noreferrer' : undefined}
           aria-label={c.label}
           data-logo={c.label.slice(0, 2).toUpperCase()}
+          style={`--brand: ${c.brand}`}
         >
           <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" fetchpriority="low" />
           <strong>{c.label}</strong>
