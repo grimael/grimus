@@ -41,6 +41,17 @@ export const projects: Project[] = [
     featured: true
   },
   {
+    title: 'DocuMind AI',
+    slug: 'doc-ai',
+    category: 'IA',
+    image: projectImage,
+    summary: 'Plateforme de numérisation intelligente documentaire pour importer, sécuriser, modéliser, vérifier humainement et exporter des documents.',
+    impact: 'MVP full-stack préparé pour brancher progressivement la conversion PDF, le preprocessing OpenCV, PaddleOCR et un workflow de validation documentaire.',
+    stack: ['FastAPI', 'Next.js', 'TypeScript', 'Tailwind CSS', 'SQLAlchemy', 'OCR'],
+    private: true,
+    featured: true
+  },
+  {
     title: 'Plateforme web AMET-ESA',
     slug: 'plateforme-amet-esa',
     category: 'Web',
@@ -223,14 +234,14 @@ export const projects: Project[] = [
     repoUrl: `${github}/grimm`
   },
   {
-    title: 'Segmentation comportementale clients',
-    slug: 'segmentation-comportementale-clients',
+    title: 'Segmentation client par Data Mining',
+    slug: 'segmentation-client-data-mining',
     category: 'Statistique',
     image: projectImage,
-    summary: 'Projet analytique autour de la segmentation de profils clients à partir de comportements observés.',
-    impact: 'Structuration des variables, classification exploratoire et lecture métier des groupes obtenus.',
-    stack: ['Python', 'Clustering', 'ACP', 'Analyse client'],
-    private: true
+    summary: 'Projet de Data Mining visant à identifier des profils clients homogènes à partir de données socio-démographiques, comportementales et transactionnelles.',
+    impact: 'Nettoyage des données, feature engineering, ACP, comparaison de modèles de clustering et recommandations marketing par segment client.',
+    stack: ['Python', 'Jupyter Notebook', 'Pandas', 'Scikit-learn', 'Clustering', 'ACP'],
+    repoUrl: `${github}/data-mining-project`
   },
   {
     title: 'Système de recommandation de trajets à Abidjan',

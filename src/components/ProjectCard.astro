@@ -19,7 +19,7 @@ const targetUrl = project.private ? undefined : project.liveUrl ?? project.repoU
     aria-label={project.private ? `${project.title} est un projet privé` : `Voir ${project.title}`}
     aria-disabled={project.private ? 'true' : undefined}
   >
-    <img src={project.image} alt="" loading="lazy" decoding="async" width="900" height="560" />
+    <img src={project.image} alt="" loading="eager" decoding="async" width="900" height="560" />
     <span class="media-tag">{project.category}</span>
     {project.private && <span class="lock-badge" aria-label="Projet privé">Privé</span>}
   </a>

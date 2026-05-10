@@ -21,8 +21,9 @@ const categories = ['Tous', ...Array.from(new Set(projects.map((project) => proj
       <img
         src={withBase('/assets/Images/optimized/Grimus.webp')}
         alt="Visuel de la page projets"
-        loading="lazy"
+        loading="eager"
         decoding="async"
+        fetchpriority="high"
         width="900"
         height="675"
       />

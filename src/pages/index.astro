@@ -11,6 +11,7 @@ const heroSkillNames = ['Python', 'R', 'Power BI', 'Tableau', 'SQL', 'PostgreSQL
 const heroSkills = heroSkillNames
   .map((name) => skillLogos.find((skill) => skill.name === name && skill.icon))
   .filter(Boolean);
+const homeProjects = featuredProjects.slice(0, 3);
 ---
 
 <BaseLayout
@@ -112,7 +113,7 @@ const heroSkills = heroSkillNames
       text="Chaque carte présente le contexte, l'impact, les technologies utilisées et un accès direct au livrable."
     />
     <div class="featured-grid">
-      {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      {homeProjects.map((project) => <ProjectCard project={project} />)}
     </div>
     <div class="center-action">
       <a class="btn btn-ghost" href={withBase('/projects/')}>Voir les {projects.length} projets</a>

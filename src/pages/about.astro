@@ -8,12 +8,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 ---
 
 <BaseLayout
-  title="Profil"
-  description="Profil de statisticien et data analyst : compétences, approche, outils et philosophie de travail."
+  title="À propos"
+  description="À propos : statisticien et data analyst, compétences, approche, outils et philosophie de travail."
 >
   <section class="page-hero page-hero-media about-hero section-accent section-accent-blue">
     <div>
-      <p class="eyebrow">Profil</p>
+      <p class="eyebrow">À propos</p>
       <h1>Un profil data qui relie science statistique, analyse métier et développement web.</h1>
       <p>{profile.headline}</p>
     </div>
@@ -21,12 +21,13 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
       <img
         src={withBase('/assets/Images/optimized/Grimus.webp')}
         alt="Visuel de la page profil"
-        loading="lazy"
+        loading="eager"
         decoding="async"
+        fetchpriority="high"
         width="900"
         height="675"
       />
-      <figcaption>Profil data</figcaption>
+      <figcaption>À propos</figcaption>
     </figure>
   </section>
 
