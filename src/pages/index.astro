@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { featuredProjects, projects } from '../data/projects';
-import { profile, skillLogos } from '../data/profile';
+import { profile, skillLogos, skillGroupLabels } from '../data/profile';
 import { withBase } from '../lib/paths';
 
 const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
@@ -12,21 +12,20 @@ const heroSkills = heroSkillNames
   .map((name) => skillLogos.find((skill) => skill.name === name && skill.icon))
   .filter(Boolean);
 const homeProjects = featuredProjects.slice(0, 3);
+const projectsCountLabelFr = `Voir les ${projects.length} projets`;
+const projectsCountLabelEn = `View all ${projects.length} projects`;
 ---
 
 <BaseLayout
   title="Accueil"
   description="Portfolio data : analyste data, statisticien, développeur web et concepteur de récits visuels basé à Abidjan."
 >
-  <section class="hero section-accent section-accent-blue" data-reveal>
+  <section class="hero" data-reveal>
     <div class="hero-content">
-      <h1>Statisticien | Data Scientist & Data Analyst</h1>
-      <p class="hero-lead">{profile.bio}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href={withBase('/projects/')}>Mes projets</a>
-        <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noopener noreferrer">CV</a>
-      </div>
-      <div class="logo-strip" aria-label="Competences principales">
+      <p class="eyebrow" data-fr="Disponible pour de nouvelles missions" data-en="Available for new opportunities">Disponible pour de nouvelles missions</p>
+      <h1 data-fr="Statisticien | Data Scientist & Data Analyst" data-en="Statistician | Data Scientist & Data Analyst">Statisticien | Data Scientist & Data Analyst</h1>
+      <p class="hero-lead" data-fr={profile.bio} data-en={profile.bioEn}>{profile.bio}</p>
+      <div class="logo-strip" aria-label="Competences principales" data-fr-aria="Competences principales" data-en-aria="Core skills">
         {heroSkills.map((skill) => (
           <span title={skill.name} data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
             <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="28" height="28" fetchpriority="low" />
@@ -34,13 +33,14 @@ const homeProjects = featuredProjects.slice(0, 3);
         ))}
       </div>
     </div>
-    <aside class="hero-showcase" aria-label="Aperçu visuel du portfolio">
+    <aside class="hero-showcase" aria-label="Portrait">
+      <div class="portrait-glow" aria-hidden="true"></div>
       <div class="showcase-main">
         <img
-          src={withBase('/assets/Images/optimized/Grimus.webp')}
-          alt="Visuel de présentation"
+          src={withBase('/assets/Images/optimized/profil2.webp')}
+          alt="Portrait"
           width="900"
-          height="1125"
+          height="1035"
           decoding="async"
           fetchpriority="high"
         />
@@ -48,84 +48,92 @@ const homeProjects = featuredProjects.slice(0, 3);
     </aside>
   </section>
 
-  <section class="split-section section-accent section-accent-green" data-reveal>
+  <section class="split-section band-alt" data-reveal>
     <div>
       <SectionHeading
         eyebrow="Signature"
         title="Un profil hybride : statistique, produit data et web."
+        titleEn="A hybrid profile: statistics, data product and web."
         text="Je ne produis pas seulement des graphiques. Je construit  des supports qui inspirent confiance et qui peuvent vivre dans un vrai environnement digital."
+        textEn="I don't just produce charts. I build materials that inspire confidence and that can live in a real digital environment."
       />
     </div>
     <div class="capability-grid">
       <article>
         <span>01</span>
-        <h3>Statistique appliquée</h3>
-        <p>Modèles, tests, économétrie et interprétation rigoureuse pour passer du signal brut à la décision.</p>
+        <h3 data-fr="Statistique appliquée" data-en="Applied statistics">Statistique appliquée</h3>
+        <p data-fr="Modèles, tests, économétrie et interprétation rigoureuse pour passer du signal brut à la décision." data-en="Models, tests, econometrics and rigorous interpretation to go from raw signal to decision.">Modèles, tests, économétrie et interprétation rigoureuse pour passer du signal brut à la décision.</p>
       </article>
       <article>
         <span>02</span>
-        <h3>Tableaux de bord premium</h3>
-        <p>Power BI, R Shiny et interfaces analytiques pour rendre les indicateurs lisibles et actionnables.</p>
+        <h3 data-fr="Tableaux de bord premium" data-en="Premium dashboards">Tableaux de bord premium</h3>
+        <p data-fr="Power BI, R Shiny et interfaces analytiques pour rendre les indicateurs lisibles et actionnables." data-en="Power BI, R Shiny and analytical interfaces to make indicators readable and actionable.">Power BI, R Shiny et interfaces analytiques pour rendre les indicateurs lisibles et actionnables.</p>
       </article>
       <article>
         <span>03</span>
-        <h3>Web & storytelling</h3>
-        <p>Pages, supports et expériences web qui donnent une vraie présence aux résultats.</p>
+        <h3 data-fr="Web & storytelling" data-en="Web & storytelling">Web & storytelling</h3>
+        <p data-fr="Pages, supports et expériences web qui donnent une vraie présence aux résultats." data-en="Pages, materials and web experiences that give results a real presence.">Pages, supports et expériences web qui donnent une vraie présence aux résultats.</p>
       </article>
     </div>
   </section>
 
-  <section class="work-preview section-accent section-accent-coral" data-reveal>
+  <section class="work-preview" data-reveal>
     <SectionHeading
       eyebrow="Aperçu"
+      eyebrowEn="Preview"
       title="Des livrables concrets, visuels et présentables."
+      titleEn="Concrete, visual and presentable deliverables."
       text="Tableaux de bord interactifs, cartographie, applications statistiques — des résultats qui parlent d'eux-mêmes."
+      textEn="Interactive dashboards, mapping, statistical applications — results that speak for themselves."
     />
     <div class="preview-grid">
       <figure class="preview-card preview-main">
         <img src={withBase('/assets/Images/optimized/power.webp')} alt="Tableau de bord Power BI" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
-          <strong>Tableau de bord Power BI</strong>
-          <span>Reporting financier & KPIs</span>
+          <strong data-fr="Tableau de bord Power BI" data-en="Power BI dashboard">Tableau de bord Power BI</strong>
+          <span data-fr="Reporting financier & KPIs" data-en="Financial reporting & KPIs">Reporting financier & KPIs</span>
         </figcaption>
       </figure>
       <figure class="preview-card">
         <img src={withBase('/assets/Images/optimized/shiny.webp')} alt="Application R Shiny" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
-          <strong>Application R Shiny</strong>
-          <span>Analyse statistique interactive</span>
+          <strong data-fr="Application R Shiny" data-en="R Shiny application">Application R Shiny</strong>
+          <span data-fr="Analyse statistique interactive" data-en="Interactive statistical analysis">Analyse statistique interactive</span>
         </figcaption>
       </figure>
       <figure class="preview-card">
         <img src={withBase('/assets/Images/optimized/qgis.webp')} alt="Cartographie QGIS" loading="lazy" decoding="async" width="900" height="560" />
         <figcaption>
-          <strong>Cartographie QGIS</strong>
-          <span>Visualisation spatiale</span>
+          <strong data-fr="Cartographie QGIS" data-en="QGIS mapping">Cartographie QGIS</strong>
+          <span data-fr="Visualisation spatiale" data-en="Spatial visualization">Visualisation spatiale</span>
         </figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="section-accent section-accent-violet" data-reveal>
+  <section class="band-alt" data-reveal>
     <SectionHeading
       eyebrow="Sélection"
+      eyebrowEn="Selection"
       title="Des projets présentés avec image, impact et accès direct."
+      titleEn="Projects presented with image, impact and direct access."
       text="Chaque carte présente le contexte, l'impact, les technologies utilisées et un accès direct au livrable."
+      textEn="Each card shows the context, the impact, the technologies used and direct access to the deliverable."
     />
     <div class="featured-grid">
       {homeProjects.map((project) => <ProjectCard project={project} />)}
     </div>
     <div class="center-action">
-      <a class="btn btn-ghost" href={withBase('/projects/')}>Voir les {projects.length} projets</a>
+      <a class="btn btn-ghost" href={withBase('/projects/')} data-fr={projectsCountLabelFr} data-en={projectsCountLabelEn}>{projectsCountLabelFr}</a>
     </div>
   </section>
 
-  <section class="skills-band section-accent section-accent-gold" data-reveal>
-    <p class="eyebrow">Outils, langages et technologies</p>
+  <section class="skills-band" data-reveal>
+    <p class="eyebrow" data-fr="Outils, langages et technologies" data-en="Tools, languages and technologies">Outils, langages et technologies</p>
     <div class="skill-categories">
       {skillGroups.map((group) => (
         <section class="skill-category">
-          <h3>{group}</h3>
+          <h3 data-fr={skillGroupLabels[group]?.fr ?? group} data-en={skillGroupLabels[group]?.en ?? group}>{group}</h3>
           <div class="skill-logo-grid">
             {skillLogos.filter((skill) => skill.group === group).map((skill) => (
               <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
@@ -145,10 +153,10 @@ const homeProjects = featuredProjects.slice(0, 3);
 
   <section class="cta-section" data-reveal>
     <div>
-      <p class="eyebrow">Collaboration</p>
-      <h2>Vous avez un projet data ? Transformons-le en livrable concret.</h2>
-      <p>Analyse, tableau de bord, rapport ou application web — je prends en charge le projet de bout en bout, de la donnée au résultat.</p>
+      <p class="eyebrow" data-fr="Collaboration" data-en="Collaboration">Collaboration</p>
+      <h2 data-fr="Vous avez un projet data ? Transformons-le en livrable concret." data-en="Got a data project? Let's turn it into a concrete deliverable.">Vous avez un projet data ? Transformons-le en livrable concret.</h2>
+      <p data-fr="Analyse, tableau de bord, rapport ou application web — je prends en charge le projet de bout en bout, de la donnée au résultat." data-en="Analysis, dashboard, report or web application — I handle the project end to end, from data to result.">Analyse, tableau de bord, rapport ou application web — je prends en charge le projet de bout en bout, de la donnée au résultat.</p>
     </div>
-    <a class="btn btn-primary" href={withBase('/contact/')}>Contact</a>
+    <a class="btn btn-primary" href={withBase('/contact/')} data-fr="Contact" data-en="Contact">Contact</a>
   </section>
 </BaseLayout>

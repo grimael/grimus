@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { profile, skillLogos } from '../data/profile';
+import { profile, skillLogos, skillGroupLabels } from '../data/profile';
 import { withBase } from '../lib/paths';
 
 const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
@@ -11,11 +11,11 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
   title="À propos"
   description="À propos : statisticien et data analyst, compétences, approche, outils et philosophie de travail."
 >
-  <section class="page-hero page-hero-media about-hero section-accent section-accent-blue">
+  <section class="page-hero page-hero-media about-hero">
     <div>
-      <p class="eyebrow">À propos</p>
-      <h1>Un profil data qui relie science statistique, analyse métier et développement web.</h1>
-      <p>{profile.headline}</p>
+      <p class="eyebrow" data-fr="À propos" data-en="About">À propos</p>
+      <h1 data-fr="Un profil data qui relie science statistique, analyse métier et développement web." data-en="A data profile connecting statistical science, business analysis and web development.">Un profil data qui relie science statistique, analyse métier et développement web.</h1>
+      <p data-fr={profile.headline} data-en={profile.headlineEn}>{profile.headline}</p>
     </div>
     <figure class="section-visual">
       <img
@@ -27,21 +27,29 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         width="900"
         height="675"
       />
-      <figcaption>À propos</figcaption>
+      <figcaption data-fr="À propos" data-en="About">À propos</figcaption>
     </figure>
   </section>
 
-  <section class="about-grid section-accent section-accent-green">
+  <section class="about-grid band-alt">
     <div class="about-copy">
       <SectionHeading
         eyebrow="Approche"
+        eyebrowEn="Approach"
         title="Comprendre avant de visualiser. Prouver avant de convaincre."
+        titleEn="Understand before visualizing. Prove before convincing."
       />
-      <p>
+      <p
+        data-fr="Diplômé de l'ENSEA d'Abidjan, je combine les méthodes quantitatives, l'économétrie, la BI et l'ingénierie des données pour concevoir des solutions data complètes : collecte, pipelines ETL, entrepôt de données, tableaux de bord et analyses."
+        data-en="A graduate of ENSEA Abidjan, I combine quantitative methods, econometrics, BI and data engineering to design complete data solutions: collection, ETL pipelines, data warehousing, dashboards and analysis."
+      >
         Diplômé de l'ENSEA d'Abidjan, je combine les méthodes quantitatives, l'économétrie, la BI et l'ingénierie des données
         pour concevoir des solutions data complètes : collecte, pipelines ETL, entrepôt de données, tableaux de bord et analyses.
       </p>
-      <p>
+      <p
+        data-fr="Mes expériences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquée, avec un fil conducteur : rendre la donnée fiable, lisible et utile à la décision."
+        data-en="My experience spans insurance, the public sector, professional training and applied research, with one common thread: making data reliable, readable and useful for decision-making."
+      >
         Mes expériences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquée,
         avec un fil conducteur : rendre la donnée fiable, lisible et utile à la décision.
       </p>
@@ -55,19 +63,21 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         width="900"
         height="675"
       />
-      <figcaption>Approche analytique</figcaption>
+      <figcaption data-fr="Approche analytique" data-en="Analytical approach">Approche analytique</figcaption>
     </figure>
   </section>
 
-  <section class="section-accent section-accent-gold">
+  <section>
     <SectionHeading
       eyebrow="Compétences"
+      eyebrowEn="Skills"
       title="Une boîte à outils complète pour passer du dataset au livrable."
+      titleEn="A complete toolbox to go from dataset to deliverable."
     />
     <div class="skill-categories">
       {skillGroups.map((group) => (
         <section class="skill-category">
-          <h3>{group}</h3>
+          <h3 data-fr={skillGroupLabels[group]?.fr ?? group} data-en={skillGroupLabels[group]?.en ?? group}>{group}</h3>
           <div class="skills-matrix skill-logo-grid">
             {skillLogos.filter((skill) => skill.group === group).map((skill) => (
               <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
@@ -85,10 +95,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
   </section>
 
-  <section class="section-accent section-accent-violet" data-reveal>
+  <section class="band-alt" data-reveal>
     <SectionHeading
       eyebrow="Experience"
+      eyebrowEn="Experience"
       title="Des missions data concrètes, connectées aux enjeux métiers."
+      titleEn="Concrete data engagements, connected to business challenges."
     />
     <div class="timeline">
 
@@ -99,12 +111,16 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date">Janv. 2026 — Présent</span>
-            <span class="timeline-badge current">En poste</span>
+            <span class="timeline-date" data-fr="Janv. 2026 — Présent" data-en="Jan. 2026 — Present">Janv. 2026 — Présent</span>
+            <span class="timeline-badge current" data-fr="En poste" data-en="Current">En poste</span>
           </div>
-          <h3 class="timeline-role">Support Data & Business Intelligence</h3>
+          <h3 class="timeline-role" data-fr="Support Data & Business Intelligence" data-en="Data & Business Intelligence Support">Support Data & Business Intelligence</h3>
           <p class="timeline-org">SanlamAllianz Participations</p>
-          <p class="timeline-desc">
+          <p
+            class="timeline-desc"
+            data-fr="Analyse de données financières clients, conception de tableaux de bord Power BI et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel."
+            data-en="Analysis of client financial data, design of Power BI dashboards and setup of Apache Hop ETL pipelines to automate monthly reporting."
+          >
             Analyse de données financières clients, conception de tableaux de bord Power BI
             et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel.
           </p>
@@ -113,7 +129,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             <span>Apache Hop</span>
             <span>ETL</span>
             <span>SQL</span>
-            <span>Finance</span>
+            <span data-fr="Finance" data-en="Finance">Finance</span>
           </div>
         </div>
       </div>
@@ -125,11 +141,15 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date">Oct. 2025 — Janv. 2026</span>
+            <span class="timeline-date" data-fr="Oct. 2025 — Janv. 2026" data-en="Oct. 2025 — Jan. 2026">Oct. 2025 — Janv. 2026</span>
           </div>
-          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
+          <h3 class="timeline-role" data-fr="Statisticien — Data Analyst" data-en="Statistician — Data Analyst">Statisticien — Data Analyst</h3>
           <p class="timeline-org">Observatoire du Service Public</p>
-          <p class="timeline-desc">
+          <p
+            class="timeline-desc"
+            data-fr="Analyse multi-sources et production de rapports analytiques avec recommandations stratégiques. Suivi et modélisation d'indicateurs de performance du service public."
+            data-en="Multi-source analysis and production of analytical reports with strategic recommendations. Tracking and modeling of public service performance indicators."
+          >
             Analyse multi-sources et production de rapports analytiques avec recommandations
             stratégiques. Suivi et modélisation d'indicateurs de performance du service public.
           </p>
@@ -137,8 +157,8 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             <span>Python</span>
             <span>R</span>
             <span>KPI</span>
-            <span>Reporting</span>
-            <span>Service public</span>
+            <span data-fr="Reporting" data-en="Reporting">Reporting</span>
+            <span data-fr="Service public" data-en="Public sector">Service public</span>
           </div>
         </div>
       </div>
@@ -149,20 +169,24 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date">Mai 2025 — Sept. 2025</span>
+            <span class="timeline-date" data-fr="Mai 2025 — Sept. 2025" data-en="May 2025 — Sept. 2025">Mai 2025 — Sept. 2025</span>
           </div>
-          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
+          <h3 class="timeline-role" data-fr="Statisticien — Data Analyst" data-en="Statistician — Data Analyst">Statisticien — Data Analyst</h3>
           <p class="timeline-org">Ministere de l'Enseignement Technique</p>
-          <p class="timeline-desc">
+          <p
+            class="timeline-desc"
+            data-fr="Architecture ETL et entrepôt de données national, modélisation de KPIs nationaux et mise en place d'un reporting automatisé sous Apache Superset."
+            data-en="National ETL and data warehouse architecture, modeling of national KPIs and setup of automated reporting under Apache Superset."
+          >
             Architecture ETL et entrepôt de données national, modélisation de KPIs nationaux
             et mise en place d'un reporting automatisé sous Apache Superset.
           </p>
           <div class="timeline-stack">
             <span>Apache Superset</span>
-            <span>Data Warehouse</span>
+            <span data-fr="Entrepôt de données" data-en="Data warehouse">Data Warehouse</span>
             <span>ETL</span>
             <span>SQL</span>
-            <span>Education</span>
+            <span data-fr="Education" data-en="Education">Education</span>
           </div>
         </div>
       </div>
@@ -172,16 +196,16 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 
   <section class="principles-grid">
     <article>
-      <span>Explorer</span>
-      <p>Identifier les tendances, anomalies et questions importantes avant de construire le livrable.</p>
+      <span data-fr="Explorer" data-en="Explore">Explorer</span>
+      <p data-fr="Identifier les tendances, anomalies et questions importantes avant de construire le livrable." data-en="Identify trends, anomalies and the important questions before building the deliverable.">Identifier les tendances, anomalies et questions importantes avant de construire le livrable.</p>
     </article>
     <article>
-      <span>Modeliser</span>
-      <p>Choisir des methodes statistiques adaptees, lisibles et defendables.</p>
+      <span data-fr="Modeliser" data-en="Model">Modeliser</span>
+      <p data-fr="Choisir des methodes statistiques adaptees, lisibles et defendables." data-en="Choose statistical methods that are appropriate, readable and defensible.">Choisir des methodes statistiques adaptees, lisibles et defendables.</p>
     </article>
     <article>
-      <span>Raconter</span>
-      <p>Transformer les résultats en supports clairs pour des publics techniques et non techniques.</p>
+      <span data-fr="Raconter" data-en="Communicate">Raconter</span>
+      <p data-fr="Transformer les résultats en supports clairs pour des publics techniques et non techniques." data-en="Turn results into clear materials for both technical and non-technical audiences.">Transformer les résultats en supports clairs pour des publics techniques et non techniques.</p>
     </article>
   </section>
 </BaseLayout>
