@@ -10,10 +10,10 @@ type Props = {
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://grimael.github.io');
 const nav = [
-  { href: withBase('/'), label: 'Accueil' },
-  { href: withBase('/about/'), label: 'À propos' },
-  { href: withBase('/projects/'), label: 'Projets' },
-  { href: withBase('/contact/'), label: 'Contact' }
+  { href: withBase('/'), label: 'Accueil', labelEn: 'Home' },
+  { href: withBase('/about/'), label: 'À propos', labelEn: 'About' },
+  { href: withBase('/projects/'), label: 'Projets', labelEn: 'Projects' },
+  { href: withBase('/contact/'), label: 'Contact', labelEn: 'Contact' }
 ];
 ---
 
@@ -24,7 +24,7 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; media-src 'self'; worker-src 'self'; manifest-src 'self'; form-action 'self' mailto:; upgrade-insecure-requests;"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://cdn.fontshare.com; script-src 'self'; connect-src 'self'; media-src 'self'; worker-src 'self'; manifest-src 'self'; form-action 'self' mailto:; upgrade-insecure-requests;"
     />
     <meta http-equiv="Permissions-Policy" content="accelerometer=(), autoplay=(), camera=(), clipboard-read=(), clipboard-write=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -32,7 +32,10 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,750&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -41,16 +44,29 @@ const nav = [
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
+    <script src={withBase('/pref-init.js')}></script>
   </head>
   <body>
-    <a class="skip-link" href="#content">Aller au contenu</a>
+    <canvas id="data-bg" aria-hidden="true"></canvas>
+    <a class="skip-link" href="#content" data-fr="Aller au contenu" data-en="Skip to content">Aller au contenu</a>
     <header class="site-header">
-      <nav class="nav-shell" aria-label="Navigation principale">
-        <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+      <nav class="nav-shell" aria-label="Navigation principale" data-fr-aria="Navigation principale" data-en-aria="Main navigation">
+        <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" data-fr-aria="Ouvrir le menu" data-en-aria="Open menu" aria-expanded="false">
           <span></span><span></span>
         </button>
         <div class="nav-links" data-nav>
-          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          {nav.map((item) => <a href={item.href} data-fr={item.label} data-en={item.labelEn}>{item.label}</a>)}
+        </div>
+        <div class="header-controls">
+          <div class="lang-toggle" role="group" aria-label="Langue du site">
+            <button type="button" data-lang-btn="fr" aria-pressed="true">FR</button>
+            <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+          </div>
+          <label class="theme-toggle">
+            <input type="checkbox" data-theme-toggle />
+            <span class="theme-toggle-track" aria-hidden="true"></span>
+            <span class="theme-toggle-label" data-fr="Blanc" data-en="White">Blanc</span>
+          </label>
         </div>
       </nav>
     </header>
@@ -58,6 +74,30 @@ const nav = [
       <slot />
     </main>
     <footer class="site-footer"></footer>
+
+    <dialog id="project-dialog" class="project-dialog">
+      <button type="button" class="dialog-close" data-dialog-close aria-label="Fermer" data-fr-aria="Fermer" data-en-aria="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+      <figure class="dialog-media">
+        <img data-dialog-image alt="" width="900" height="560" />
+        <span class="media-tag" data-dialog-category></span>
+        <span class="lock-badge" data-dialog-lock hidden data-fr="Privé" data-en="Private">Privé</span>
+      </figure>
+      <div class="dialog-body">
+        <div class="project-meta">
+          <span class="status-dot" data-fr="Étude de cas" data-en="Case study">Étude de cas</span>
+          <span data-dialog-stack0></span>
+        </div>
+        <h3 data-dialog-title></h3>
+        <p data-dialog-summary></p>
+        <p class="impact" data-dialog-impact></p>
+        <div class="stack-list" data-dialog-stack-list aria-label="Technologies"></div>
+        <div class="project-actions" data-dialog-actions></div>
+      </div>
+    </dialog>
+
+    <script src={withBase('/data-bg.js')} defer></script>
     <script src={withBase('/site.js')} defer></script>
   </body>
 </html>

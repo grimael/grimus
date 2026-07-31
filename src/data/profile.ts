@@ -1,15 +1,29 @@
 export const profile = {
   name: 'Analyste data',
   role: 'Data scientist et ingénieur data - BI - ETL - Web',
+  roleEn: 'Data scientist & data engineer - BI - ETL - Web',
   location: "Abidjan, Côte d'Ivoire",
   email: 'grimael.s@outlook.com',
   github: 'https://github.com/grimael',
   linkedin: 'https://www.linkedin.com/in/grimael',
   cv: 'https://drive.google.com/file/d/1YfLQ_Y0YVnX5t8xkXktFeSuC0qP9Oyx3/view?usp=sharing',
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
+  headlineEn: 'Turning raw data into useful decisions, and building the tools to see them clearly.',
   bio:
     "Data scientist et ingénieur data diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs.",
-  availability: "Ouvert aux missions d'ingénierie des données, BI, analyse statistique et produits web orientés data."
+  bioEn:
+    "Data scientist and data engineer graduated from ENSEA Abidjan, I design end-to-end data solutions: collection, ETL, data warehousing, BI dashboards, statistical models and interactive web tools.",
+  availability: "Ouvert aux missions d'ingénierie des données, BI, analyse statistique et produits web orientés data.",
+  availabilityEn: 'Open to data engineering, BI, statistical analysis and data-driven web product engagements.'
+};
+
+export const skillGroupLabels: Record<string, { fr: string; en: string }> = {
+  'Science des données et ML': { fr: 'Science des données et ML', en: 'Data Science & ML' },
+  'Ingénierie des données': { fr: 'Ingénierie des données', en: 'Data Engineering' },
+  'BI et visualisation': { fr: 'BI et visualisation', en: 'BI & Visualization' },
+  'Développement web': { fr: 'Développement web', en: 'Web Development' },
+  'Collecte de données': { fr: 'Collecte de données', en: 'Data Collection' },
+  'Flux de travail': { fr: 'Flux de travail', en: 'Tools & Workflow' }
 };
 
 export const skills = [

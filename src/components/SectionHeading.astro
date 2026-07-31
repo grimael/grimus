@@ -1,15 +1,18 @@
 ---
 type Props = {
   eyebrow: string;
+  eyebrowEn?: string;
   title: string;
+  titleEn?: string;
   text?: string;
+  textEn?: string;
 };
 
-const { eyebrow, title, text } = Astro.props;
+const { eyebrow, eyebrowEn, title, titleEn, text, textEn } = Astro.props;
 ---
 
 <div class="section-heading">
-  <p class="eyebrow">{eyebrow}</p>
-  <h2>{title}</h2>
-  {text && <p>{text}</p>}
+  <p class="eyebrow" data-fr={eyebrow} data-en={eyebrowEn ?? eyebrow}>{eyebrow}</p>
+  <h2 data-fr={title} data-en={titleEn ?? title}>{title}</h2>
+  {text && <p data-fr={text} data-en={textEn ?? text}>{text}</p>}
 </div>

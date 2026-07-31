@@ -3,21 +3,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../data/profile';
 import { withBase } from '../lib/paths';
 
-const subject = encodeURIComponent('Projet data depuis votre portfolio');
-const body = encodeURIComponent('Bonjour,\n\nJe souhaite discuter avec vous d’un projet data.\n\nContexte :\nObjectif :\nDélai :\n');
+const subjectFr = encodeURIComponent('Projet data depuis votre portfolio');
+const bodyFr = encodeURIComponent('Bonjour,\n\nJe souhaite discuter avec vous d’un projet data.\n\nContexte :\nObjectif :\nDélai :\n');
+const subjectEn = encodeURIComponent('Data project from your portfolio');
+const bodyEn = encodeURIComponent('Hello,\n\nI would like to discuss a data project with you.\n\nContext:\nGoal:\nTimeline:\n');
+
+const mailtoFr = `mailto:${profile.email}?subject=${subjectFr}&body=${bodyFr}`;
+const mailtoEn = `mailto:${profile.email}?subject=${subjectEn}&body=${bodyEn}`;
 
 const contacts = [
   {
     label: 'Email',
+    labelEn: 'Email',
     sublabel: profile.email,
-    href: `mailto:${profile.email}?subject=${subject}&body=${body}`,
+    href: mailtoFr,
+    hrefEn: mailtoEn,
     icon: 'https://api.iconify.design/vscode-icons:file-type-outlook.svg',
     brand: '#0078D4',
     external: false,
   },
   {
     label: 'LinkedIn',
+    labelEn: 'LinkedIn',
     sublabel: 'Voir mon profil',
+    sublabelEn: 'View my profile',
     href: profile.linkedin,
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
     brand: '#0A66C2',
@@ -25,6 +34,7 @@ const contacts = [
   },
   {
     label: 'GitHub',
+    labelEn: 'GitHub',
     sublabel: 'grimael',
     href: profile.github,
     icon: 'https://cdn.simpleicons.org/github/181717',
@@ -38,10 +48,10 @@ const contacts = [
   title="Contact"
   description="Contact pour un projet data, tableau de bord, visualisation, statistique ou analyse économétrique."
 >
-  <section class="page-hero page-hero-media contact-hero section-accent section-accent-coral">
+  <section class="page-hero page-hero-media contact-hero">
     <div>
-      <p class="eyebrow">Contact</p>
-      <h1>Parlons du problème, du livrable et de l'effet que vous voulez produire.</h1>
+      <p class="eyebrow" data-fr="Contact" data-en="Contact">Contact</p>
+      <h1 data-fr="Parlons du problème, du livrable et de l'effet que vous voulez produire." data-en="Let's talk about the problem, the deliverable and the effect you want to create.">Parlons du problème, du livrable et de l'effet que vous voulez produire.</h1>
     </div>
     <figure class="section-visual">
       <img
@@ -53,33 +63,35 @@ const contacts = [
         width="900"
         height="675"
       />
-      <figcaption>Discussion projet</figcaption>
+      <figcaption data-fr="Discussion projet" data-en="Project discussion">Discussion projet</figcaption>
     </figure>
   </section>
 
-  <section class="faq-grid section-accent section-accent-gold" data-reveal>
+  <section class="faq-grid band-alt" data-reveal>
     <article>
-      <h3>Quels projets ?</h3>
-      <p>Analyse statistique, tableaux de bord, cartographie, data storytelling, rapports et supports de présentation.</p>
+      <h3 data-fr="Quels projets ?" data-en="What kind of projects?">Quels projets ?</h3>
+      <p data-fr="Analyse statistique, tableaux de bord, cartographie, data storytelling, rapports et supports de présentation." data-en="Statistical analysis, dashboards, mapping, data storytelling, reports and presentation materials.">Analyse statistique, tableaux de bord, cartographie, data storytelling, rapports et supports de présentation.</p>
     </article>
     <article>
-      <h3>Quels livrables ?</h3>
-      <p>Tableau de bord, rapport analytique, notebook, présentation, visualisation ou aide à la décision.</p>
+      <h3 data-fr="Quels livrables ?" data-en="What deliverables?">Quels livrables ?</h3>
+      <p data-fr="Tableau de bord, rapport analytique, notebook, présentation, visualisation ou aide à la décision." data-en="Dashboard, analytical report, notebook, presentation, visualization or decision support.">Tableau de bord, rapport analytique, notebook, présentation, visualisation ou aide à la décision.</p>
     </article>
     <article>
-      <h3>Quelle sécurité ?</h3>
-      <p>Pas de token GitHub côté client, pas de base de données exposée, pas de collecte invisible via formulaire.</p>
+      <h3 data-fr="Quelle sécurité ?" data-en="What about security?">Quelle sécurité ?</h3>
+      <p data-fr="Pas de token GitHub côté client, pas de base de données exposée, pas de collecte invisible via formulaire." data-en="No client-side GitHub token, no exposed database, no invisible data collection via forms.">Pas de token GitHub côté client, pas de base de données exposée, pas de collecte invisible via formulaire.</p>
     </article>
   </section>
 
-  <section class="section-accent section-accent-green" data-reveal>
-    <p class="eyebrow">Canaux disponibles</p>
-    <h2>Choisissez votre moyen de contact préféré.</h2>
+  <section data-reveal>
+    <p class="eyebrow" data-fr="Canaux disponibles" data-en="Available channels">Canaux disponibles</p>
+    <h2 data-fr="Choisissez votre moyen de contact préféré." data-en="Choose your preferred way to get in touch.">Choisissez votre moyen de contact préféré.</h2>
     <div class="social-grid">
       {contacts.map((c) => (
         <a
           class="social-card"
           href={c.href}
+          data-fr-href={c.href}
+          data-en-href={c.hrefEn ?? c.href}
           target={c.external ? '_blank' : undefined}
           rel={c.external ? 'noopener noreferrer' : undefined}
           aria-label={c.label}
@@ -88,7 +100,7 @@ const contacts = [
         >
           <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" fetchpriority="low" />
           <strong>{c.label}</strong>
-          <small>{c.sublabel}</small>
+          <small data-fr={c.sublabel} data-en={c.sublabelEn ?? c.sublabel}>{c.sublabel}</small>
         </a>
       ))}
     </div>
