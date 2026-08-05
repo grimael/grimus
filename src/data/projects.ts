@@ -64,10 +64,29 @@ export const stackTranslations: Record<string, string> = {
   Optimisation: 'Optimization',
   Géospatial: 'Geospatial',
   'Application web': 'Web application',
-  'Entrepôt de données': 'Data warehouse'
+  'Entrepôt de données': 'Data warehouse',
+  'Analyse statistique': 'Statistical analysis'
 };
 
 export const projects: Project[] = [
+  {
+    title: 'Dashboard Churn Télécom & Assistant IA',
+    titleEn: 'Telecom Churn Dashboard & AI Assistant',
+    slug: 'dashboard-churn-telecom-ia',
+    category: 'Tableau de bord',
+    image: image('churn-dashboard'),
+    summary:
+      "Dashboard d'analyse du churn pour un opérateur télécom californien, construit à partir de 6 fichiers Excel bruts liés par client, pour identifier qui résilie, pourquoi et où — avec la rigueur statistique d'une vraie analyse (tests du χ², V de Cramér, mise en garde sur les corrélations concomitantes).",
+    summaryEn:
+      "Churn analysis dashboard for a Californian telecom operator, built from 6 raw Excel files linked by customer, to identify who leaves, why, and where — with the statistical rigor of real analysis (χ² tests, Cramér's V, caveats on concurrent correlations).",
+    impact:
+      "Assistant IA intégré (bouton flottant) qui répond en langage naturel en interrogeant librement les 7 043 clients — pas seulement des agrégats précalculés — via Gemini avec bascule automatique vers Groq, et deux outils de requêtage dédiés.",
+    impactEn:
+      'Built-in AI assistant (floating button) that answers in natural language by freely querying all 7,043 customers — not just precomputed aggregates — via Gemini with automatic Groq fallback, and two dedicated query tools.',
+    stack: ['R', 'Shiny', 'Gemini API', 'Groq', 'Analyse statistique'],
+    liveUrl: 'https://grimus.shinyapps.io/Dash/',
+    repoUrl: `${github}/R_Data_Viz`
+  },
   {
     title: 'Prédiction NPS client — Challenge Artefact',
     titleEn: 'Customer NPS Prediction — Artefact Challenge',
