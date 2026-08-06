@@ -10,9 +10,9 @@ export const profile = {
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
   headlineEn: 'Turning raw data into useful decisions, and building the tools to see them clearly.',
   bio:
-    "Data scientist et ingénieur data diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs.",
+    "Data scientist et Analyste Statisticien diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs.",
   bioEn:
-    "Data scientist and data engineer graduated from ENSEA Abidjan, I design end-to-end data solutions: collection, ETL, data warehousing, BI dashboards, statistical models and interactive web tools.",
+    "Data scientist and Statistical Analyst graduated from ENSEA Abidjan, I design end-to-end data solutions: collection, ETL, data warehousing, BI dashboards, statistical models and interactive web tools.",
   availability: "Ouvert aux missions d'ingénierie des données, BI, analyse statistique et produits web orientés data.",
   availabilityEn: 'Open to data engineering, BI, statistical analysis and data-driven web product engagements.'
 };
@@ -66,7 +66,6 @@ export const skillLogos = [
   },
   { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', group: 'Ingénierie des données' },
   { name: 'Apache Hop', icon: 'https://api.iconify.design/logos:apache.svg', group: 'Ingénierie des données' },
-  { name: 'dbt', icon: 'https://api.iconify.design/logos:dbt-icon.svg', group: 'Ingénierie des données' },
   { name: 'Talend', icon: 'https://cdn.simpleicons.org/talend/FF6D70', group: 'Ingénierie des données' },
   { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', group: 'Ingénierie des données' },
   { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717', group: 'Ingénierie des données' },

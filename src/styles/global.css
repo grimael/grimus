@@ -21,6 +21,7 @@
   --font-display: 'Clash Display', 'Satoshi', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Satoshi', Inter, ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-signature: 'Instrument Serif', 'Times New Roman', serif;
   --wash-1: rgba(124, 108, 246, 0.16);
   --wash-2: rgba(167, 139, 250, 0.1);
   --wash-3: rgba(124, 108, 246, 0.06);
@@ -164,39 +165,29 @@ textarea {
   gap: 1rem;
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.85rem;
+.signature {
   margin-right: auto;
+  font-family: var(--font-signature);
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  background: linear-gradient(120deg, var(--heading-grad-start) 0%, var(--accent-2) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--ink);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 12px 28px rgba(124, 108, 246, 0.35);
-  font-weight: 700;
-  font-family: var(--font-display);
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .signature {
+    color: transparent;
+  }
 }
 
-.brand-mark span {
-  color: #fff4a4;
-}
-
-.brand strong,
-.brand small {
-  display: block;
-}
-
-.brand small {
-  color: var(--muted);
-  margin-top: 0.1rem;
-  font-size: 0.8rem;
+.signature:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
 }
 
 .nav-links {
@@ -801,7 +792,7 @@ p {
 }
 
 .projects-list {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .project-card {
@@ -1086,11 +1077,6 @@ p {
     padding: 1.2rem 1.2rem 1.4rem;
     max-height: calc(92vh - 32vh);
   }
-}
-
-.skills-band {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
 .skill-logo-grid {
@@ -1786,10 +1772,6 @@ p {
     font-size: 0.95rem;
   }
 
-  .brand small {
-    display: none;
-  }
-
   .hero {
     min-height: auto;
     gap: 1.5rem;
@@ -1929,12 +1911,6 @@ p {
 
   .nav-shell {
     min-height: 64px;
-  }
-
-  .brand-mark {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
   }
 
   main > section {
