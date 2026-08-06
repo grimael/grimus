@@ -19,7 +19,7 @@ const contacts = [
     href: mailtoFr,
     hrefEn: mailtoEn,
     icon: 'https://api.iconify.design/vscode-icons:file-type-outlook.svg',
-    brand: '#0078D4',
+    brandClass: 'brand-email',
     external: false,
   },
   {
@@ -29,7 +29,7 @@ const contacts = [
     sublabelEn: 'View my profile',
     href: profile.linkedin,
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
-    brand: '#0A66C2',
+    brandClass: 'brand-linkedin',
     external: true,
   },
   {
@@ -38,7 +38,7 @@ const contacts = [
     sublabel: 'grimael',
     href: profile.github,
     icon: 'https://cdn.simpleicons.org/github/181717',
-    brand: '#181717',
+    brandClass: 'brand-github',
     external: true,
   },
 ];
@@ -88,7 +88,7 @@ const contacts = [
     <div class="social-grid">
       {contacts.map((c) => (
         <a
-          class="social-card"
+          class:list={['social-card', c.brandClass]}
           href={c.href}
           data-fr-href={c.href}
           data-en-href={c.hrefEn ?? c.href}
@@ -96,7 +96,6 @@ const contacts = [
           rel={c.external ? 'noopener noreferrer' : undefined}
           aria-label={c.label}
           data-logo={c.label.slice(0, 2).toUpperCase()}
-          style={`--brand: ${c.brand}`}
         >
           <img src={c.icon} alt={c.label} width="48" height="48" loading="lazy" decoding="async" referrerpolicy="no-referrer" fetchpriority="low" />
           <strong>{c.label}</strong>

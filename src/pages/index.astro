@@ -3,10 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { featuredProjects, projects } from '../data/projects';
-import { profile, skillLogos, skillGroupLabels } from '../data/profile';
+import { profile, skillLogos } from '../data/profile';
 import { withBase } from '../lib/paths';
 
-const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 const heroSkillNames = ['Python', 'R', 'Power BI', 'Tableau', 'SQL', 'PostgreSQL', 'GitHub', 'Astro'];
 const heroSkills = heroSkillNames
   .map((name) => skillLogos.find((skill) => skill.name === name && skill.icon))
@@ -125,29 +124,6 @@ const projectsCountLabelEn = `View all ${projects.length} projects`;
     </div>
     <div class="center-action">
       <a class="btn btn-ghost" href={withBase('/projects/')} data-fr={projectsCountLabelFr} data-en={projectsCountLabelEn}>{projectsCountLabelFr}</a>
-    </div>
-  </section>
-
-  <section class="skills-band" data-reveal>
-    <p class="eyebrow" data-fr="Outils, langages et technologies" data-en="Tools, languages and technologies">Outils, langages et technologies</p>
-    <div class="skill-categories">
-      {skillGroups.map((group) => (
-        <section class="skill-category">
-          <h3 data-fr={skillGroupLabels[group]?.fr ?? group} data-en={skillGroupLabels[group]?.en ?? group}>{group}</h3>
-          <div class="skill-logo-grid">
-            {skillLogos.filter((skill) => skill.group === group).map((skill) => (
-              <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
-                {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="38" height="38" fetchpriority="low" />
-                ) : (
-                  <span class="skill-initials">{skill.initials}</span>
-                )}
-                <strong>{skill.name}</strong>
-              </article>
-            ))}
-          </div>
-        </section>
-      ))}
     </div>
   </section>
 
