@@ -1,58 +1,39 @@
 ---
 import type { Project } from '../data/projects';
-import { categoryLabels, stackTranslations } from '../data/projects';
 
 type Props = {
   project: Project;
 };
 
 const { project } = Astro.props;
-const categoryFr = categoryLabels[project.category].fr;
-const categoryEn = categoryLabels[project.category].en;
-const stackJson = JSON.stringify(project.stack.map((tech) => ({ fr: tech, en: stackTranslations[tech] ?? tech })));
-const repoAriaFr = `Dépôt GitHub : ${project.title}`;
-const repoAriaEn = `GitHub repository: ${project.titleEn}`;
-const openAriaFr = `Voir les détails du projet ${project.title}`;
-const openAriaEn = `View project details: ${project.titleEn}`;
-const stack0En = stackTranslations[project.stack[0]] ?? project.stack[0];
+const stackJson = JSON.stringify(project.stack);
+const repoAria = `Dépôt GitHub : ${project.title}`;
+const openAria = `Voir les détails du projet ${project.title}`;
 ---
 
 <article
   class="project-card"
   data-category={project.category}
-  data-title-fr={project.title}
-  data-title-en={project.titleEn}
-  data-summary-fr={project.summary}
-  data-summary-en={project.summaryEn}
-  data-impact-fr={project.impact}
-  data-impact-en={project.impactEn}
-  data-category-fr={categoryFr}
-  data-category-en={categoryEn}
+  data-title={project.title}
+  data-summary={project.summary}
+  data-impact={project.impact}
   data-image={project.image}
   data-stack={stackJson}
   data-live-url={project.liveUrl ?? ''}
   data-repo-url={project.repoUrl ?? ''}
-  data-repo-aria-fr={repoAriaFr}
-  data-repo-aria-en={repoAriaEn}
+  data-repo-aria={repoAria}
   data-private={project.private ? '1' : ''}
 >
-  <button
-    type="button"
-    class="project-media"
-    data-open-project
-    aria-label={openAriaFr}
-    data-fr-aria={openAriaFr}
-    data-en-aria={openAriaEn}
-  >
+  <button type="button" class="project-media" data-open-project aria-label={openAria}>
     <img src={project.image} alt="" loading="eager" decoding="async" width="900" height="560" />
-    <span class="media-tag" data-fr={categoryFr} data-en={categoryEn}>{categoryFr}</span>
+    <span class="media-tag">{project.category}</span>
   </button>
   <div class="project-body">
-    <h3 data-fr={project.title} data-en={project.titleEn}>{project.title}</h3>
+    <h3>{project.title}</h3>
     <div class="project-meta">
-      <span class="status-dot" data-fr="Étude de cas" data-en="Case study">Étude de cas</span>
-      <span data-fr={project.stack[0]} data-en={stack0En}>{project.stack[0]}</span>
+      <span class="status-dot">Étude de cas</span>
+      <span>{project.stack[0]}</span>
     </div>
-    <button type="button" class="btn btn-ghost btn-compact details-btn" data-open-project data-fr="Détails" data-en="Details">Détails</button>
+    <button type="button" class="btn btn-ghost btn-compact details-btn" data-open-project>Détails</button>
   </div>
 </article>

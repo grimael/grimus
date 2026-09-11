@@ -1,148 +1,199 @@
 export const profile = {
-  name: 'Analyste data',
-  role: 'Data scientist et ingénieur data - BI - ETL - Web',
-  roleEn: 'Data scientist & data engineer - BI - ETL - Web',
-  location: "Abidjan, Côte d'Ivoire",
   email: 'grimael.s@outlook.com',
   github: 'https://github.com/grimael',
   linkedin: 'https://www.linkedin.com/in/grimael',
-  cv: 'https://drive.google.com/file/d/1YfLQ_Y0YVnX5t8xkXktFeSuC0qP9Oyx3/view?usp=sharing',
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
-  headlineEn: 'Turning raw data into useful decisions, and building the tools to see them clearly.',
   bio:
-    "Data scientist et Analyste Statisticien diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs.",
-  bioEn:
-    "Data scientist and Statistical Analyst graduated from ENSEA Abidjan, I design end-to-end data solutions: collection, ETL, data warehousing, BI dashboards, statistical models and interactive web tools.",
-  availability: "Ouvert aux missions d'ingénierie des données, BI, analyse statistique et produits web orientés data.",
-  availabilityEn: 'Open to data engineering, BI, statistical analysis and data-driven web product engagements.'
+    "Data scientist et Analyste Statisticien diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs."
 };
 
-export const skillGroupLabels: Record<string, { fr: string; en: string }> = {
-  'Science des données et ML': { fr: 'Science des données et ML', en: 'Data Science & ML' },
-  'Ingénierie des données': { fr: 'Ingénierie des données', en: 'Data Engineering' },
-  'BI et visualisation': { fr: 'BI et visualisation', en: 'BI & Visualization' },
-  'Développement web': { fr: 'Développement web', en: 'Web Development' },
-  'Collecte de données': { fr: 'Collecte de données', en: 'Data Collection' },
-  'Flux de travail': { fr: 'Flux de travail', en: 'Tools & Workflow' }
+export type SkillLogo = {
+  name: string;
+  icon?: string;
+  initials?: string;
 };
 
-export const skills = [
-  'Python',
-  'R / R Shiny',
-  'SQL',
-  'Power BI',
-  'Tableau',
-  'QGIS',
-  'HTML / CSS',
-  'JavaScript',
-  'Astro',
-  'Économétrie',
-  'Data storytelling',
-  'Visualisation',
-  'Analyse statistique'
+const logo = (file: string) => `${import.meta.env.BASE_URL}assets/logos/${file}`;
+
+export const skillLogos: SkillLogo[] = [
+  { name: 'Python', icon: logo('python.svg') },
+  { name: 'R', icon: logo('r.svg') },
+  { name: 'scikit-learn', icon: logo('scikit-learn.svg') },
+  { name: 'pandas', icon: logo('pandas.svg') },
+  { name: 'NumPy', icon: logo('numpy.svg') },
+  { name: 'Matplotlib', icon: logo('matplotlib.svg') },
+  { name: 'STATA', icon: logo('stata.svg') },
+  { name: 'SPSS', icon: logo('spss.svg') },
+  { name: 'LightGBM', icon: logo('lightgbm.png') },
+  { name: 'SHAP', icon: logo('shap.png') },
+  { name: 'Gemini', icon: logo('gemini.svg') },
+  { name: 'Groq', initials: 'GQ' },
+  { name: 'SQL', icon: logo('sql.svg') },
+  { name: 'PostgreSQL', icon: logo('postgresql.svg') },
+  { name: 'DuckDB', icon: logo('duckdb.svg') },
+  { name: 'Apache Hop', icon: logo('apache-hop.svg') },
+  { name: 'Talend', icon: logo('talend.svg') },
+  { name: 'FastAPI', icon: logo('fastapi.svg') },
+  { name: 'Docker', icon: logo('docker.svg') },
+  { name: 'GitHub Actions', icon: logo('github-actions.svg') },
+  { name: 'Git', icon: logo('git.svg') },
+  { name: 'GitHub', icon: logo('github.svg') },
+  { name: 'Power BI', icon: logo('power-bi.svg') },
+  { name: 'Tableau', icon: logo('tableau.svg') },
+  { name: 'Apache Superset', icon: logo('apache-superset.svg') },
+  { name: 'R Shiny', icon: logo('r.svg') },
+  { name: 'Streamlit', icon: logo('streamlit.svg') },
+  { name: 'Excel', icon: logo('excel.svg') },
+  { name: 'QGIS', icon: logo('qgis.svg') },
+  { name: 'HTML5', icon: logo('html5.svg') },
+  { name: 'CSS3', icon: logo('css3.svg') },
+  { name: 'JavaScript', icon: logo('javascript.svg') },
+  { name: 'TypeScript', icon: logo('typescript.svg') },
+  { name: 'React', icon: logo('react.svg') },
+  { name: 'Next.js', icon: logo('next-js.svg') },
+  { name: 'Node.js', icon: logo('node-js.svg') },
+  { name: 'Tailwind CSS', icon: logo('tailwind-css.svg') },
+  { name: 'Astro', icon: logo('astro.svg') },
+  { name: 'Supabase', icon: logo('supabase.svg') },
+  { name: 'Electron', icon: logo('electron.svg') },
+  { name: 'Vercel', icon: logo('vercel.svg') },
+  { name: 'Render', icon: logo('render.svg') },
+  { name: 'LaTeX', icon: logo('latex.svg') },
+  { name: 'KoboToolbox', icon: logo('kobotoolbox.png') },
+  { name: 'ODK', icon: logo('odk.jpg') },
+  { name: 'CSPro', icon: logo('cspro.png') },
+  { name: 'Survey Solutions', icon: logo('survey-solutions.png') },
+  { name: 'VS Code', icon: logo('vs-code.svg') },
+  { name: 'PowerPoint', icon: logo('powerpoint.svg') },
+  { name: 'Canva', icon: logo('canva.svg') },
+  { name: 'Jupyter', icon: logo('jupyter.svg') },
+  { name: 'Google Colab', icon: logo('google-colab.svg') }
 ];
 
-export const skillLogos = [
+export type ExpertisePillar = {
+  title: string;
+  lead: string;
+  skills: string[];
+  /** Names from `skillLogos`. */
+  tools: string[];
+  wide?: boolean;
+};
+
+export const expertisePillars: ExpertisePillar[] = [
   {
-    name: 'Python',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-    group: 'Science des données et ML'
+    title: 'Statistique & Économétrie',
+    lead: 'La rigueur méthodologique avant la visualisation.',
+    skills: [
+      'Statistique descriptive',
+      "Statistique inférentielle et tests d'hypothèses (χ², V de Cramér)",
+      'Probabilités',
+      'Analyse exploratoire des données',
+      'Régression, économétrie et données de panel',
+      'Séries temporelles',
+      'Analyse factorielle (ACP, AFC, ACM) et classification (CAH)',
+      'Analyse de corrélation',
+      'Théorie des sondages et échantillonnage',
+      'Traitement des valeurs manquantes (imputation)',
+      'Correction des biais de sélection'
+    ],
+    tools: ['R', 'Python', 'STATA', 'SPSS']
   },
   {
-    name: 'R',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg',
-    group: 'Science des données et ML'
-  },
-  { name: 'scikit-learn', icon: 'https://cdn.simpleicons.org/scikitlearn/F7931E', group: 'Science des données et ML' },
-  { name: 'pandas', icon: 'https://cdn.simpleicons.org/pandas/150458', group: 'Science des données et ML' },
-  { name: 'NumPy', icon: 'https://cdn.simpleicons.org/numpy/013243', group: 'Science des données et ML' },
-  { name: 'Matplotlib', icon: 'https://api.iconify.design/logos:matplotlib-icon.svg', group: 'Science des données et ML' },
-  { name: 'STATA', icon: 'https://api.iconify.design/devicon:stata-wordmark.svg', group: 'Science des données et ML' },
-  { name: 'SPSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spss/spss-original.svg', group: 'Science des données et ML' },
-  {
-    name: 'SQL',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg',
-    group: 'Ingénierie des données'
-  },
-  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', group: 'Ingénierie des données' },
-  { name: 'Apache Hop', icon: 'https://api.iconify.design/logos:apache.svg', group: 'Ingénierie des données' },
-  { name: 'Talend', icon: 'https://cdn.simpleicons.org/talend/FF6D70', group: 'Ingénierie des données' },
-  { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', group: 'Ingénierie des données' },
-  { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717', group: 'Ingénierie des données' },
-  {
-    name: 'Power BI',
-    icon: 'https://api.iconify.design/logos:microsoft-power-bi.svg',
-    group: 'BI et visualisation'
+    title: 'Analyse de données',
+    lead: 'Explorer, croiser et transformer la donnée brute en recommandations claires.',
+    skills: [
+      'SQL avancé',
+      'Programmation Python et R',
+      'Excel avancé et automatisation VBA',
+      "Conception d'enquêtes et collecte de données",
+      'Nettoyage et préparation des données',
+      'Croisement de données multi-sources',
+      'Formulation de recommandations à partir des résultats'
+    ],
+    tools: ['SQL', 'Excel', 'pandas', 'NumPy', 'Matplotlib', 'KoboToolbox', 'ODK', 'CSPro', 'Survey Solutions']
   },
   {
-    name: 'Tableau',
-    icon: 'https://api.iconify.design/logos:tableau-icon.svg',
-    group: 'BI et visualisation'
-  },
-  { name: 'Apache Superset', icon: 'https://cdn.simpleicons.org/apachesuperset/20A6C9', group: 'BI et visualisation' },
-  { name: 'R Shiny', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg', group: 'BI et visualisation' },
-  { name: 'Excel', icon: 'https://api.iconify.design/vscode-icons:file-type-excel.svg', group: 'BI et visualisation' },
-  {
-    name: 'QGIS',
-    icon: 'https://cdn.simpleicons.org/qgis/589632',
-    group: 'BI et visualisation'
-  },
-  {
-    name: 'HTML5',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
-    group: 'Développement web'
+    title: 'Data Engineering',
+    lead: 'Des flux de données fiables, automatisés et documentés.',
+    skills: [
+      'Pipelines ETL / ELT',
+      "Architecture d'entrepôt de données",
+      'Modélisation dimensionnelle (schéma en étoile)',
+      'Bases de données analytiques',
+      'Extraction de données via API',
+      'Contrôle qualité automatisé (complétude, validité, fraîcheur)',
+      'Automatisation et planification des traitements',
+      "Développement d'API REST",
+      'Conteneurisation'
+    ],
+    tools: ['Apache Hop', 'Talend', 'PostgreSQL', 'DuckDB', 'FastAPI', 'Docker', 'GitHub Actions']
   },
   {
-    name: 'CSS3',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
-    group: 'Développement web'
+    title: 'Data Science',
+    lead: 'Des modèles appliqués à de vrais problèmes métier, interprétables et auditables.',
+    skills: [
+      'Apprentissage supervisé : classification et régression',
+      'Apprentissage non supervisé : clustering et segmentation',
+      'Feature engineering',
+      'Interprétabilité des modèles',
+      "Audit d'équité des modèles",
+      'Prévision et projections',
+      'NLP : analyse de sentiments',
+      'Algorithmes génétiques et optimisation',
+      'Deep learning',
+      'OCR et vision par ordinateur',
+      'IA générative : assistants LLM connectés aux données'
+    ],
+    tools: ['Python', 'scikit-learn', 'LightGBM', 'SHAP', 'Jupyter', 'Google Colab', 'Gemini', 'Groq']
   },
   {
-    name: 'JavaScript',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-    group: 'Développement web'
-  },
-  { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', group: 'Développement web' },
-  { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', group: 'Développement web' },
-  {
-    name: 'Astro',
-    icon: 'https://cdn.simpleicons.org/astro/BC52EE',
-    group: 'Développement web'
-  },
-  { name: 'LaTeX', icon: 'https://cdn.simpleicons.org/latex/008080', group: 'Développement web' },
-  { name: 'KoboToolbox', icon: 'https://avatars.githubusercontent.com/kobotoolbox?s=200', group: 'Collecte de données' },
-  { name: 'ODK', icon: 'https://avatars.githubusercontent.com/getodk?s=200', group: 'Collecte de données' },
-  { name: 'CSPro', icon: 'https://commons.wikimedia.org/wiki/Special:FilePath/CSPro_Logo.png', group: 'Collecte de données' },
-  { name: 'Survey Solutions', icon: 'https://avatars.githubusercontent.com/surveysolutions?s=200', group: 'Collecte de données' },
-  {
-    name: 'VS Code',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
-    group: 'Flux de travail'
+    title: 'BI & Reporting',
+    lead: 'Des indicateurs lisibles, actionnables et suivis dans la durée.',
+    skills: [
+      'Tableaux de bord décisionnels',
+      'Modélisation Power BI et DAX',
+      'Applications analytiques interactives',
+      'Définition et suivi de KPIs (plus de 20)',
+      'Reporting automatisé',
+      'Cartographie et analyse spatiale',
+      'Data storytelling, infographies et présentations',
+      'Rapports analytiques pour les décideurs'
+    ],
+    tools: ['Power BI', 'Tableau', 'Apache Superset', 'R Shiny', 'Streamlit', 'QGIS', 'PowerPoint', 'Canva']
   },
   {
-    name: 'PowerPoint',
-    icon: 'https://api.iconify.design/vscode-icons:file-type-powerpoint.svg',
-    group: 'Flux de travail'
+    title: 'Gestion de projets data',
+    lead: 'Du cadrage au déploiement, avec un impact mesuré.',
+    skills: [
+      'Recueil et cadrage des besoins métier',
+      "Conception d'architectures data de bout en bout",
+      "Pilotage de déploiements avec mesure d'impact (jusqu'à 40 % de gain de productivité)",
+      'Méthodes agiles (Scrum)',
+      "Coordination d'équipe",
+      'Formation des utilisateurs',
+      'Documentation méthodologique et traçabilité des décisions',
+      'Reproductibilité des analyses',
+      'Versioning et collaboration'
+    ],
+    tools: ['Git', 'GitHub', 'LaTeX']
   },
   {
-    name: 'Canva',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg',
-    group: 'Flux de travail'
-  },
-  {
-    name: 'Jupyter',
-    icon: 'https://cdn.simpleicons.org/jupyter/F37626',
-    group: 'Flux de travail'
-  },
-  {
-    name: 'Google Colab',
-    icon: 'https://cdn.simpleicons.org/googlecolab/F9AB00',
-    group: 'Flux de travail'
+    title: 'Développement web',
+    lead: 'Des produits web qui donnent une vraie présence aux résultats.',
+    skills: [
+      'HTML, CSS et JavaScript',
+      'TypeScript',
+      'React.js et Next.js',
+      'Astro (sites statiques rapides et bien référencés)',
+      'Node.js et Express (back-end, API)',
+      'Tailwind CSS',
+      'Bases de données et authentification',
+      'Visualisation web interactive (Chart.js, Leaflet)',
+      'Sites bilingues, adaptés au mobile et sécurisés',
+      'Applications de bureau',
+      'Déploiement et hébergement'
+    ],
+    tools: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Astro', 'Node.js', 'Tailwind CSS', 'Supabase', 'Electron', 'Vercel', 'Render', 'VS Code'],
+    wide: true
   }
-];
-
-export const metrics = [
-  { value: '12', label: 'KPIs suivis en service public' },
-  { value: '40%', label: 'gain de productivité via reporting automatisé' },
-  { value: '4+', label: 'domaines : assurance, public, formation, recherche' }
 ];

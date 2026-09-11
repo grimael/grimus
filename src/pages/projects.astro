@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PortraitFrame from '../components/PortraitFrame.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { projects, categoryLabels } from '../data/projects';
-import { withBase } from '../lib/paths';
+import { projects } from '../data/projects';
 
-const categories = ['Tous', ...Array.from(new Set(projects.map((project) => project.category)))] as const;
+const categories = ['Tous', ...Array.from(new Set(projects.map((project) => project.category)))];
 const heading = `${projects.length} livrables sélectionnés`;
-const headingEn = `${projects.length} selected deliverables`;
 ---
 
 <BaseLayout
@@ -16,49 +15,25 @@ const headingEn = `${projects.length} selected deliverables`;
 >
   <section class="page-hero page-hero-media">
     <div>
-      <p class="eyebrow" data-fr="Portfolio de projets" data-en="Project portfolio">Portfolio de projets</p>
-      <h1 data-fr="Des projets data présentés comme des produits finis." data-en="Data projects presented as finished products.">Des projets data présentés comme des produits finis.</h1>
+      <p class="eyebrow">Portfolio de projets</p>
+      <h1>Des projets data présentés comme des produits finis.</h1>
     </div>
-    <figure class="section-visual">
-      <img
-        src={withBase('/assets/Images/optimized/Grimus.webp')}
-        alt="Visuel de la page projets"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-        width="900"
-        height="675"
-      />
-      <figcaption data-fr="Livrables data" data-en="Data deliverables">Livrables data</figcaption>
-    </figure>
+    <PortraitFrame photo="costume-serre" code="Projets.03" caption="Livrables data" />
   </section>
 
-  <section class="filter-shell" aria-label="Categories de projets" data-fr-aria="Categories de projets" data-en-aria="Project categories">
+  <section class="filter-shell" aria-label="Categories de projets">
     {categories.map((category) => (
-      <button
-        class={category === 'Tous' ? 'is-active' : ''}
-        type="button"
-        data-filter={category}
-        data-fr={categoryLabels[category].fr}
-        data-en={categoryLabels[category].en}
-      >
-        {categoryLabels[category].fr}
+      <button class={category === 'Tous' ? 'is-active' : ''} type="button" data-filter={category}>
+        {category}
       </button>
     ))}
   </section>
 
   <section id="all" class="band-alt">
-    <SectionHeading
-      eyebrow="Tous les projets"
-      eyebrowEn="All projects"
-      title={heading}
-      titleEn={headingEn}
-      text="Le design privilégie la lecture rapide : image, contexte, impact, technologies, livrable et dépôt."
-      textEn="The design favors quick reading: image, context, impact, technologies, deliverable and repository."
-    />
+    <SectionHeading eyebrow="Tous les projets" title={heading} />
     <div class="projects-list">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
-    <p class="empty-state" data-empty-state hidden data-fr="Aucun projet dans cette catégorie pour le moment." data-en="No project in this category yet.">Aucun projet dans cette catégorie pour le moment.</p>
+    <p class="empty-state" data-empty-state hidden>Aucun projet dans cette catégorie pour le moment.</p>
   </section>
 </BaseLayout>

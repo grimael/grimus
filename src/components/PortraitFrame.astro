@@ -1,0 +1,40 @@
+---
+import { withBase } from '../lib/paths';
+
+const photos = {
+  costume: { file: 'profil-costume', width: 896, height: 1030, alt: 'Portrait de Michaël S. GRIMA en costume' },
+  'costume-serre': { file: 'profil-costume-serre', width: 640, height: 800, alt: 'Portrait de Michaël S. GRIMA en costume' },
+  ensea: { file: 'profil-ensea', width: 824, height: 1030, alt: "Michaël S. GRIMA en polo de l'ENSEA" },
+  sourire: { file: 'profil-sourire', width: 896, height: 1120, alt: 'Michaël S. GRIMA souriant' }
+};
+
+type Props = {
+  photo: keyof typeof photos;
+  code: string;
+  caption?: string;
+};
+
+const { photo, code, caption } = Astro.props;
+const image = photos[photo];
+---
+
+<figure class="scope-frame">
+  <span class="scope-tag" aria-hidden="true">{code}</span>
+  <div class="scope-box">
+    <div class="scope-media">
+      <img
+        src={withBase(`/assets/Images/optimized/${image.file}.webp`)}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <span class="scope-corner is-tl" aria-hidden="true"></span>
+    <span class="scope-corner is-tr" aria-hidden="true"></span>
+    <span class="scope-corner is-bl" aria-hidden="true"></span>
+    <span class="scope-corner is-br" aria-hidden="true"></span>
+  </div>
+  {caption && <figcaption class="scope-tag is-end">{caption}</figcaption>}
+</figure>

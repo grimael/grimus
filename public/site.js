@@ -7,7 +7,7 @@ toggle?.addEventListener('click', () => {
   nav?.classList.toggle('is-open', !open);
 });
 
-document.querySelectorAll('.logo-strip span, .skill-logo-grid article, .social-card').forEach((container) => {
+document.querySelectorAll('.logo-strip span, .tool-chip, .social-card').forEach((container) => {
   const image = container.querySelector('img');
 
   if (!image) return;
@@ -46,48 +46,6 @@ filterButtons.forEach((button) => {
   });
 });
 
-/* ── Language toggle (FR / EN) ─────────────────────────────── */
-function applyLang(lang) {
-  document.documentElement.setAttribute('lang', lang);
-
-  document.querySelectorAll('[data-fr]').forEach((el) => {
-    const text = lang === 'en' ? el.dataset.en : el.dataset.fr;
-    if (text != null) el.textContent = text;
-  });
-
-  document.querySelectorAll('[data-fr-aria]').forEach((el) => {
-    const text = lang === 'en' ? el.dataset.enAria : el.dataset.frAria;
-    if (text != null) el.setAttribute('aria-label', text);
-  });
-
-  document.querySelectorAll('[data-fr-href]').forEach((el) => {
-    const href = lang === 'en' ? el.dataset.enHref : el.dataset.frHref;
-    if (href != null) el.setAttribute('href', href);
-  });
-
-  document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-    btn.setAttribute('aria-pressed', String(btn.dataset.langBtn === lang));
-  });
-}
-
-function currentLang() {
-  return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'fr';
-}
-
-document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const lang = btn.dataset.langBtn;
-    try {
-      localStorage.setItem('lang', lang);
-    } catch (e) {
-      /* localStorage unavailable */
-    }
-    applyLang(lang);
-  });
-});
-
-applyLang(currentLang());
-
 /* ── Theme toggle (white filter) ───────────────────────────── */
 const themeCheckbox = document.querySelector('[data-theme-toggle]');
 
@@ -112,13 +70,19 @@ applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'li
 /* ── Project details dialog ────────────────────────────────── */
 const projectDialog = document.getElementById('project-dialog');
 
-const githubIcon =
-  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92v2.84c0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>';
-
-function setDual(el, fr, en) {
-  el.dataset.fr = fr;
-  el.dataset.en = en;
-  el.textContent = currentLang() === 'en' ? en : fr;
+// Built with DOM APIs (no innerHTML): the CSP enforces Trusted Types.
+function createGithubIcon() {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS(svgNS, 'path');
+  path.setAttribute(
+    'd',
+    'M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92v2.84c0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z'
+  );
+  svg.appendChild(path);
+  return svg;
 }
 
 function openProjectDialog(card) {
@@ -129,19 +93,19 @@ function openProjectDialog(card) {
   image.src = d.image || '';
 
   const categoryEl = projectDialog.querySelector('[data-dialog-category]');
-  setDual(categoryEl, d.categoryFr || '', d.categoryEn || '');
+  categoryEl.textContent = d.category || '';
 
   const lockEl = projectDialog.querySelector('[data-dialog-lock]');
   lockEl.hidden = d.private !== '1';
 
   const titleEl = projectDialog.querySelector('[data-dialog-title]');
-  setDual(titleEl, d.titleFr || '', d.titleEn || '');
+  titleEl.textContent = d.title || '';
 
   const summaryEl = projectDialog.querySelector('[data-dialog-summary]');
-  setDual(summaryEl, d.summaryFr || '', d.summaryEn || '');
+  summaryEl.textContent = d.summary || '';
 
   const impactEl = projectDialog.querySelector('[data-dialog-impact]');
-  setDual(impactEl, d.impactFr || '', d.impactEn || '');
+  impactEl.textContent = d.impact || '';
 
   let stack = [];
   try {
@@ -151,23 +115,23 @@ function openProjectDialog(card) {
   }
 
   const stack0El = projectDialog.querySelector('[data-dialog-stack0]');
-  if (stack[0]) setDual(stack0El, stack[0].fr, stack[0].en);
+  stack0El.textContent = stack[0] || '';
 
   const stackList = projectDialog.querySelector('[data-dialog-stack-list]');
-  stackList.innerHTML = '';
+  stackList.replaceChildren();
   stack.forEach((tech) => {
     const span = document.createElement('span');
-    setDual(span, tech.fr, tech.en);
+    span.textContent = tech;
     stackList.appendChild(span);
   });
 
   const actions = projectDialog.querySelector('[data-dialog-actions]');
-  actions.innerHTML = '';
+  actions.replaceChildren();
 
   if (d.private === '1') {
     const span = document.createElement('span');
     span.className = 'btn btn-disabled';
-    setDual(span, 'Privé', 'Private');
+    span.textContent = 'Privé';
     actions.appendChild(span);
   } else {
     if (d.liveUrl) {
@@ -176,7 +140,7 @@ function openProjectDialog(card) {
       live.href = d.liveUrl;
       live.target = '_blank';
       live.rel = 'noopener noreferrer';
-      setDual(live, 'Voir', 'View');
+      live.textContent = 'Voir';
       actions.appendChild(live);
     }
     if (d.repoUrl) {
@@ -186,10 +150,8 @@ function openProjectDialog(card) {
       repo.target = '_blank';
       repo.rel = 'noopener noreferrer';
       repo.title = 'GitHub';
-      repo.dataset.frAria = d.repoAriaFr || '';
-      repo.dataset.enAria = d.repoAriaEn || '';
-      repo.setAttribute('aria-label', currentLang() === 'en' ? d.repoAriaEn || '' : d.repoAriaFr || '');
-      repo.innerHTML = githubIcon;
+      repo.setAttribute('aria-label', d.repoAria || '');
+      repo.appendChild(createGithubIcon());
       actions.appendChild(repo);
     }
   }

@@ -1,10 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PortraitFrame from '../components/PortraitFrame.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { profile, skillLogos, skillGroupLabels } from '../data/profile';
-import { withBase } from '../lib/paths';
+import { profile, skillLogos, expertisePillars } from '../data/profile';
 
-const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
+const logosByName = new Map(skillLogos.map((logo) => [logo.name, logo]));
+const pillars = expertisePillars.map((pillar, index) => ({
+  ...pillar,
+  number: String(index + 1).padStart(2, '0'),
+  tools: pillar.tools.map((name) => {
+    const logo = logosByName.get(name);
+    if (!logo) throw new Error(`Unknown tool "${name}": add it to skillLogos in src/data/profile.ts`);
+    return logo;
+  })
+}));
 ---
 
 <BaseLayout
@@ -13,166 +22,63 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
 >
   <section class="page-hero page-hero-media about-hero">
     <div>
-      <p class="eyebrow" data-fr="À propos" data-en="About">À propos</p>
-      <h1 data-fr="Un profil data qui relie science statistique, analyse métier et développement web." data-en="A data profile connecting statistical science, business analysis and web development.">Un profil data qui relie science statistique, analyse métier et développement web.</h1>
-      <p data-fr={profile.headline} data-en={profile.headlineEn}>{profile.headline}</p>
+      <p class="eyebrow">À propos</p>
+      <h1>Un profil data qui relie science statistique, analyse métier et développement web.</h1>
+      <p>{profile.headline}</p>
     </div>
-    <figure class="section-visual">
-      <img
-        src={withBase('/assets/Images/optimized/Grimus.webp')}
-        alt="Visuel de la page profil"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-        width="900"
-        height="675"
-      />
-      <figcaption data-fr="À propos" data-en="About">À propos</figcaption>
-    </figure>
+    <PortraitFrame photo="ensea" code="Profil.02" caption="À propos" />
   </section>
 
-  <section class="about-grid band-alt">
+  <section class="band-alt">
     <div class="about-copy">
-      <SectionHeading
-        eyebrow="Approche"
-        eyebrowEn="Approach"
-        title="Comprendre avant de visualiser. Prouver avant de convaincre."
-        titleEn="Understand before visualizing. Prove before convincing."
-      />
-      <p
-        data-fr="Diplômé de l'ENSEA d'Abidjan, je combine les méthodes quantitatives, l'économétrie, la BI et l'ingénierie des données pour concevoir des solutions data complètes : collecte, pipelines ETL, entrepôt de données, tableaux de bord et analyses."
-        data-en="A graduate of ENSEA Abidjan, I combine quantitative methods, econometrics, BI and data engineering to design complete data solutions: collection, ETL pipelines, data warehousing, dashboards and analysis."
-      >
+      <SectionHeading eyebrow="Approche" title="Comprendre avant de visualiser. Prouver avant de convaincre." />
+      <p>
         Diplômé de l'ENSEA d'Abidjan, je combine les méthodes quantitatives, l'économétrie, la BI et l'ingénierie des données
         pour concevoir des solutions data complètes : collecte, pipelines ETL, entrepôt de données, tableaux de bord et analyses.
       </p>
-      <p
-        data-fr="Mes expériences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquée, avec un fil conducteur : rendre la donnée fiable, lisible et utile à la décision."
-        data-en="My experience spans insurance, the public sector, professional training and applied research, with one common thread: making data reliable, readable and useful for decision-making."
-      >
+      <p>
         Mes expériences couvrent l'assurance, le service public, la formation professionnelle et la recherche appliquée,
         avec un fil conducteur : rendre la donnée fiable, lisible et utile à la décision.
       </p>
     </div>
-    <figure class="section-visual">
-      <img
-        src={withBase('/assets/Images/optimized/grimus2.webp')}
-        alt="Visuel de la section approche"
-        loading="lazy"
-        decoding="async"
-        width="900"
-        height="675"
-      />
-      <figcaption data-fr="Approche analytique" data-en="Analytical approach">Approche analytique</figcaption>
-    </figure>
   </section>
 
-  <section>
-    <SectionHeading
-      eyebrow="Expertise"
-      eyebrowEn="Expertise"
-      title="Six piliers, une seule chaîne de valeur data."
-      titleEn="Six pillars, one data value chain."
-    />
-    <div class="capability-grid">
-      <article>
-        <span>01</span>
-        <h3 data-fr="Statistique & Économétrie" data-en="Statistics & Econometrics">Statistique & Économétrie</h3>
-        <p
-          data-fr="Statistiques descriptives et inférentielles, probabilités, économétrie, analyses exploratoires — la rigueur méthodologique avant la visualisation."
-          data-en="Descriptive and inferential statistics, probability, econometrics, exploratory analysis — methodological rigor before visualization."
-        >
-          Statistiques descriptives et inférentielles, probabilités, économétrie, analyses exploratoires — la rigueur méthodologique avant la visualisation.
-        </p>
-      </article>
-      <article>
-        <span>02</span>
-        <h3 data-fr="Analyse de données" data-en="Data Analytics">Analyse de données</h3>
-        <p
-          data-fr="SQL avancé, Python, R et Excel avancé pour explorer, modéliser et restituer des données brutes en recommandations claires."
-          data-en="Advanced SQL, Python, R and Excel to explore, model and turn raw data into clear recommendations."
-        >
-          SQL avancé, Python, R et Excel avancé pour explorer, modéliser et restituer des données brutes en recommandations claires.
-        </p>
-      </article>
-      <article>
-        <span>03</span>
-        <h3 data-fr="Data Engineering" data-en="Data Engineering">Data Engineering</h3>
-        <p
-          data-fr="Pipelines ETL/ELT (Apache Hop), architecture Data Warehouse et conception de bases analytiques pour fiabiliser les flux multi-sources."
-          data-en="ETL/ELT pipelines (Apache Hop), Data Warehouse architecture and analytical database design to make multi-source data flows reliable."
-        >
-          Pipelines ETL/ELT (Apache Hop), architecture Data Warehouse et conception de bases analytiques pour fiabiliser les flux multi-sources.
-        </p>
-      </article>
-      <article>
-        <span>04</span>
-        <h3 data-fr="Data Science" data-en="Data Science">Data Science</h3>
-        <p
-          data-fr="Modélisation statistique et notions de Machine Learning en Python et R, appliquées à des problématiques métier réelles."
-          data-en="Statistical modeling and Machine Learning fundamentals in Python and R, applied to real business problems."
-        >
-          Modélisation statistique et notions de Machine Learning en Python et R, appliquées à des problématiques métier réelles.
-        </p>
-      </article>
-      <article>
-        <span>05</span>
-        <h3 data-fr="BI & Reporting" data-en="BI & Reporting">BI & Reporting</h3>
-        <p
-          data-fr="Power BI, Apache Superset et tableaux de bord décisionnels — plus de 20 KPIs définis et suivis pour des institutions publiques et privées."
-          data-en="Power BI, Apache Superset and decision dashboards — 20+ KPIs defined and tracked for public and private institutions."
-        >
-          Power BI, Apache Superset et tableaux de bord décisionnels — plus de 20 KPIs définis et suivis pour des institutions publiques et privées.
-        </p>
-      </article>
-      <article>
-        <span>06</span>
-        <h3 data-fr="Gestion de projets data" data-en="Data Project Management">Gestion de projets data</h3>
-        <p
-          data-fr="Conception d'architectures de bout en bout et pilotage de déploiements avec impact mesuré, jusqu'à 40 % de gain de productivité."
-          data-en="End-to-end architecture design and deployment leadership with measured impact, up to a 40% productivity gain."
-        >
-          Conception d'architectures de bout en bout et pilotage de déploiements avec impact mesuré, jusqu'à 40 % de gain de productivité.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <section>
-    <SectionHeading
-      eyebrow="Compétences"
-      eyebrowEn="Skills"
-      title="Une boîte à outils complète pour passer du dataset au livrable."
-      titleEn="A complete toolbox to go from dataset to deliverable."
-    />
-    <div class="skill-categories">
-      {skillGroups.map((group) => (
-        <section class="skill-category">
-          <h3 data-fr={skillGroupLabels[group]?.fr ?? group} data-en={skillGroupLabels[group]?.en ?? group}>{group}</h3>
-          <div class="skills-matrix skill-logo-grid">
-            {skillLogos.filter((skill) => skill.group === group).map((skill) => (
-              <article data-logo={skill.initials ?? skill.name.slice(0, 2).toUpperCase()}>
-                {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} loading="lazy" decoding="async" referrerpolicy="no-referrer" width="38" height="38" fetchpriority="low" />
-                ) : (
-                  <span class="skill-initials">{skill.initials}</span>
-                )}
-                <strong>{skill.name}</strong>
-              </article>
-            ))}
+  <section id="expertise">
+    <SectionHeading eyebrow="Expertise" title="Sept piliers, de la donnée brute au produit en ligne." />
+    <div class="pillar-grid">
+      {pillars.map((pillar) => (
+        <article class:list={['pillar-card', { 'is-wide': pillar.wide }]}>
+          <span class="pillar-number" aria-hidden="true">{pillar.number}</span>
+          <header class="pillar-head">
+            <h3>{pillar.title}</h3>
+            <p>{pillar.lead}</p>
+          </header>
+          <ul class="pillar-skills">
+            {pillar.skills.map((skill) => <li>{skill}</li>)}
+          </ul>
+          <div class="pillar-tools">
+            <p class="pillar-tools-label">Outils</p>
+            <ul class="tool-chips">
+              {pillar.tools.map((tool) => (
+                <li
+                  class:list={['tool-chip', { 'logo-missing': !tool.icon }]}
+                  data-logo={tool.initials ?? tool.name.slice(0, 2).toUpperCase()}
+                >
+                  {tool.icon && (
+                    <img src={tool.icon} alt="" loading="lazy" decoding="async" width="22" height="22" />
+                  )}
+                  <span>{tool.name}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
+        </article>
       ))}
     </div>
   </section>
 
-  <section class="band-alt" data-reveal>
-    <SectionHeading
-      eyebrow="Experience"
-      eyebrowEn="Experience"
-      title="Des missions data concrètes, connectées aux enjeux métiers."
-      titleEn="Concrete data engagements, connected to business challenges."
-    />
+  <section class="band-alt">
+    <SectionHeading eyebrow="Experience" title="Des missions data concrètes, connectées aux enjeux métiers." />
     <div class="timeline">
 
       <div class="timeline-item is-current">
@@ -182,16 +88,12 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date" data-fr="Janv. 2026 — Présent" data-en="Jan. 2026 — Present">Janv. 2026 — Présent</span>
-            <span class="timeline-badge current" data-fr="En poste" data-en="Current">En poste</span>
+            <span class="timeline-date">Janv. 2026 — Présent</span>
+            <span class="timeline-badge current">En poste</span>
           </div>
-          <h3 class="timeline-role" data-fr="Support Data & Business Intelligence" data-en="Data & Business Intelligence Support">Support Data & Business Intelligence</h3>
+          <h3 class="timeline-role">Support Data & Business Intelligence</h3>
           <p class="timeline-org">SanlamAllianz Participations</p>
-          <p
-            class="timeline-desc"
-            data-fr="Analyse de données financières clients, conception de tableaux de bord Power BI et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel."
-            data-en="Analysis of client financial data, design of Power BI dashboards and setup of Apache Hop ETL pipelines to automate monthly reporting."
-          >
+          <p class="timeline-desc">
             Analyse de données financières clients, conception de tableaux de bord Power BI
             et mise en place de pipelines ETL via Apache Hop pour automatiser le reporting mensuel.
           </p>
@@ -200,7 +102,7 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             <span>Apache Hop</span>
             <span>ETL</span>
             <span>SQL</span>
-            <span data-fr="Finance" data-en="Finance">Finance</span>
+            <span>Finance</span>
           </div>
         </div>
       </div>
@@ -212,15 +114,11 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date" data-fr="Oct. 2025 — Janv. 2026" data-en="Oct. 2025 — Jan. 2026">Oct. 2025 — Janv. 2026</span>
+            <span class="timeline-date">Oct. 2025 — Janv. 2026</span>
           </div>
-          <h3 class="timeline-role" data-fr="Statisticien — Data Analyst" data-en="Statistician — Data Analyst">Statisticien — Data Analyst</h3>
+          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
           <p class="timeline-org">Observatoire du Service Public</p>
-          <p
-            class="timeline-desc"
-            data-fr="Analyse multi-sources et production de rapports analytiques avec recommandations stratégiques. Suivi et modélisation d'indicateurs de performance du service public."
-            data-en="Multi-source analysis and production of analytical reports with strategic recommendations. Tracking and modeling of public service performance indicators."
-          >
+          <p class="timeline-desc">
             Analyse multi-sources et production de rapports analytiques avec recommandations
             stratégiques. Suivi et modélisation d'indicateurs de performance du service public.
           </p>
@@ -228,8 +126,8 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
             <span>Python</span>
             <span>R</span>
             <span>KPI</span>
-            <span data-fr="Reporting" data-en="Reporting">Reporting</span>
-            <span data-fr="Service public" data-en="Public sector">Service public</span>
+            <span>Reporting</span>
+            <span>Service public</span>
           </div>
         </div>
       </div>
@@ -240,24 +138,20 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
         </div>
         <div class="timeline-content">
           <div class="timeline-header">
-            <span class="timeline-date" data-fr="Mai 2025 — Sept. 2025" data-en="May 2025 — Sept. 2025">Mai 2025 — Sept. 2025</span>
+            <span class="timeline-date">Mai 2025 — Sept. 2025</span>
           </div>
-          <h3 class="timeline-role" data-fr="Statisticien — Data Analyst" data-en="Statistician — Data Analyst">Statisticien — Data Analyst</h3>
+          <h3 class="timeline-role">Statisticien — Data Analyst</h3>
           <p class="timeline-org">Ministere de l'Enseignement Technique</p>
-          <p
-            class="timeline-desc"
-            data-fr="Architecture ETL et entrepôt de données national, modélisation de KPIs nationaux et mise en place d'un reporting automatisé sous Apache Superset."
-            data-en="National ETL and data warehouse architecture, modeling of national KPIs and setup of automated reporting under Apache Superset."
-          >
+          <p class="timeline-desc">
             Architecture ETL et entrepôt de données national, modélisation de KPIs nationaux
             et mise en place d'un reporting automatisé sous Apache Superset.
           </p>
           <div class="timeline-stack">
             <span>Apache Superset</span>
-            <span data-fr="Entrepôt de données" data-en="Data warehouse">Data Warehouse</span>
+            <span>Entrepôt de données</span>
             <span>ETL</span>
             <span>SQL</span>
-            <span data-fr="Education" data-en="Education">Education</span>
+            <span>Education</span>
           </div>
         </div>
       </div>
@@ -265,18 +159,4 @@ const skillGroups = Array.from(new Set(skillLogos.map((skill) => skill.group)));
     </div>
   </section>
 
-  <section class="principles-grid">
-    <article>
-      <span data-fr="Explorer" data-en="Explore">Explorer</span>
-      <p data-fr="Identifier les tendances, anomalies et questions importantes avant de construire le livrable." data-en="Identify trends, anomalies and the important questions before building the deliverable.">Identifier les tendances, anomalies et questions importantes avant de construire le livrable.</p>
-    </article>
-    <article>
-      <span data-fr="Modeliser" data-en="Model">Modeliser</span>
-      <p data-fr="Choisir des methodes statistiques adaptees, lisibles et defendables." data-en="Choose statistical methods that are appropriate, readable and defensible.">Choisir des methodes statistiques adaptees, lisibles et defendables.</p>
-    </article>
-    <article>
-      <span data-fr="Raconter" data-en="Communicate">Raconter</span>
-      <p data-fr="Transformer les résultats en supports clairs pour des publics techniques et non techniques." data-en="Turn results into clear materials for both technical and non-technical audiences.">Transformer les résultats en supports clairs pour des publics techniques et non techniques.</p>
-    </article>
-  </section>
 </BaseLayout>
