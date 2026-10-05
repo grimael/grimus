@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Projet de validation du workflow",
+    "slug": "projet-de-validation-du-workflow",
+    "category": "Web",
+    "image": "/assets/Images/Project.svg",
+    "summary": "Projet de démonstration de la synchronisation automatique entre un dépôt de projet et le portfolio.",
+    "impact": "Démonstration du flux GitHub Actions → payload → intégration automatique du portfolio.",
+    "stack": ["GitHub Actions", "Node.js", "Astro"],
+    "liveUrl": "https://example.com",
+    "repoUrl": "https://github.com/grimael/projet-validation",
+    "featured": true
+  }
+]

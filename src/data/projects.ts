@@ -1,3 +1,5 @@
+import generatedProjectsData from './projects.generated.json';
+
 export type Project = {
   title: string;
   slug: string;
@@ -17,7 +19,44 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+
 const projectImage = asset('/assets/Images/Project.svg');
 const image = (name: string) => asset(`/assets/Images/optimized/${name}.webp`);
 
+const normalizeGeneratedProject = (project: Partial<Project> & { category?: string; }): Project => {
+  const validCategories: Project['category'][] = [
+    'Statistique',
+    'Data Visualisation',
+    'Géospatial',
+    'Recherche',
+    'Web',
+    'IA'
+  ];
+
+  const category = validCategories.includes(project.category as Project['category'])
+    ? project.category as Project['category']
+    : 'Web';
+
+  const cleanedTitle = project.title?.trim() || 'Projet sans titre';
+  const cleanedSlug = project.slug?.trim() || cleanedTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+  return {
+    title: cleanedTitle,
+    slug: cleanedSlug,
+    category,
+    image: project.image || projectImage,
+    summary: project.summary || 'Projet ajouté automatiquement depuis un dépôt GitHub.',
+    impact: project.impact || 'Projet intégré automatiquement à partir d’un README structuré.',
+    stack: project.stack || [],
+    liveUrl: project.liveUrl,
+    repoUrl: project.repoUrl,
+    private: project.private,
+    featured: project.featured
+  };
+};
+
+const generatedProjects = Array.isArray(generatedProjectsData)
+  ? generatedProjectsData.map((project) => normalizeGeneratedProject(project as Partial<Project> & { category?: string; }))
+  : [];
+
 export const projects: Project[] = [
+  ...generatedProjects,
   {
     title: 'OpenDataViz — Observatoire économique africain',
     slug: 'opendataviz-observatoire-afrique',
