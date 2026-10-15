@@ -1,47 +1,30 @@
 ---
 import '../styles/fonts.css';
 import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { profile } from '../data/profile';
 import { withBase } from '../lib/paths';
+import { ui, localizedPath, pagePaths, type Lang, type Page } from '../lib/i18n';
 
-type Props = {
-  title: string;
-  description: string;
-};
-
-const { title, description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://grimael.github.io');
-// Vite's dev server injects CSS via inline <style> tags and its client/toolbar write
-// HTML strings, so 'unsafe-inline', data: images and Trusted Types are relaxed only
-// while running `astro dev`, never in the deployed site. No asset is loaded from a
-// third party: fonts, logos and images are all served from this origin.
+type Props = { title: string; description: string; lang?: Lang; page?: Page; path?: string; image?: string; imageAlt?: string };
+const { title, description, lang = 'fr', page = 'home', path = pagePaths[page], image = '/assets/Images/optimized/grima-editorial.webp', imageAlt = 'Portrait de Michaël S. GRIMA en noir et blanc' } = Astro.props;
+const t = ui[lang];
+const canonical = new URL(localizedPath(path, lang), Astro.site ?? 'https://grimael.dev');
+const ogImage = new URL(image.startsWith(import.meta.env.BASE_URL) ? image : withBase(image), Astro.site ?? 'https://grimael.dev');
+const personImage = new URL(withBase('/assets/Images/optimized/grima-editorial.webp'), Astro.site ?? 'https://grimael.dev');
 const isDev = import.meta.env.DEV;
 const csp = [
-  "default-src 'self'",
-  "base-uri 'self'",
-  "object-src 'none'",
-  "frame-src 'none'",
+  "default-src 'self'", "base-uri 'self'", "object-src 'none'", "frame-src 'none'",
   `img-src 'self'${isDev ? ' data:' : ''}`,
-  `style-src 'self'${isDev ? " 'unsafe-inline'" : ''}`,
-  "font-src 'self'",
-  "script-src 'self'",
-  "connect-src 'self'",
-  "media-src 'none'",
-  "worker-src 'none'",
-  "manifest-src 'none'",
-  "form-action 'none'",
-  ...(isDev ? [] : ["require-trusted-types-for 'script'", "trusted-types 'none'"]),
-  'upgrade-insecure-requests'
+  `style-src 'self'${isDev ? " 'unsafe-inline'" : ''}`, "font-src 'self'",
+  `script-src 'self'${isDev ? " 'unsafe-inline'" : ''}`, "connect-src 'self'", "media-src 'none'",
+  "worker-src 'none'", "manifest-src 'none'", "form-action 'none'",
+  ...(isDev ? [] : ["require-trusted-types-for 'script'", "trusted-types 'none'", 'upgrade-insecure-requests'])
 ].join('; ');
-const nav = [
-  { href: withBase('/'), label: 'Accueil' },
-  { href: withBase('/about/'), label: 'À propos' },
-  { href: withBase('/projects/'), label: 'Projets' },
-  { href: withBase('/contact/'), label: 'Contact' }
-];
+const navPages: Page[] = ['home', 'about', 'expertise', 'projects', 'contact'];
 ---
-
 <!doctype html>
-<html lang="fr">
+<html lang={lang} data-theme="light" class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -49,69 +32,74 @@ const nav = [
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="robots" content="index,follow" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <meta name="theme-color" content="#f4f9fc" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg?v=data-1')} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GRIMAEL.DEV" />
+    <meta property="og:locale" content="fr_FR" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>{title}</title>
-    {/* is:inline keeps these public scripts as plain external tags (Astro 7 would otherwise process and drop them). */}
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <title>grimael</title>
     <script is:inline src={withBase('/pref-init.js')}></script>
   </head>
-  <body>
-    <canvas id="data-bg" aria-hidden="true"></canvas>
-    <div class="page-grid" aria-hidden="true"></div>
-    <div class="page-corners" aria-hidden="true">
-      <span class="is-tl"></span><span class="is-tr"></span><span class="is-bl"></span><span class="is-br"></span>
-    </div>
-    <a class="skip-link" href="#content">Aller au contenu</a>
-    <header class="site-header">
-      <nav class="nav-shell" aria-label="Navigation principale">
-        <a class="signature" href={withBase('/')} aria-label="Michaël S. GRIMA — Accueil">Michaël S. GRIMA</a>
-        <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span>
-        </button>
-        <div class="nav-links" data-nav>
-          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  <body data-page={page}>
+    <a class="skip-link" href="#content">{t.skip}</a>
+    <header class="site-header" data-header>
+      <nav class="nav-shell container" aria-label={t.navigation}>
+        <a class="wordmark" href={localizedPath('', lang)} aria-label={`${t.identity} - ${t.nav[0]}`}>Michaël S. <span>GRIMA</span></a>
+        <div class="nav-links" id="site-navigation" data-nav>
+          {navPages.map((p, i) => <a href={localizedPath(pagePaths[p], lang)} aria-current={page === p ? 'page' : undefined}>{t.nav[i]}</a>)}
         </div>
         <div class="header-controls">
-          <label class="theme-toggle">
-            <input type="checkbox" data-theme-toggle />
-            <span class="theme-toggle-track" aria-hidden="true"></span>
-            <span class="theme-toggle-label">Blanc</span>
+          <label class="theme-toggle" title={t.theme}>
+            <input type="checkbox" data-theme-toggle data-dark-label={t.dark} data-light-label={t.light} aria-label={t.dark} />
+            <span class="theme-icons" aria-hidden="true"><Icon name="Sun" size={16} /><Icon name="Moon" size={16} /></span>
           </label>
+          <button class="icon-button menu-toggle" type="button" aria-label={t.menu} title={t.menu} aria-expanded="false" aria-controls="site-navigation" data-menu-toggle><Icon name="Menu" /><Icon name="X" /></button>
         </div>
       </nav>
     </header>
-    <main id="content">
-      <slot />
-    </main>
-
-    <dialog id="project-dialog" class="project-dialog">
-      <button type="button" class="dialog-close" data-dialog-close aria-label="Fermer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-      </button>
-      <figure class="dialog-media">
-        <img data-dialog-image alt="" width="900" height="560" />
-        <span class="media-tag" data-dialog-category></span>
-        <span class="lock-badge" data-dialog-lock hidden>Privé</span>
-      </figure>
-      <div class="dialog-body">
-        <div class="project-meta">
-          <span class="status-dot">Étude de cas</span>
-          <span data-dialog-stack0></span>
+    <main id="content" tabindex="-1"><slot /></main>
+    <footer class="site-footer" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="name" content={t.identity} />
+      <link itemprop="url" href="https://grimael.dev" />
+      <meta itemprop="image" content={personImage.toString()} />
+      <meta itemprop="email" content={profile.email} />
+      <link itemprop="sameAs" href={profile.github} />
+      <link itemprop="sameAs" href={profile.linkedin} />
+      <div class="container footer-bottom">
+        <small>© {new Date().getFullYear()} GRIMAEL.DEV. {t.copyright}</small>
+        <div class="footer-links">
+          <a href={`mailto:${profile.email}`} aria-label="Email" title="Email"><Icon name="Mail" /></a>
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><img src={withBase('/assets/logos/github.svg')} alt="" width="20" height="20" /></a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><img src={withBase('/assets/logos/linkedin.svg')} alt="" width="20" height="20" /></a>
         </div>
-        <h3 data-dialog-title></h3>
+      </div>
+    </footer>
+    <dialog id="project-dialog" class="project-dialog" aria-labelledby="dialog-title">
+      <button class="icon-button dialog-close" type="button" data-dialog-close aria-label={t.close} title={t.close}><Icon name="X" /></button>
+      <div class="dialog-media"><img data-dialog-image alt="" width="1600" height="1000" /><div class="project-placeholder" data-dialog-placeholder hidden><Icon name="CodeXml" size={48} /></div></div>
+      <div class="dialog-body">
+        <p class="eyebrow" data-dialog-category></p>
+        <h2 id="dialog-title" data-dialog-title></h2>
         <p data-dialog-summary></p>
-        <p class="impact" data-dialog-impact></p>
-        <div class="stack-list" data-dialog-stack-list aria-label="Technologies"></div>
-        <div class="project-actions" data-dialog-actions></div>
+        <p data-dialog-impact></p>
+        <div class="stack-list" data-dialog-stack-list></div>
+        <div class="cta-row"><a class="btn btn-primary" data-dialog-detail href={localizedPath('projects', lang)}>{t.details}<Icon name="ArrowRight" /></a></div>
       </div>
     </dialog>
-
-    <script is:inline src={withBase('/data-bg.js')} defer></script>
+    <dialog id="image-dialog" class="image-dialog" aria-label={t.imagePreview}>
+      <button class="icon-button dialog-close" type="button" data-image-close aria-label={t.close} title={t.close}><Icon name="X" /></button>
+      <img data-full-image alt="" width="1600" height="1000" />
+    </dialog>
     <script is:inline src={withBase('/site.js')} defer></script>
   </body>
 </html>

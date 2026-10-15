@@ -1,39 +1,26 @@
 ---
+import Icon from './Icon.astro';
 import type { Project } from '../data/projects';
-
-type Props = {
-  project: Project;
-};
-
-const { project } = Astro.props;
-const stackJson = JSON.stringify(project.stack);
-const repoAria = `Dépôt GitHub : ${project.title}`;
-const openAria = `Voir les détails du projet ${project.title}`;
+import { hasProjectImage, shortDescriptions } from '../data/projects.presentation';
+import { localizedPath, ui, term, type Lang } from '../lib/i18n';
+type Props = { project: Project; lang?: Lang; featured?: boolean };
+const { project, lang = 'fr', featured = false } = Astro.props;
+const t = ui[lang];
+const href = localizedPath(`projects/${project.slug}`, lang);
+const imageAvailable = hasProjectImage(project);
+const description = shortDescriptions[project.slug] ?? project.summary;
 ---
-
-<article
-  class="project-card"
-  data-category={project.category}
-  data-title={project.title}
-  data-summary={project.summary}
-  data-impact={project.impact}
-  data-image={project.image}
-  data-stack={stackJson}
-  data-live-url={project.liveUrl ?? ''}
-  data-repo-url={project.repoUrl ?? ''}
-  data-repo-aria={repoAria}
-  data-private={project.private ? '1' : ''}
->
-  <button type="button" class="project-media" data-open-project aria-label={openAria}>
-    <img src={project.image} alt="" loading="eager" decoding="async" width="900" height="560" />
-    <span class="media-tag">{project.category}</span>
-  </button>
+<article class:list={['project-card', { 'is-featured': featured }]} data-category={project.category} data-search={`${project.title} ${project.summary} ${project.stack.join(' ')}`} data-title={project.title} data-summary={project.summary} data-impact={project.impact} data-image={imageAvailable ? project.image : ''} data-stack={JSON.stringify(project.stack.map(s => term(s, lang)))} data-detail-url={href} data-category-label={term(project.category, lang)}>
+  <div class="project-media">
+    <a href={href} tabindex="-1" aria-hidden="true">
+      {imageAvailable ? <img src={project.image} alt="" loading="lazy" decoding="async" width="1600" height="1000" /> : <div class="project-placeholder"><Icon name={project.category === 'IA' ? 'BrainCircuit' : project.category === 'Statistique' ? 'ChartSpline' : 'CodeXml'} size={38} /><strong>{project.title}</strong></div>}
+    </a>
+    <button class="icon-button preview-button" type="button" data-open-project aria-label={`${t.preview} : ${project.title}`} title={t.preview}><Icon name="Expand" size={17} /></button>
+  </div>
   <div class="project-body">
-    <h3>{project.title}</h3>
-    <div class="project-meta">
-      <span class="status-dot">Étude de cas</span>
-      <span>{project.stack[0]}</span>
-    </div>
-    <button type="button" class="btn btn-ghost btn-compact details-btn" data-open-project>Détails</button>
+    <div class="project-category-row"><span class="category-badge" data-kind={project.category}>{term(project.category, lang)}</span>{project.private && <span class="private-label" title={t.private}><Icon name="LockKeyhole" size={13} /><span class="sr-only">{t.private}</span></span>}</div>
+    <h3><a href={href}>{project.title}</a></h3>
+    <p class="project-summary">{description}</p>
+    <div class="project-bottom"><p class="project-stack"><Icon name="Layers" size={13} />{project.stack.slice(0, 3).map(s => term(s, lang)).join(' · ')}</p><a class="project-arrow" href={href} aria-label={`${t.details} : ${project.title}`} title={t.details}><Icon name="ArrowRight" size={17} /></a></div>
   </div>
 </article>

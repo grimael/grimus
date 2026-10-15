@@ -61,7 +61,7 @@ export const projects: Project[] = [
     title: 'Portfolio GRIMUS',
     slug: 'portfolio-grimus',
     category: 'Web',
-    image: image('profil-costume-banniere'),
+    image: projectImage,
     summary: 'Portfolio personnel construit pour présenter un profil data, des projets, des livrables et des canaux de contact professionnels.',
     impact: 'Site statique optimisé pour GitHub Pages, navigation claire, identité visuelle personnalisée et structure maintenable.',
     stack: ['Astro', 'HTML', 'CSS', 'JavaScript'],
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     title: 'Profil GitHub',
     slug: 'profil-github-grimael',
     category: 'Web',
-    image: image('profil-ensea-banniere'),
+    image: projectImage,
     summary: 'Profil GitHub personnel conçu pour centraliser l’identité technique, les projets, les domaines de compétence et les liens utiles.',
     impact: 'Point d’entrée clair vers les dépôts, les projets publics et la présence technique.',
     stack: ['GitHub', 'Markdown', 'Portfolio', 'Documentation'],
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     title: 'Étude économétrique : corruption et investissement public',
     slug: 'econometrie-corruption-investissement',
     category: 'Statistique',
-    image: image('logo_maphix'),
+    image: projectImage,
     summary: "Analyse des effets de la corruption sur l'investissement public en Afrique subsaharienne avec une lecture économétrique orientée décision.",
     impact: 'Modèles de régression, interprétation causale prudente, recommandations de politique publique et restitution claire.',
     stack: ['Économétrie', 'Régression', 'R', 'Analyse publique'],
@@ -283,5 +283,3 @@ export const projects: Project[] = [
     private: true
   }
 ];
-
-export const featuredProjects = projects.filter((project) => project.featured);

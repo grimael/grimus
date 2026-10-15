@@ -2,6 +2,7 @@ export const profile = {
   email: 'grimael.s@outlook.com',
   github: 'https://github.com/grimael',
   linkedin: 'https://www.linkedin.com/in/grimael',
+  whatsapp: 'https://wa.me/2250718283603',
   headline: 'Transformer les données brutes en décisions utiles, et construire les outils pour les voir clairement.',
   bio:
     "Data scientist et Analyste Statisticien diplômé de l'ENSEA d'Abidjan, je conçois des solutions data de bout en bout : collecte, ETL, entrepôt de données, tableaux de bord BI, modèles statistiques et outils web interactifs."
@@ -82,33 +83,25 @@ export type ExpertisePillar = {
 export const expertisePillars: ExpertisePillar[] = [
   {
     title: 'Statistique & Économétrie',
-    lead: 'La rigueur méthodologique avant la visualisation.',
+    lead: 'La rigueur statistique pour comprendre et modéliser.',
     skills: [
-      'Statistique descriptive',
-      "Statistique inférentielle et tests d'hypothèses (χ², V de Cramér)",
-      'Probabilités',
-      'Analyse exploratoire des données',
-      'Régression, économétrie et données de panel',
-      'Séries temporelles',
-      'Analyse factorielle (ACP, AFC, ACM) et classification (CAH)',
-      'Analyse de corrélation',
-      'Théorie des sondages et échantillonnage',
-      'Traitement des valeurs manquantes (imputation)',
-      'Correction des biais de sélection'
+      'Statistique descriptive et inférentielle',
+      'Régression et économétrie',
+      'Séries temporelles et prévision',
+      'Analyse multivariée',
+      'Sondages et échantillonnage'
     ],
     tools: ['R', 'Python', 'STATA', 'SPSS']
   },
   {
     title: 'Analyse de données',
-    lead: 'Explorer, croiser et transformer la donnée brute en recommandations claires.',
+    lead: 'Des données fiables et des résultats lisibles.',
     skills: [
-      'SQL avancé',
-      'Programmation Python et R',
-      'Excel avancé et automatisation VBA',
-      "Conception d'enquêtes et collecte de données",
-      'Nettoyage et préparation des données',
-      'Croisement de données multi-sources',
-      'Formulation de recommandations à partir des résultats'
+      'Collecte et préparation des données',
+      'Analyse exploratoire',
+      'Analyse de données multi-sources',
+      'Visualisation des données',
+      'Recommandations et aide à la décision'
     ],
     tools: ['SQL', 'Excel', 'pandas', 'NumPy', 'Matplotlib', 'KoboToolbox', 'ODK', 'CSPro', 'Survey Solutions']
   },
@@ -117,83 +110,47 @@ export const expertisePillars: ExpertisePillar[] = [
     lead: 'Des flux de données fiables, automatisés et documentés.',
     skills: [
       'Pipelines ETL / ELT',
-      "Architecture d'entrepôt de données",
-      'Modélisation dimensionnelle (schéma en étoile)',
+      'Entrepôts et modélisation des données',
       'Bases de données analytiques',
-      'Extraction de données via API',
-      'Contrôle qualité automatisé (complétude, validité, fraîcheur)',
-      'Automatisation et planification des traitements',
-      "Développement d'API REST",
-      'Conteneurisation'
+      'Intégration de données et API',
+      'Qualité et automatisation des traitements'
     ],
     tools: ['Apache Hop', 'Talend', 'PostgreSQL', 'DuckDB', 'FastAPI', 'Docker', 'GitHub Actions']
   },
   {
-    title: 'Data Science',
-    lead: 'Des modèles appliqués à de vrais problèmes métier, interprétables et auditables.',
+    title: 'Data Science & Machine Learning',
+    lead: 'Des modèles adaptés aux besoins, évalués et interprétables.',
     skills: [
-      'Apprentissage supervisé : classification et régression',
-      'Apprentissage non supervisé : clustering et segmentation',
-      'Feature engineering',
-      'Interprétabilité des modèles',
-      "Audit d'équité des modèles",
-      'Prévision et projections',
-      'NLP : analyse de sentiments',
-      'Algorithmes génétiques et optimisation',
+      'Apprentissage supervisé et non supervisé',
+      'Évaluation et interprétabilité des modèles',
       'Deep learning',
-      'OCR et vision par ordinateur',
-      'IA générative : assistants LLM connectés aux données'
+      'Traitement du langage et vision par ordinateur',
+      'IA générative et assistants LLM'
     ],
     tools: ['Python', 'scikit-learn', 'LightGBM', 'SHAP', 'Jupyter', 'Google Colab', 'Gemini', 'Groq']
   },
   {
     title: 'BI & Reporting',
-    lead: 'Des indicateurs lisibles, actionnables et suivis dans la durée.',
+    lead: 'Des indicateurs clairs pour accompagner les décisions.',
     skills: [
       'Tableaux de bord décisionnels',
-      'Modélisation Power BI et DAX',
-      'Applications analytiques interactives',
-      'Définition et suivi de KPIs (plus de 20)',
+      'Modélisation analytique et DAX',
+      'Définition et suivi des indicateurs',
       'Reporting automatisé',
-      'Cartographie et analyse spatiale',
-      'Data storytelling, infographies et présentations',
-      'Rapports analytiques pour les décideurs'
+      'Data storytelling et restitution'
     ],
     tools: ['Power BI', 'Tableau', 'Apache Superset', 'R Shiny', 'Streamlit', 'QGIS', 'PowerPoint', 'Canva']
   },
   {
-    title: 'Gestion de projets data',
-    lead: 'Du cadrage au déploiement, avec un impact mesuré.',
-    skills: [
-      'Recueil et cadrage des besoins métier',
-      "Conception d'architectures data de bout en bout",
-      "Pilotage de déploiements avec mesure d'impact (jusqu'à 40 % de gain de productivité)",
-      'Méthodes agiles (Scrum)',
-      "Coordination d'équipe",
-      'Formation des utilisateurs',
-      'Documentation méthodologique et traçabilité des décisions',
-      'Reproductibilité des analyses',
-      'Versioning et collaboration'
-    ],
-    tools: ['Git', 'GitHub', 'LaTeX']
-  },
-  {
     title: 'Développement web',
-    lead: 'Des produits web qui donnent une vraie présence aux résultats.',
+    lead: 'Des applications qui rendent les données accessibles.',
     skills: [
-      'HTML, CSS et JavaScript',
-      'TypeScript',
-      'React.js et Next.js',
-      'Astro (sites statiques rapides et bien référencés)',
-      'Node.js et Express (back-end, API)',
-      'Tailwind CSS',
+      'Interfaces web interactives et responsives',
+      'Développement d’API et services back-end',
       'Bases de données et authentification',
-      'Visualisation web interactive (Chart.js, Leaflet)',
-      'Sites bilingues, adaptés au mobile et sécurisés',
-      'Applications de bureau',
+      'Applications analytiques et de bureau',
       'Déploiement et hébergement'
     ],
-    tools: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Astro', 'Node.js', 'Tailwind CSS', 'Supabase', 'Electron', 'Vercel', 'Render', 'VS Code'],
-    wide: true
+    tools: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Astro', 'Node.js', 'Tailwind CSS', 'Supabase', 'Electron', 'Vercel', 'Render', 'VS Code']
   }
 ];

@@ -15,6 +15,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
@@ -31,9 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Audit dependencies
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
+      - name: Check Astro and TypeScript
+        run: npm run check
       - name: Build
         run: npm run build
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Test production site
+        run: npm run test:e2e
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:

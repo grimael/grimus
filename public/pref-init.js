@@ -1,19 +1,11 @@
 (function () {
-  // GitHub Pages cannot send frame-ancestors / X-Frame-Options headers:
-  // refuse to render inside a frame (clickjacking protection).
+  document.documentElement.classList.remove('no-js');
   if (window.top !== window.self) {
     document.documentElement.hidden = true;
-    try {
-      window.top.location.replace(window.self.location.href);
-    } catch (e) {
-      /* top navigation blocked: the page simply stays hidden */
-    }
+    try { window.top.location.replace(window.self.location.href); } catch { /* Frame stays hidden. */ }
   }
-
   try {
-    var theme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-  } catch (e) {
-    /* localStorage unavailable: keep defaults from the HTML */
-  }
+    document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+    localStorage.removeItem('language');
+  } catch { /* Retain the server-rendered light theme. */ }
 })();

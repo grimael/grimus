@@ -1,0 +1,19 @@
+---
+import { withBase } from '../lib/paths';
+import Icon from './Icon.astro';
+type Props = { eyebrow: string; title: string; lead: string; subtitle?: string; class?: string; projectMedia?: boolean; image?: string };
+const { eyebrow, title, lead, subtitle, class: className, projectMedia = false, image } = Astro.props;
+---
+<section class:list={['page-intro', 'editorial-intro', className]}>
+  {projectMedia ? <div class="intro-project-media">{image ? <img src={image} alt={`Capture du projet : ${title}`} width="1600" height="1000" decoding="async" fetchpriority="high" /> : <div class="project-placeholder intro-project-placeholder"><Icon name="CodeXml" size={52} /><strong>{title}</strong></div>}</div> : <figure class="intro-portrait"><img src={withBase('/assets/Images/optimized/grima-editorial.webp')} alt="Portrait de Michaël S. GRIMA en noir et blanc" width="1024" height="1024" decoding="async" fetchpriority="high" /></figure>}
+  <div class="container intro-layout">
+    <div class="intro-copy entrance">
+      <slot name="before" />
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}<span class="warm-dot" aria-hidden="true">.</span></h1>
+      {subtitle && <p class="intro-subtitle">{subtitle}</p>}
+      <p class="page-lead">{lead}</p>
+      <slot />
+    </div>
+  </div>
+</section>

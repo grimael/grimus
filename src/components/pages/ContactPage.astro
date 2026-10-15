@@ -1,0 +1,28 @@
+---
+import PageIntro from '../PageIntro.astro';
+import { profile } from '../../data/profile';
+import { withBase } from '../../lib/paths';
+import { ui, type Lang } from '../../lib/i18n';
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = ui[lang];
+const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(t.mailSubject)}&body=${encodeURIComponent(t.mailBody)}`;
+const links = [
+  { name: 'Email', href: mailto, icon: 'email.svg', external: false },
+  { name: 'LinkedIn', href: profile.linkedin, icon: 'linkedin.svg', external: true },
+  { name: 'GitHub', href: profile.github, icon: 'github.svg', external: true },
+  { name: 'WhatsApp', href: profile.whatsapp, icon: 'whatsapp.svg', external: true }
+];
+---
+<PageIntro eyebrow={t.contactPageEyebrow} title={t.nav[4]} subtitle={t.contactTitle} lead={t.contactPageLead} />
+<section class="section-space contact-channels">
+  <div class="container">
+    <div class="section-heading"><p class="eyebrow">{t.channels}</p><h2>Un premier échange.</h2></div>
+    <div class="contact-content-grid">
+      <div class="contact-socials" role="group" aria-label={t.channels}>
+        {links.map(link => <a class="contact-social-link" href={link.href} aria-label={link.name} title={link.name} target={link.external ? '_blank' : undefined} rel={link.name === 'WhatsApp' ? 'noopener noreferrer nofollow' : link.external ? 'noopener noreferrer' : undefined} referrerpolicy={link.external ? 'no-referrer' : undefined}><img src={withBase(`/assets/logos/${link.icon}`)} alt="" width="30" height="30" /></a>)}
+      </div>
+      <div class="contact-scope"><p class="eyebrow">{t.scopeTitle}</p><ol>{t.scopeSteps.map((step, i) => <li><span>0{i + 1}</span>{step}</li>)}</ol></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../Icon.astro';
+import PageIntro from '../PageIntro.astro';
+import ProjectCard from '../ProjectCard.astro';
+import { projects, type Project } from '../../data/projects';
+import { hasProjectImage, shortDescriptions } from '../../data/projects.presentation';
+import { ui, term, localizedPath, type Lang } from '../../lib/i18n';
+type Props = { project: Project; lang: Lang };
+const { project, lang } = Astro.props;
+const t = ui[lang];
+const related = projects.filter(p => p.slug !== project.slug && p.category === project.category).slice(0, 3);
+const imageAvailable = hasProjectImage(project);
+---
+<BaseLayout title={`${project.title} — GRIMAEL.DEV`} description={project.summary} page="projects" lang={lang} path={`projects/${project.slug}`} image={imageAvailable ? project.image : undefined} imageAlt={imageAvailable ? `${t.screenshotAlt} : ${project.title}` : undefined}>
+  <PageIntro eyebrow={`${term(project.category, lang)} · ${t.caseStudy}`} title={project.title} lead={shortDescriptions[project.slug] ?? project.summary} class="project-intro" projectMedia image={imageAvailable ? project.image : undefined}>
+    <a slot="before" class="text-link project-back" href={localizedPath('projects', lang)}><Icon name="ArrowLeft" size={16} />{t.back}</a>
+    <div class="stack-list">{project.stack.map(s => <span>{term(s, lang)}</span>)}</div>
+    <div class="cta-row">{project.repoUrl && <a class="btn btn-primary" href={project.repoUrl} target="_blank" rel="noopener noreferrer"><Icon name="CodeXml" />{t.source}<Icon name="ArrowUpRight" size={17} /></a>}{project.liveUrl && <a class="btn btn-outline-light" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{t.live}<Icon name="ExternalLink" size={17} /></a>}{project.private && <span class="private-label"><Icon name="LockKeyhole" size={16} />{t.private}</span>}</div>
+    {project.liveUrl?.includes('app.powerbi.com/groups/me') && <p class="access-note">{t.restricted}</p>}
+  </PageIntro>
+  <section class="project-case-section section-space"><div class="container case-layout"><div class="case-copy"><section><p class="eyebrow">01</p><h2>{t.overview}</h2><p>{project.summary}</p></section><section><p class="eyebrow">02</p><h2>{t.deliverables}</h2><p>{project.impact}</p></section><section><p class="eyebrow">03</p><h2>{t.technologies}</h2><div class="stack-list">{project.stack.map(s => <span>{term(s, lang)}</span>)}</div></section>{project.private && <p class="access-note">{t.privateDescription}</p>}</div><div class="case-media">{imageAvailable ? <button type="button" class="case-image" data-image-preview aria-label={t.imagePreview} data-image={project.image} data-alt={project.title}><img src={project.image} alt={`${t.screenshotAlt} : ${project.title}`} width="1600" height="1000" loading="lazy" decoding="async" /><span class="image-zoom"><Icon name="Expand" /></span></button> : <div class="project-placeholder case-placeholder"><Icon name="CodeXml" size={52} /><strong>{project.title}</strong></div>}</div></div></section>
+  {related.length > 0 && <section class="section-space dark-band"><div class="container"><div class="section-heading"><p class="eyebrow">{t.allProjects}</p><h2>{t.relatedTitle}</h2></div><div class="featured-grid">{related.map(p => <ProjectCard project={p} lang={lang} />)}</div></div></section>}
+</BaseLayout>

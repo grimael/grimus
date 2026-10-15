@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomePage from './pages/HomePage.astro';
+import AboutPage from './pages/AboutPage.astro';
+import ExpertisePage from './pages/ExpertisePage.astro';
+import ProjectsPage from './pages/ProjectsPage.astro';
+import ContactPage from './pages/ContactPage.astro';
+import { ui, type Lang, type Page } from '../lib/i18n';
+type Props = { page: Page; lang?: Lang };
+const { page, lang = 'fr' } = Astro.props;
+const [title, description] = ui[lang].meta[page];
+const View = { home: HomePage, about: AboutPage, expertise: ExpertisePage, projects: ProjectsPage, contact: ContactPage }[page];
+---
+<BaseLayout title={title} description={description} page={page} lang={lang}><View lang={lang} /></BaseLayout>

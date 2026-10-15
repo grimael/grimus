@@ -1,0 +1,18 @@
+---
+import Icon from '../Icon.astro';
+import PageIntro from '../PageIntro.astro';
+import ProjectCard from '../ProjectCard.astro';
+import { projects } from '../../data/projects';
+import { ui, term, type Lang } from '../../lib/i18n';
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = ui[lang];
+const categories = [...new Set(projects.map(p => p.category))];
+---
+<PageIntro eyebrow={t.projectsEyebrow} title={t.nav[3]} subtitle={t.projectsTitle} lead={t.projectsLead} />
+<section class="catalog-section section-space" id="all"><div class="container" data-project-catalog>
+  <div class="catalog-toolbar"><div class="filter-shell" role="group" aria-label={t.allProjects}><button class="is-active" type="button" data-filter="all" aria-pressed="true">{t.all}<span>{projects.length}</span></button>{categories.map(category => <button type="button" data-filter={category} aria-pressed="false">{term(category, lang)}<span>{projects.filter(p => p.category === category).length}</span></button>)}</div><div class="search-field"><Icon name="Search" size={18} /><input type="search" data-project-search aria-label={t.search} placeholder={t.searchPlaceholder} /><button class="icon-button" type="button" data-clear-search aria-label={t.clear} title={t.clear} hidden><Icon name="X" size={16} /></button></div></div>
+  <div class="catalog-status"><p aria-live="polite" aria-atomic="true"><span data-result-count>{projects.length}</span> {t.results}</p><button class="text-link" type="button" data-reset-filters hidden>{t.reset}<Icon name="RotateCcw" size={14} /></button></div>
+  <div class="projects-grid">{projects.map(project => <ProjectCard project={project} lang={lang} />)}</div>
+  <div class="empty-state" data-empty-state hidden><Icon name="SearchX" size={36} /><h2>{t.emptyTitle}</h2><p>{t.emptyDescription}</p><button class="btn btn-secondary" type="button" data-reset-filters>{t.reset}<Icon name="RotateCcw" size={16} /></button></div>
+</div></section>

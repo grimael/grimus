@@ -1,0 +1,15 @@
+---
+import Icon from '../Icon.astro';
+import PageIntro from '../PageIntro.astro';
+import { localizedPillars } from '../../data/content';
+import { skillLogos } from '../../data/profile';
+import { ui, localizedPath, type Lang } from '../../lib/i18n';
+type Props = { lang: Lang };
+const { lang } = Astro.props;
+const t = ui[lang];
+const pillars = localizedPillars(lang);
+const logos = new Map(skillLogos.map(logo => [logo.name, logo]));
+const icons = ['ChartSpline', 'ChartColumnIncreasing', 'Database', 'BrainCircuit', 'MonitorCog', 'CodeXml'] as const;
+---
+<PageIntro eyebrow={t.nav[2]} title={t.nav[2]} subtitle={t.expertisePageTitle} lead={t.expertisePageLead} />
+<section class="section-space expertise-detail-section" id="expertise"><div class="container pillar-grid">{pillars.map((pillar, i) => <article class:list={['pillar-card', { 'is-wide': pillar.wide }]} data-reveal><header><span class="expertise-icon"><Icon name={icons[i]} size={25} /></span><span class="pillar-number">0{i + 1}</span><h2>{pillar.title}</h2><p>{pillar.lead}</p></header><div class="pillar-content"><ul class="pillar-skills">{pillar.skills.map(skill => <li>{skill}</li>)}</ul><div class="pillar-tools"><h3>{t.tools}</h3><ul class="tool-chips">{pillar.tools.map(name => { const logo = logos.get(name); return <li>{logo?.icon ? <img src={logo.icon} alt="" width="22" height="22" loading="lazy" decoding="async" /> : <span class="tool-initial">{logo?.initials ?? name.slice(0, 2)}</span>}<span>{name}</span></li>; })}</ul></div></div></article>)}</div><div class="container center-action"><a class="btn btn-primary" href={localizedPath('projects', lang)}>{t.related}<Icon name="ArrowRight" /></a></div></section>

@@ -1,174 +1,168 @@
-const toggle = document.querySelector('.menu-toggle');
+const root = document.documentElement;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const header = document.querySelector('[data-header]');
+const menuToggle = document.querySelector('[data-menu-toggle]');
 const nav = document.querySelector('[data-nav]');
+const main = document.querySelector('main');
+const footer = document.querySelector('footer');
 
-toggle?.addEventListener('click', () => {
-  const open = toggle.getAttribute('aria-expanded') === 'true';
-  toggle.setAttribute('aria-expanded', String(!open));
-  nav?.classList.toggle('is-open', !open);
-});
-
-document.querySelectorAll('.logo-strip span, .tool-chip, .social-card').forEach((container) => {
-  const image = container.querySelector('img');
-
-  if (!image) return;
-
-  const markMissing = () => {
-    container.classList.add('logo-missing');
-  };
-
-  image.addEventListener('error', markMissing, { once: true });
-
-  if (image.complete && image.naturalWidth === 0) {
-    markMissing();
-  }
-});
-
-const filterButtons = document.querySelectorAll('[data-filter]');
-const projectCards = document.querySelectorAll('.project-card[data-category]');
-const emptyState = document.querySelector('[data-empty-state]');
-
-filterButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const filter = button.getAttribute('data-filter');
-    let visible = 0;
-
-    filterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
-
-    projectCards.forEach((card) => {
-      const match = filter === 'Tous' || card.getAttribute('data-category') === filter;
-      card.hidden = !match;
-      if (match) visible += 1;
-    });
-
-    if (emptyState) {
-      emptyState.hidden = visible > 0;
-    }
-  });
-});
-
-/* ── Theme toggle (white filter) ───────────────────────────── */
-const themeCheckbox = document.querySelector('[data-theme-toggle]');
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  if (themeCheckbox) themeCheckbox.checked = theme === 'light';
-  if (window.__dataBgRefresh) window.__dataBgRefresh();
+function setMenu(open, restoreFocus = false) {
+  if (!menuToggle || !nav) return;
+  menuToggle.setAttribute('aria-expanded', String(open));
+  nav.classList.toggle('is-open', open);
+  document.body.classList.toggle('menu-open', open);
+  if (main) main.inert = open;
+  if (footer) footer.inert = open;
+  if (restoreFocus) menuToggle.focus();
 }
-
-themeCheckbox?.addEventListener('change', () => {
-  const theme = themeCheckbox.checked ? 'light' : 'dark';
-  try {
-    localStorage.setItem('theme', theme);
-  } catch (e) {
-    /* localStorage unavailable */
+menuToggle?.addEventListener('click', () => {
+  const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+  setMenu(open);
+  if (open) nav.querySelector('a')?.focus();
+});
+nav?.addEventListener('click', event => { if (event.target.closest('a')) setMenu(false); });
+document.addEventListener('click', event => {
+  if (menuToggle?.getAttribute('aria-expanded') === 'true' && !header.contains(event.target)) setMenu(false, true);
+});
+document.addEventListener('keydown', event => {
+  if (menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+  if (event.key === 'Escape') { setMenu(false, true); event.preventDefault(); }
+  if (event.key === 'Tab') {
+    const focusable = [...header.querySelectorAll('a, button, input')].filter(el => el.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { last.focus(); event.preventDefault(); }
+    if (!event.shiftKey && document.activeElement === last) { first.focus(); event.preventDefault(); }
   }
+});
+window.matchMedia('(min-width: 700px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
+const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 15);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+const themeCheckbox = document.querySelector('[data-theme-toggle]');
+function applyTheme(theme) {
+  root.dataset.theme = theme;
+  if (themeCheckbox) {
+    themeCheckbox.checked = theme === 'dark';
+    themeCheckbox.setAttribute('aria-label', theme === 'dark' ? themeCheckbox.dataset.lightLabel : themeCheckbox.dataset.darkLabel);
+  }
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#101b23' : '#f4f9fc');
+}
+themeCheckbox?.addEventListener('change', () => {
+  const theme = themeCheckbox.checked ? 'dark' : 'light';
+  try { localStorage.setItem('theme', theme); } catch { /* Storage is optional. */ }
   applyTheme(theme);
 });
-
-applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
-
-/* ── Project details dialog ────────────────────────────────── */
-const projectDialog = document.getElementById('project-dialog');
-
-// Built with DOM APIs (no innerHTML): the CSP enforces Trusted Types.
-function createGithubIcon() {
-  const svgNS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(svgNS, 'svg');
-  svg.setAttribute('viewBox', '0 0 24 24');
-  svg.setAttribute('aria-hidden', 'true');
-  const path = document.createElementNS(svgNS, 'path');
-  path.setAttribute(
-    'd',
-    'M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92v2.84c0 .27.18.59.69.49A10.12 10.12 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z'
-  );
-  svg.appendChild(path);
-  return svg;
-}
-
-function openProjectDialog(card) {
-  if (!projectDialog || !card) return;
-  const d = card.dataset;
-
-  const image = projectDialog.querySelector('[data-dialog-image]');
-  image.src = d.image || '';
-
-  const categoryEl = projectDialog.querySelector('[data-dialog-category]');
-  categoryEl.textContent = d.category || '';
-
-  const lockEl = projectDialog.querySelector('[data-dialog-lock]');
-  lockEl.hidden = d.private !== '1';
-
-  const titleEl = projectDialog.querySelector('[data-dialog-title]');
-  titleEl.textContent = d.title || '';
-
-  const summaryEl = projectDialog.querySelector('[data-dialog-summary]');
-  summaryEl.textContent = d.summary || '';
-
-  const impactEl = projectDialog.querySelector('[data-dialog-impact]');
-  impactEl.textContent = d.impact || '';
-
-  let stack = [];
-  try {
-    stack = JSON.parse(d.stack || '[]');
-  } catch (e) {
-    stack = [];
+applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+document.querySelectorAll('[data-marquee-toggle]').forEach(button => button.addEventListener('click', () => {
+  const paused = button.getAttribute('aria-pressed') !== 'true';
+  const window = document.getElementById(button.getAttribute('aria-controls'));
+  if (!window) return;
+  button.setAttribute('aria-pressed', String(paused));
+  const label = paused ? button.dataset.playLabel : button.dataset.pauseLabel;
+  button.setAttribute('aria-label', label);
+  button.title = label;
+  window.classList.toggle('is-paused', paused);
+}));
+const catalog = document.querySelector('[data-project-catalog]');
+if (catalog) {
+  const cards = [...catalog.querySelectorAll('.project-card')];
+  const buttons = [...catalog.querySelectorAll('[data-filter]')];
+  const input = catalog.querySelector('[data-project-search]');
+  const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const initial = new URLSearchParams(window.location.search);
+  let category = buttons.some(b => b.dataset.filter === initial.get('category')) ? initial.get('category') : 'all';
+  input.value = initial.get('q') || '';
+  function filterProjects(updateUrl = true) {
+    const query = normalize(input.value.trim());
+    let visible = 0;
+    buttons.forEach(button => {
+      const active = button.dataset.filter === category;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    cards.forEach(card => {
+      const matches = (category === 'all' || card.dataset.category === category) && normalize(card.dataset.search).includes(query);
+      const wasHidden = card.hidden;
+      card.hidden = !matches;
+      if (matches) visible++;
+      if (matches && wasHidden && !reducedMotion.matches) {
+        card.classList.remove('filter-enter');
+        requestAnimationFrame(() => card.classList.add('filter-enter'));
+      }
+    });
+    catalog.querySelector('[data-empty-state]').hidden = visible > 0;
+    catalog.querySelector('[data-result-count]').textContent = String(visible);
+    catalog.querySelector('[data-clear-search]').hidden = !input.value;
+    catalog.querySelector('.catalog-status [data-reset-filters]').hidden = category === 'all' && !input.value;
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      category === 'all' ? url.searchParams.delete('category') : url.searchParams.set('category', category);
+      input.value.trim() ? url.searchParams.set('q', input.value.trim()) : url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+    }
   }
-
-  const stack0El = projectDialog.querySelector('[data-dialog-stack0]');
-  stack0El.textContent = stack[0] || '';
-
-  const stackList = projectDialog.querySelector('[data-dialog-stack-list]');
-  stackList.replaceChildren();
-  stack.forEach((tech) => {
-    const span = document.createElement('span');
-    span.textContent = tech;
-    stackList.appendChild(span);
+  buttons.forEach(button => button.addEventListener('click', () => { category = button.dataset.filter; filterProjects(); }));
+  input.addEventListener('input', () => filterProjects());
+  catalog.querySelector('[data-clear-search]').addEventListener('click', () => { input.value = ''; filterProjects(); input.focus(); });
+  catalog.querySelectorAll('[data-reset-filters]').forEach(button => button.addEventListener('click', () => { category = 'all'; input.value = ''; filterProjects(); }));
+  window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    category = buttons.some(b => b.dataset.filter === params.get('category')) ? params.get('category') : 'all';
+    input.value = params.get('q') || '';
+    filterProjects(false);
   });
-
-  const actions = projectDialog.querySelector('[data-dialog-actions]');
-  actions.replaceChildren();
-
-  if (d.private === '1') {
-    const span = document.createElement('span');
-    span.className = 'btn btn-disabled';
-    span.textContent = 'Privé';
-    actions.appendChild(span);
-  } else {
-    if (d.liveUrl) {
-      const live = document.createElement('a');
-      live.className = 'btn btn-primary btn-compact';
-      live.href = d.liveUrl;
-      live.target = '_blank';
-      live.rel = 'noopener noreferrer';
-      live.textContent = 'Voir';
-      actions.appendChild(live);
-    }
-    if (d.repoUrl) {
-      const repo = document.createElement('a');
-      repo.className = 'btn btn-ghost btn-icon';
-      repo.href = d.repoUrl;
-      repo.target = '_blank';
-      repo.rel = 'noopener noreferrer';
-      repo.title = 'GitHub';
-      repo.setAttribute('aria-label', d.repoAria || '');
-      repo.appendChild(createGithubIcon());
-      actions.appendChild(repo);
-    }
-  }
-
-  if (typeof projectDialog.showModal === 'function') {
-    projectDialog.showModal();
-  }
+  filterProjects(false);
 }
 
-document.addEventListener('click', (event) => {
-  const trigger = event.target.closest('[data-open-project]');
-  if (!trigger) return;
-  openProjectDialog(trigger.closest('.project-card'));
-});
+const projectDialog = document.querySelector('#project-dialog');
+const imageDialog = document.querySelector('#image-dialog');
+function openDialog(dialog) { dialog.showModal(); document.body.classList.add('dialog-open'); }
+function bindDialog(dialog, closeSelector) {
+  if (!dialog) return;
+  dialog.querySelector(closeSelector).addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    const bounds = dialog.getBoundingClientRect();
+    if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
+  });
+  dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+}
+bindDialog(projectDialog, '[data-dialog-close]');
+bindDialog(imageDialog, '[data-image-close]');
+document.querySelectorAll('[data-open-project]').forEach(button => button.addEventListener('click', () => {
+  const data = button.closest('.project-card').dataset;
+  const image = projectDialog.querySelector('[data-dialog-image]');
+  image.hidden = !data.image;
+  if (data.image) image.src = data.image; else image.removeAttribute('src');
+  image.alt = data.title;
+  projectDialog.querySelector('[data-dialog-placeholder]').hidden = Boolean(data.image);
+  for (const field of ['title', 'summary', 'impact']) projectDialog.querySelector(`[data-dialog-${field}]`).textContent = data[field];
+  projectDialog.querySelector('[data-dialog-category]').textContent = data.categoryLabel;
+  projectDialog.querySelector('[data-dialog-detail]').href = data.detailUrl;
+  const stack = projectDialog.querySelector('[data-dialog-stack-list]');
+  stack.replaceChildren();
+  JSON.parse(data.stack).forEach(tech => { const item = document.createElement('span'); item.textContent = tech; stack.append(item); });
+  openDialog(projectDialog);
+}));
+document.querySelectorAll('[data-image-preview]').forEach(button => button.addEventListener('click', () => {
+  const image = imageDialog.querySelector('[data-full-image]');
+  image.src = button.dataset.image;
+  image.alt = button.dataset.alt;
+  openDialog(imageDialog);
+}));
 
-projectDialog?.querySelector('[data-dialog-close]')?.addEventListener('click', () => projectDialog.close());
-
-projectDialog?.addEventListener('click', (event) => {
-  if (event.target === projectDialog) projectDialog.close();
+let revealObserver;
+if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+  revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('is-revealed'); revealObserver.unobserve(entry.target); }
+  }), { threshold: .08 });
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    if (el.getBoundingClientRect().top > window.innerHeight) el.classList.add('will-reveal');
+    revealObserver.observe(el);
+  });
+}
+window.addEventListener('pagehide', () => revealObserver?.disconnect());
+window.addEventListener('pageshow', event => {
+  if (event.persisted) document.querySelectorAll('.will-reveal').forEach(el => el.classList.add('is-revealed'));
 });

@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+import { journey } from '../data/content';
+import type { Lang } from '../lib/i18n';
+type Props = { lang: Lang; compact?: boolean };
+const { lang, compact = false } = Astro.props;
+const entries = compact ? [journey[lang][3], journey[lang][0]] : journey[lang];
+---
+<ol class:list={['timeline', { compact }]}>
+  {entries.map(entry => <li class="timeline-item" data-reveal><span class="timeline-icon"><Icon name={entry.icon} size={20} /></span><div><p class="timeline-date">{entry.date}</p><h3>{entry.role}</h3><p class="timeline-org">{entry.org}</p>{!compact && <p class="timeline-description">{entry.description}</p>}</div></li>)}
+</ol>

@@ -6,3 +6,13 @@ dist/
 !.env.example
 npm-debug.log*
 *.log
+test-results/
+playwright-report/
+qa/
+
+# Local review documents and unused image sources.
+/CONTENT_TO_VERIFY.md
+/PRE_PUSH_REVIEW.md
+/REDESIGN_AUDIT.md
+/REDESIGN_REVIEW.md
+/assets/Images/
